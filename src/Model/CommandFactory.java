@@ -1,7 +1,9 @@
+package Model;
+
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.security.InvalidParameterException;
+
 import Commands.*;
 
 public class CommandFactory {
@@ -41,10 +43,10 @@ public class CommandFactory {
         }
 
         Constructor<?> constructor = commandClass.getConstructors()[0];
-        Command command = null;
+        Executable executable = null;
 
         try {
-            command = (Command) constructor.newInstance();
+            executable = (Executable) constructor.newInstance();
         }
 
         catch (InstantiationException e) {
