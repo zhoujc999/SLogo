@@ -2,9 +2,9 @@ package external;
 
 public interface CommandWindow {
     /**
-     * The CommandWindow is the site where the user may type in text in order to execute the desired command. It is able
+     * The external.CommandWindow is the site where the user may type in text in order to execute the desired command. It is able
      * set its text to something that the user may not have typed in. This is useful for loading commands from the
-     * CommandHistory.
+     * internal.CommandHistory.
      *
      * @author Tahj Starr
      */
@@ -20,7 +20,7 @@ public interface CommandWindow {
     void setInput(String command);
 
     /**
-     * Sets the name displayed by CommandWindow based on the language to which GUI is set.
+     * Sets the name displayed by external.CommandWindow based on the language to which external.GUI is set.
      */
     void setName(String name);
 

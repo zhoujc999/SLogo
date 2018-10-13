@@ -3,7 +3,7 @@ package external;
 public interface GraphicsWindow {
 
     /**
-     * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
+     * external.GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
      *
      * @author Tahj Starr
      */

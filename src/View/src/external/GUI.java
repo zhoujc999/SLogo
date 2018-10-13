@@ -5,7 +5,7 @@ import internal.CommandReference;
 
 public interface GUI {
     /**
-     * The GUI contains and defines the position of all the classes in the View. The language of its text is able to be
+     * The external.GUI contains and defines the position of all the classes in the View. The language of its text is able to be
      * chosen and changed.
      *
      * @author Tahj Starr
@@ -17,32 +17,32 @@ public interface GUI {
     void run();
 
     /**
-     * Access GUI's CommandHistory.
+     * Access external.GUI's internal.CommandHistory.
      */
     CommandHistory getCommandHistory();
 
     /**
-     * Access GUI's CommandReference.
+     * Access external.GUI's internal.CommandReference.
      */
     CommandReference getCommandReference();
 
     /**
-     * Access GUI's CommandWindow.
+     * Access external.GUI's external.CommandWindow.
      */
     CommandWindow getCommandWindow();
 
     /**
-     * Access GUI's VariableWindow.
+     * Access external.GUI's external.VariableWindow.
      */
     VariableWindow getVariableWindow();
 
     /**
-     * Access GUI's GraphicsWindow.
+     * Access external.GUI's external.GraphicsWindow.
      */
     GraphicsWindow getGraphicsWindow();
 
     /**
-     * Sets the language of the text in CommandReference.
+     * Sets the language of the text in internal.CommandReference.
      */
     void setLanguage(String language);
 
