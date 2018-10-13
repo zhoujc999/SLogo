@@ -1,5 +1,7 @@
 package Commands;
 
+import external.TurtleExecutable;
+
 public class Forward implements TurtleExecutable {
 
     private final static int numParams = 1;

@@ -4,5 +4,4 @@ module slogo_team03.model {
     requires javafx.graphics;
     requires javafx.media;
 
-    exports commands;
 }

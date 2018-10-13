@@ -1,4 +1,4 @@
-package Commands;
+package external;
 
 public interface Executable {
 
