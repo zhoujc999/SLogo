@@ -1,4 +1,4 @@
-package external;
+package External;
 
 import external.Executable;
 
