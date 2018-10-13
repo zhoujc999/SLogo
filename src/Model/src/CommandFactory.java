@@ -1,10 +1,8 @@
-package Model;
-
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import Commands.*;
+import external.Executable;
 
 public class CommandFactory {
 
