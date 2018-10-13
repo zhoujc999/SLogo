@@ -1,3 +1,5 @@
+package External;
+
 import java.util.List;
 
 /**
@@ -10,22 +12,22 @@ public interface ModelTurtle {
     //methods below are part of external Model API
 
     /**
-     * Return a unique integer ID for this ModelTurtle. This method will be used in the event that multiple ModelTurtle
+     * Return a unique integer ID for this External.ModelTurtle. This method will be used in the event that multiple External.ModelTurtle
      * instances are created.
      *
-     * @return the ID of this ModelTurtle
+     * @return the ID of this External.ModelTurtle
      */
     int getID();
 
     /**
-     * @return a List of any variables representing the state of this ModelTurtle. The variables should be integers.
+     * @return a List of any variables representing the state of this External.ModelTurtle. The variables should be integers.
      */
     List<Integer> getState();
 
     //methods below are part of internal Model API
 
     /**
-     * Moves the ModelTurtle forward by the specified number of pixels.
+     * Moves the External.ModelTurtle forward by the specified number of pixels.
      *
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
