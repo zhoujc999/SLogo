@@ -1,6 +1,6 @@
 package Commands;
 
-public class Forward implements  {
+public class Forward implements TurtleExecutable {
 
     private final static int numParams = 1;
     private final static String PARAM_NAME = "forward";

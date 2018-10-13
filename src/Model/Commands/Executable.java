@@ -1,6 +1,6 @@
 package Commands;
 
-public interface Command {
+public interface Executable {
 
     void execute();
 
