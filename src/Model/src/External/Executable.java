@@ -2,8 +2,8 @@ package external;
 
 public interface Executable {
 
-    void execute();
+    public void execute();
 
-    int returnVal();
+    public int returnVal();
 
 }
