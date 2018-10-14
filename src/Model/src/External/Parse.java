@@ -1,4 +1,4 @@
-package Model.src.External;
+package External;
 
 /**
  * An interface used by classes that parse strings into individual procedure calls and arguments.

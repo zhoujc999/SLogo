@@ -1,4 +1,4 @@
-package Model.src.External;
+package External;
 
 import java.util.List;
 
