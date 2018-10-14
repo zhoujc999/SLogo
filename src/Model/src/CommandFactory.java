@@ -1,4 +1,4 @@
-
+package internal;
 
 
 import java.util.List;
@@ -10,12 +10,13 @@ public class CommandFactory {
 
     private static Invoker invoker;
     private static CommandFactory cmdFactory;
+    private static CommandInvoker invoker;
 
     private CommandFactory(Invoker invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(Invoker invoker) {
+    public static CommandFactory getInstance(CommandInvoker invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)
@@ -26,6 +27,7 @@ public class CommandFactory {
                 }
             }
         }
+
         return cmdFactory;
     }
 
