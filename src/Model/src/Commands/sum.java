@@ -16,8 +16,8 @@ public class sum implements MathExecutable {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
-            param1 = (int) params.get(0);
-            param2 = (int) params.get(1);
+            param1 = (double) params.get(0);
+            param2 = (double) params.get(1);
         }
         catch (ClassCastException e) {
             e.printStackTrace();
