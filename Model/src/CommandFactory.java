@@ -8,9 +8,10 @@ import External.Executable;
 
 public class CommandFactory {
 
+    private static Invoker invoker;
     private static CommandFactory cmdFactory;
 
-    private CommandFactory(CommandInvoker invoker) {
+    private CommandFactory(Invoker invoker) {
         this.invoker = invoker;
     }
 

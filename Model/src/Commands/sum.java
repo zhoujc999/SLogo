@@ -1,23 +1,22 @@
 package Commands;
 
-import External.ModelTurtle;
-import External.TurtleExecutable;
+import External.MathExecutable;
 import java.util.List;
 
-public class forward implements TurtleExecutable {
-    private final static int numParams = 1;
-    private ModelTurtle turtle;
+public class sum implements MathExecutable {
+    private final static int numParams = 2;
     private double param1;
-    private double distance;
+    private double param2;
+    private double result;
 
 
-
-    public forward(List params) {
+    public sum(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
             param1 = (int) params.get(0);
+            param2 = (int) params.get(1);
         }
         catch (ClassCastException e) {
             e.printStackTrace();
@@ -26,18 +25,13 @@ public class forward implements TurtleExecutable {
     }
 
     @Override
-    public void getTurtle(ModelTurtle turtle) {
-        this.turtle = turtle;
-    }
-
-    @Override
     public void execute() {
-        this.distance = this.param1;
-        this.turtle.forward(distance);
+        this.result = this.param1 + this.param2;
     }
 
     @Override
     public double returnValue() {
-        return distance;
+        return result;
     }
+
 }

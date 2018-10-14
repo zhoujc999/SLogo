@@ -1,4 +1,4 @@
 package External;
 
-public interface MathExecutable {
+public interface MathExecutable extends Executable {
 }
