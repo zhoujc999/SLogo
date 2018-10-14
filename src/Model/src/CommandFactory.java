@@ -5,7 +5,6 @@ import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import Model.src.External.*;
-import Model.src.Commands.*;
 
 public class CommandFactory {
 
@@ -45,10 +44,10 @@ public class CommandFactory {
         }
 
         Constructor<?> constructor = commandClass.getConstructors()[0];
-        Executable command = null;
+        SLogoExecutable command = null;
 
         try {
-            command = (Executable) constructor.newInstance(params);
+            command = (SLogoExecutable) constructor.newInstance(params);
         }
 
         catch (InstantiationException e) {

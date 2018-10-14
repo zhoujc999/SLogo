@@ -4,7 +4,7 @@ import Model.src.External.*;
 
 import java.util.List;
 
-public class forward implements TurtleExecutable {
+public class forward implements SLogoTurtleExecutable {
     private ModelTurtle turtle;
     private double param1;
     private double distance;

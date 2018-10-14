@@ -1,10 +1,10 @@
 package Model.src.Commands;
 
-import Model.src.External.MathExecutable;
+import Model.src.External.SLogoMathExecutable;
 
 import java.util.List;
 
-public class sum implements MathExecutable {
+public class sum implements SLogoMathExecutable {
     private final static int numParams = 2;
     private double param1;
     private double param2;

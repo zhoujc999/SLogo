@@ -4,7 +4,7 @@ package Model.src.External;
  * An interface used for classes that encapsulate the procedures with their parameters called by the commands
  */
 
-public interface Executable {
+public interface SLogoExecutable {
 
     /**
      * Takes the turtle and manipulates according to the specific command object
