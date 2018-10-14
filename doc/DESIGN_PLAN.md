@@ -34,7 +34,7 @@ Invoker
 
 Parser
 
-* public Parser(List updateLst, Factory fact)
+* public Parser(List updateList, Factory fact)
 * public void parseCommand(String cmd)
 * public void update(Observable o, Object arg)
 

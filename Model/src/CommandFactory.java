@@ -1,4 +1,4 @@
-package internal;
+
 
 
 import java.util.List;
@@ -9,13 +9,12 @@ import External.Executable;
 public class CommandFactory {
 
     private static CommandFactory cmdFactory;
-    private static CommandInvoker invoker;
 
     private CommandFactory(CommandInvoker invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(CommandInvoker invoker) {
+    public static CommandFactory getInstance(Invoker invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)
@@ -26,7 +25,6 @@ public class CommandFactory {
                 }
             }
         }
-
         return cmdFactory;
     }
 
