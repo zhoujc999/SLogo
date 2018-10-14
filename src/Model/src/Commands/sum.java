@@ -1,6 +1,7 @@
-package Commands;
+package Model.src.Commands;
 
-import External.MathExecutable;
+import Model.src.External.MathExecutable;
+
 import java.util.List;
 
 public class sum implements MathExecutable {
