@@ -32,7 +32,7 @@ public interface ModelTurtle {
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
      */
-    int forward(int pixels);
+    double forward(double pixels);
 
     /**
      * Moves the turtle backward by the specified number of pixels.
@@ -40,7 +40,7 @@ public interface ModelTurtle {
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
      */
-    int back(int pixels);
+    double back(double pixels);
 
     /**
      * Turns the turtle left by the specified number of degrees.
@@ -48,7 +48,7 @@ public interface ModelTurtle {
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
      */
-    int left(int degrees);
+    double left(double degrees);
 
     /**
      * Turns the turtle right by the specified number of degrees.
@@ -56,7 +56,7 @@ public interface ModelTurtle {
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
      */
-    int right(int degrees);
+    double right(double degrees);
 
     /**
      * Sets the heading of the turtle as by the specified number degrees right of north/up.
@@ -64,7 +64,7 @@ public interface ModelTurtle {
      * @param degrees the number of degrees right of north/up that the turtle's heading should be set to
      * @return the number of degrees the turtle turned
      */
-    int setHeading(int degrees);
+    double setHeading(int degrees);
 
     /**
      * Sets the heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
@@ -74,7 +74,7 @@ public interface ModelTurtle {
      * @param y the y-coordinate of the point the turtle should face
      * @return the number of degrees the turtle turned
      */
-    int towards(int x, int y);
+    double towards(double x, double y);
 
     /**
      * Sets the position of the turtle the absolute screen position with coordinates (x,y), where (0,0) is the center
@@ -84,7 +84,7 @@ public interface ModelTurtle {
      * @param y the x-coordinate of the desired position of the turtle
      * @return the distance, in pixels, travelled by the turtle to reach the desired position
      */
-    int goTo(int x, int y);
+    double goTo(double x, double y);
 
     /**
      * puts pen down such that when the turtle moves, it leaves a trail
@@ -119,32 +119,32 @@ public interface ModelTurtle {
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */
-    int home();
+    double home();
 
     /**
      * erases turtle's trails and sends it to the home position
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */
-    int clearScreen();
+    double clearScreen();
 
     /**
      *
      * @return the turtle's X coordinate, where the coordinates (0,0) are at the center of the screen
      */
-    int getX();
+    double getX();
 
     /**
      *
      * @return the turtle's Y coordinate, where the coordinates (0,0) are at the center of the screen
      */
-    int getY();
+    double getY();
 
     /**
      *
      * @return 	the turtle's heading as the number of degrees right of north/up
      */
-    int getHeading();
+    double getHeading();
 
     /**
      *
