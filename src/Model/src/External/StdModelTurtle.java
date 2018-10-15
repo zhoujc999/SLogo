@@ -3,12 +3,12 @@ package External;
 import java.util.List;
 
 public class StdModelTurtle implements ModelTurtle{
-    final int TURTLE_ID = 0;
-    double myXPos = 0;
-    double myYPos = 0;
-    double myHeading = 0;
-    int penDown = 1;
-    int showing = 1;
+    private int TURTLE_ID = 0;
+    private double myXPos = 0;
+    private double myYPos = 0;
+    private double myHeading = 0;
+    private int penDown = 1;
+    private int showing = 1;
 
     /**
      * Return a unique integer ID for this External.ModelTurtle. This method will be used in the event that multiple External.ModelTurtle
@@ -85,8 +85,10 @@ public class StdModelTurtle implements ModelTurtle{
      * @return the number of degrees the turtle turned
      */
     @Override
-    public double setHeading(int degrees) {
-        return 0;
+    public double setHeading(double degrees) {
+        double diff = degrees - myHeading;
+        myHeading = degrees;
+        return diff;
     }
 
     /**
@@ -99,7 +101,12 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double towards(double x, double y) {
-        return 0;
+        double xDiff = myXPos - x;
+        double yDiff = myYPos - y;
+        double newHeading = Math.tan(xDiff/yDiff);
+        double headingDiff = newHeading - myHeading;
+        myHeading = newHeading;
+        return headingDiff;
     }
 
     /**
@@ -112,7 +119,11 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double goTo(double x, double y) {
-        return 0;
+        double xDiff = myXPos - x;
+        double yDiff = myYPos - y;
+        myXPos = x;
+        myYPos = y;
+        return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
     }
 
     /**
@@ -122,7 +133,8 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int penDown() {
-        return 0;
+        penDown = 1;
+        return penDown;
     }
 
     /**
@@ -132,7 +144,8 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int penUp() {
-        return 0;
+        penDown = 0;
+        return penDown;
     }
 
     /**
@@ -142,7 +155,8 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int show() {
-        return 0;
+        showing = 1;
+        return showing;
     }
 
     /**
@@ -152,7 +166,8 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int hide() {
-        return 0;
+        showing = 0;
+        return showing;
     }
 
     /**
@@ -162,7 +177,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double home() {
-        return 0;
+        return goTo(0,0);
     }
 
     /**
@@ -172,7 +187,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double clearScreen() {
-        return 0;
+        return home();
     }
 
     /**
@@ -180,7 +195,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getX() {
-        return 0;
+        return myXPos;
     }
 
     /**
@@ -188,7 +203,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getY() {
-        return 0;
+        return myYPos;
     }
 
     /**
@@ -196,7 +211,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getHeading() {
-        return 0;
+        return myHeading;
     }
 
     /**
@@ -204,7 +219,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int getPenDown() {
-        return 0;
+        return penDown;
     }
 
     /**
@@ -212,6 +227,6 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int getShowing() {
-        return 0;
+        return showing;
     }
 }

@@ -64,7 +64,7 @@ public interface ModelTurtle {
      * @param degrees the number of degrees right of north/up that the turtle's heading should be set to
      * @return the number of degrees the turtle turned
      */
-    double setHeading(int degrees);
+    double setHeading(double degrees);
 
     /**
      * Sets the heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
