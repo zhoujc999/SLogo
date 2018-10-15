@@ -2,8 +2,8 @@ package external;
 
 public interface VariableWindow {
     /**
-     * The external.VariableWindow displays all of the variables and commands defined by the user. The user can then use
-     * one of these variables or commands by typing it into the external.CommandWindow.
+     * The VariableWindow displays all of the variables and commands defined by the user. The user can then use
+     * one of these variables or commands by typing it into the CommandWindow.
      *
      * @author Tahj Starr
      */
@@ -19,7 +19,7 @@ public interface VariableWindow {
     String loadVariable(String name);
 
     /**
-     * Sets the name displayed by external.VariableWindow based on the language to which external.GUI is set.
+     * Sets the name displayed by VariableWindow based on the language to which GUI is set.
      */
     void setName(String name);
 
