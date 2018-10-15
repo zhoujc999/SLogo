@@ -1,4 +1,4 @@
-package External;
+package Model.src.External;
 
 /**
  * An interface used for classes that encapsulate the execution of commands.

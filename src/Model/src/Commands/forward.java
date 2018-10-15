@@ -4,8 +4,8 @@ import Model.src.External.*;
 
 import java.util.List;
 
-public class forward implements SLogoTurtleExecutable {
-    private ModelTurtle turtle;
+public class forward implements SLogoExecutable {
+    private External.ModelTurtle turtle;
     private double param1;
     private double distance;
     private final static int numParams = 1;
@@ -25,7 +25,7 @@ public class forward implements SLogoTurtleExecutable {
     }
 
     @Override
-    public void getTurtle(ModelTurtle turtle) {
+    public void getTurtle(External.ModelTurtle turtle) {
         this.turtle = turtle;
     }
 
