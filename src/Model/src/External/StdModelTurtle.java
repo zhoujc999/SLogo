@@ -24,6 +24,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return TURTLE_ID;
     }
 
+    public double getReturnVal() {
+        return returnVal;
+    }
+
     /**
      * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
      */
