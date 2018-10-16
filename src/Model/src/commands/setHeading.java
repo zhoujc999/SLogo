@@ -24,6 +24,10 @@ public class setHeading implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
+        catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            // TODO
+        }
 
     }
 
@@ -36,7 +40,7 @@ public class setHeading implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue () {
+    public double returnValue() {
         return this.degreesTurned;
     }
 

@@ -25,6 +25,10 @@ public class forward implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
+        catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            // TODO
+        }
 
     }
 
@@ -37,7 +41,7 @@ public class forward implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue () {
+    public double returnValue() {
         return this.distance;
     }
 

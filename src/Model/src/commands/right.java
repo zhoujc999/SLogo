@@ -23,6 +23,10 @@ public class right implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
+        catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            // TODO
+        }
 
     }
 
@@ -35,7 +39,7 @@ public class right implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue () {
+    public double returnValue() {
         return this.degree;
     }
 

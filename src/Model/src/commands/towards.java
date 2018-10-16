@@ -5,23 +5,28 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class left implements SLogoTurtleExecutable {
+public class towards implements SLogoTurtleExecutable {
     private ModelTurtle turtle;
 
     private double param1;
-    private double degree;
-    private final static int numParams = 1;
+    private double param2;
+    private double x;
+    private double y;
+    private double degreesTurned;
+    private final static int numParams = 2;
 
 
-    public left(List params) {
+    public towards(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
             param1 = (double) params.get(0);
+            param2 = (double) params.get(1);
         }
         catch (ClassCastException e) {
             e.printStackTrace();
+            // TODO
         }
         catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -33,14 +38,15 @@ public class left implements SLogoTurtleExecutable {
     @Override
     public void execute(ModelTurtle turtle) {
         this.turtle = turtle;
-        this.degree = param1;
-        turtle.left(degree);
+        this.x = param1;
+        this.y = param2;
+        this.degreesTurned = turtle.towards(x, y);
     }
 
 
     @Override
     public double returnValue() {
-        return this.degree;
+        return this.degreesTurned;
     }
 
 }
