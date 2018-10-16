@@ -1,6 +1,8 @@
 package External;
 
 
-public interface TurtleExecutable extends Executable {
+public interface SLogoTurtleExecutable extends SLogoExecutable {
+
     public void getTurtle(ModelTurtle turtle);
+
 }

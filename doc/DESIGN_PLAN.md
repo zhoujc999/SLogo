@@ -24,7 +24,7 @@ TurtleModel (Jay)
 Invoker (Jonathan)
 * public void acceptCommand(Command cmd)
 
-## Model: External API
+## Model: external API
 ModelTurtle (Jay)
 * see src/Model/src/ModelTurtle.java
 
@@ -60,7 +60,7 @@ CommandReference
 * void hide()
 * void setLanguage(String language)
 
-## View: External API
+## View: external API
 
 CommandWindow
 * String getInput()

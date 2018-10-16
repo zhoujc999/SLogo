@@ -1,21 +1,22 @@
-package internal;
+package Model.src;
 
 
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import External.Executable;
+import Model.src.External.*;
 
 public class CommandFactory {
 
+    private Invoker invoker;
     private static CommandFactory cmdFactory;
-    private static CommandInvoker invoker;
 
-    private CommandFactory(CommandInvoker invoker) {
+
+    private CommandFactory(Invoker invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(CommandInvoker invoker) {
+    public static CommandFactory getInstance(Invoker invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)
@@ -33,7 +34,7 @@ public class CommandFactory {
 
 
     public void createCommand(String cmd, List params) {
-        String commandName = "Commands." + cmd;
+        String commandName = "src.Model.src.Commands." + cmd;
         Class<?> commandClass = null;
         try {
             commandClass = Class.forName(commandName);
@@ -43,10 +44,10 @@ public class CommandFactory {
         }
 
         Constructor<?> constructor = commandClass.getConstructors()[0];
-        Executable executable = null;
+        SLogoExecutable command = null;
 
         try {
-            executable = (Executable) constructor.newInstance();
+            command = (SLogoExecutable) constructor.newInstance(params);
         }
 
         catch (InstantiationException e) {
@@ -65,6 +66,10 @@ public class CommandFactory {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        if (command == null) {
+            throw new NullPointerException("Command Object is null");
+        }
+        invoker.acceptCommand(command);
     }
 }
 
