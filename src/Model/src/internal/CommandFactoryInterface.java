@@ -1,6 +1,5 @@
-package Internal;
-import External.Invokable;
-import External.SLogoExecutable;
+package internal;
+import external.Invokable;
 
 
 import java.util.List;

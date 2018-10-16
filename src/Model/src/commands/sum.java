@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import External.SLogoMathExecutable;
+import external.SLogoMathExecutable;
 import java.util.List;
 
 public class sum implements SLogoMathExecutable {

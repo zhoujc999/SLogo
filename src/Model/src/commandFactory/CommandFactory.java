@@ -1,8 +1,8 @@
-package CommandFactory;
+package commandFactory;
 
-import External.Invokable;
-import External.SLogoExecutable;
-import Internal.CommandFactoryInterface;
+import external.Invokable;
+import external.SLogoExecutable;
+import internal.CommandFactoryInterface;
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +35,7 @@ public class CommandFactory implements CommandFactoryInterface {
 
 
     public void createCommand(String cmd, List params) {
-        String commandName = "src.Model.src.Commands." + cmd;
+        String commandName = "src.Model.src.commands." + cmd;
         Class<?> commandClass = null;
         try {
             commandClass = Class.forName(commandName);
