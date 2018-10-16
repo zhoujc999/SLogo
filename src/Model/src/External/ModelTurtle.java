@@ -1,6 +1,7 @@
 package external;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Instances of classes implementing this interface are abstract representations of a turtle
@@ -22,7 +23,7 @@ public interface ModelTurtle {
     /**
      * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
      */
-    List<Integer> getState();
+    Map<String, Double> getState();
 
     //methods below are part of internal Model API
 
@@ -64,7 +65,7 @@ public interface ModelTurtle {
      * @param degrees the number of degrees right of north/up that the turtle's heading should be set to
      * @return the number of degrees the turtle turned
      */
-    double setHeading(int degrees);
+    double setHeading(double degrees);
 
     /**
      * Sets the heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
