@@ -28,9 +28,13 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return returnVal;
     }
 
-    private void notifyGivenStates(Map<String, Double> oldState, Map<String, Double> newState) {
-        notifyObservers(Map.of("oldState", oldState, "newState", newState));
+    private Map<String, Double> getOldXYMap() {
+        return Map.of("oldXPos", myXPos,"oldYPos", myYPos);
     }
+
+//    private void notifyGivenStates(Map<String, Double> oldState, Map<String, Double> newState) {
+//        notifyObservers(Map.of("oldState", oldState, "newState", newState));
+//    }
 
     /**
      * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
@@ -54,14 +58,14 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double forward(double pixels) {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         double xDist = pixels*Math.cos(myHeading);
         double yDist = pixels*Math.sin(myHeading);
         myXPos += xDist;
         myYPos += yDist;
         returnVal = pixels;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return pixels;
     }
 
@@ -95,11 +99,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double right(double degrees) {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         myHeading += degrees;
         returnVal = degrees;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return degrees;
     }
 
@@ -111,12 +115,12 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double setHeading(double degrees) {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         double diff = degrees - myHeading;
         myHeading = degrees;
         returnVal = diff;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return diff;
     }
 
@@ -130,15 +134,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double towards(double x, double y) {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         double newHeading = Math.tan(xDiff/yDiff);
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return headingDiff;
     }
 
@@ -152,15 +156,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double goTo(double x, double y) {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         myXPos = x;
         myYPos = y;
         double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
         returnVal = dist;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return dist;
     }
 
@@ -171,11 +175,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int penDown() {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         penDown = 1;
         returnVal = penDown;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return penDown;
     }
 
@@ -186,11 +190,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int penUp() {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         penDown = 0;
         returnVal = penDown;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return penDown;
     }
 
@@ -201,11 +205,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int show() {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         showing = 1;
         returnVal = showing;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return showing;
     }
 
@@ -216,11 +220,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int hide() {
-        var oldState = getState();
+        Map<String, Double> dataMap = getOldXYMap();
         showing = 0;
         returnVal = showing;
-        var newState = getState();
-        notifyGivenStates(oldState, newState);
+        dataMap.putAll(getState());
+        notifyObservers(dataMap);
         return showing;
     }
 
@@ -241,9 +245,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double clearScreen() {
-        //FIXME: Notify observers correctly
         clearScreen = 1;
-        return home();
+        double dist = home(); //observers receive state within this call
+        clearScreen = 0;
+        returnVal = dist;
+        return dist;
     }
 
     /**
