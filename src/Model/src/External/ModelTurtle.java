@@ -1,6 +1,7 @@
-package External;
+package external;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Instances of classes implementing this interface are abstract representations of a turtle
@@ -22,7 +23,7 @@ public interface ModelTurtle {
     /**
      * @return a List of any variables representing the state of this External.ModelTurtle. The variables should be integers.
      */
-    List<Integer> getState();
+    Map<String, Double> getState();
 
     //methods below are part of internal Model API
 

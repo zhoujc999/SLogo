@@ -1,14 +1,17 @@
-package External;
+package external;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Observable;
 
-public class StdModelTurtle implements ModelTurtle{
+public class StdModelTurtle extends Observable implements ModelTurtle {
     private int TURTLE_ID = 0;
     private double myXPos = 0;
     private double myYPos = 0;
     private double myHeading = 0;
     private int penDown = 1;
     private int showing = 1;
+    private int clearScreen = 0;
+    private double returnVal;
 
     /**
      * Return a unique integer ID for this External.ModelTurtle. This method will be used in the event that multiple External.ModelTurtle
@@ -25,9 +28,14 @@ public class StdModelTurtle implements ModelTurtle{
      * @return a List of any variables representing the state of this External.ModelTurtle. The variables should be integers.
      */
     @Override
-    public List<Integer> getState() {
-        //FIXME: the variables I intended to return are now a mix of doubles and ints
-        return List.of(); //this.getX(), this.getY(), this.getHeading(), this.getPenDown(), this.getShowing());
+    public Map<String, Double> getState() {
+        return Map.ofEntries(
+                Map.entry("xPos", myXPos),
+                Map.entry("yPos", myYPos),
+                Map.entry("heading", myHeading),
+                Map.entry("penDown", (double) penDown),
+                Map.entry("showing", (double) showing),
+                Map.entry("clearScreen", (double) clearScreen));
     }
 
     /**
@@ -42,6 +50,8 @@ public class StdModelTurtle implements ModelTurtle{
         double yDist = pixels*Math.sin(myHeading);
         myXPos += xDist;
         myYPos += yDist;
+        notifyObservers(getState());
+        returnVal = pixels;
         return pixels;
     }
 
@@ -64,7 +74,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double left(double degrees) {
-        return 0;
+        return right(-degrees);
     }
 
     /**
@@ -75,7 +85,10 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double right(double degrees) {
-        return 0;
+        myHeading += degrees;
+        returnVal = degrees;
+        notifyObservers(getState());
+        return degrees;
     }
 
     /**
@@ -88,6 +101,8 @@ public class StdModelTurtle implements ModelTurtle{
     public double setHeading(double degrees) {
         double diff = degrees - myHeading;
         myHeading = degrees;
+        returnVal = diff;
+        notifyObservers(getState());
         return diff;
     }
 
@@ -106,6 +121,8 @@ public class StdModelTurtle implements ModelTurtle{
         double newHeading = Math.tan(xDiff/yDiff);
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
+        returnVal = headingDiff;
+        notifyObservers(getState());
         return headingDiff;
     }
 
@@ -123,7 +140,10 @@ public class StdModelTurtle implements ModelTurtle{
         double yDiff = myYPos - y;
         myXPos = x;
         myYPos = y;
-        return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+        double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+        returnVal = dist;
+        notifyObservers(getState());
+        return dist;
     }
 
     /**
@@ -134,6 +154,8 @@ public class StdModelTurtle implements ModelTurtle{
     @Override
     public int penDown() {
         penDown = 1;
+        returnVal = penDown;
+        notifyObservers(getState());
         return penDown;
     }
 
@@ -145,6 +167,8 @@ public class StdModelTurtle implements ModelTurtle{
     @Override
     public int penUp() {
         penDown = 0;
+        returnVal = penDown;
+        notifyObservers(getState());
         return penDown;
     }
 
@@ -156,6 +180,8 @@ public class StdModelTurtle implements ModelTurtle{
     @Override
     public int show() {
         showing = 1;
+        returnVal = showing;
+        notifyObservers(getState());
         return showing;
     }
 
@@ -167,6 +193,8 @@ public class StdModelTurtle implements ModelTurtle{
     @Override
     public int hide() {
         showing = 0;
+        returnVal = showing;
+        notifyObservers(getState());
         return showing;
     }
 
@@ -187,6 +215,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double clearScreen() {
+        clearScreen = 1;
         return home();
     }
 
@@ -195,6 +224,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getX() {
+        returnVal = myXPos;
         return myXPos;
     }
 
@@ -203,6 +233,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getY() {
+        returnVal = myYPos;
         return myYPos;
     }
 
@@ -211,6 +242,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public double getHeading() {
+        returnVal = myHeading;
         return myHeading;
     }
 
@@ -219,6 +251,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int getPenDown() {
+        returnVal = penDown;
         return penDown;
     }
 
@@ -227,6 +260,7 @@ public class StdModelTurtle implements ModelTurtle{
      */
     @Override
     public int getShowing() {
+        returnVal = showing;
         return showing;
     }
 }
