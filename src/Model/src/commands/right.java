@@ -1,21 +1,19 @@
 package commands;
 
-
 import external.ModelTurtle;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class forward implements SLogoTurtleExecutable {
-
+public class right implements SLogoTurtleExecutable {
     private ModelTurtle turtle;
 
     private double param1;
-    private double distance;
+    private double degree;
     private final static int numParams = 1;
 
 
-    public forward(List params) {
+    public right(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
@@ -31,14 +29,14 @@ public class forward implements SLogoTurtleExecutable {
     @Override
     public void execute(ModelTurtle turtle) {
         this.turtle = turtle;
-        this.distance = param1;
-        turtle.forward(distance);
+        this.degree = param1;
+        turtle.right(degree);
     }
 
 
     @Override
     public double returnValue () {
-        return this.distance;
+        return this.degree;
     }
 
 }
