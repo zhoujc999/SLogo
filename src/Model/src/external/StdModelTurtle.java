@@ -28,6 +28,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return returnVal;
     }
 
+    private void notifyGivenStates(Map<String, Double> oldState, Map<String, Double> newState) {
+        notifyObservers(Map.of("oldState", oldState, "newState", newState));
+    }
+
     /**
      * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
      */
@@ -50,12 +54,14 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double forward(double pixels) {
+        var oldState = getState();
         double xDist = pixels*Math.cos(myHeading);
         double yDist = pixels*Math.sin(myHeading);
         myXPos += xDist;
         myYPos += yDist;
-        notifyObservers(getState());
         returnVal = pixels;
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return pixels;
     }
 
@@ -89,9 +95,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double right(double degrees) {
+        var oldState = getState();
         myHeading += degrees;
         returnVal = degrees;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return degrees;
     }
 
@@ -103,10 +111,12 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double setHeading(double degrees) {
+        var oldState = getState();
         double diff = degrees - myHeading;
         myHeading = degrees;
         returnVal = diff;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return diff;
     }
 
@@ -120,13 +130,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double towards(double x, double y) {
+        var oldState = getState();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         double newHeading = Math.tan(xDiff/yDiff);
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return headingDiff;
     }
 
@@ -140,13 +152,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double goTo(double x, double y) {
+        var oldState = getState();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         myXPos = x;
         myYPos = y;
         double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
         returnVal = dist;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return dist;
     }
 
@@ -157,9 +171,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int penDown() {
+        var oldState = getState();
         penDown = 1;
         returnVal = penDown;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return penDown;
     }
 
@@ -170,9 +186,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int penUp() {
+        var oldState = getState();
         penDown = 0;
         returnVal = penDown;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return penDown;
     }
 
@@ -183,9 +201,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int show() {
+        var oldState = getState();
         showing = 1;
         returnVal = showing;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return showing;
     }
 
@@ -196,9 +216,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int hide() {
+        var oldState = getState();
         showing = 0;
         returnVal = showing;
-        notifyObservers(getState());
+        var newState = getState();
+        notifyGivenStates(oldState, newState);
         return showing;
     }
 
@@ -219,6 +241,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double clearScreen() {
+        //FIXME: Notify observers correctly
         clearScreen = 1;
         return home();
     }
