@@ -1,5 +1,6 @@
 package commands;
 
+import external.ModelTurtle;
 import external.SLogoMathExecutable;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class sum implements SLogoMathExecutable {
     }
 
     @Override
-    public void execute() {
+    public void execute(ModelTurtle turtle) {
         this.result = this.param1 + this.param2;
     }
 

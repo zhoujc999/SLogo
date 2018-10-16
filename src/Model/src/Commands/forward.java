@@ -29,19 +29,16 @@ public class forward implements SLogoTurtleExecutable {
     }
 
     @Override
-    public void getTurtle(ModelTurtle turtle) {
+    public void execute(ModelTurtle turtle) {
         this.turtle = turtle;
-    }
-
-    @Override
-    public void execute() {
         this.distance = param1;
         turtle.forward(distance);
     }
 
+
     @Override
     public double returnValue () {
-        return  this.distance;
+        return this.distance;
     }
 
 }
