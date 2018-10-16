@@ -15,12 +15,14 @@ public class GUI extends Region {
      * @author Tahj Starr
      */
 
-    private static final Point2D COMMAND_WINDOW_LOCATION = new Point2D(50, 500);
-    private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(500, 50);
-    private static final Point2D GRAPHICS_WINDOW_LOCATION = new Point2D(50, 50);
-    private static final Dimension2D GRAPHICS_WINDOW_SIZE = new Dimension2D(500, 400);
-    private static final Point2D RUN_BUTTON_LOCATION = new Point2D(550, 500);
-    private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(500, 50);
+    private static final Point2D COMMAND_WINDOW_LOCATION = new Point2D(70, 530);
+    private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(520, 60);
+    private static final Point2D GRAPHICS_WINDOW_LOCATION = new Point2D(10, 50);
+    private static final Dimension2D GRAPHICS_WINDOW_SIZE = new Dimension2D(580, 470);
+    private static final Point2D RUN_BUTTON_LOCATION = new Point2D(10, 530);
+    private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(50, 25);
+    private static final Point2D CLEAR_BUTTON_LOCATION = new Point2D(10, 565);
+    private static final Dimension2D CLEAR_BUTTON_SIZE = new Dimension2D(50, 25);
 
 
     private CommandWindow myCommandWindow;
@@ -31,7 +33,7 @@ public class GUI extends Region {
         setLayoutY(0);
         myCommandWindow = new CommandWindow(COMMAND_WINDOW_LOCATION, COMMAND_WINDOW_SIZE);
         myGraphicsWindow = new GraphicsWindow(GRAPHICS_WINDOW_LOCATION, GRAPHICS_WINDOW_SIZE);
-        getChildren().addAll(myCommandWindow, myGraphicsWindow, runButton());
+        getChildren().addAll(myCommandWindow, myGraphicsWindow, runButton(), clearButton());
     }
 
     /**
@@ -46,8 +48,20 @@ public class GUI extends Region {
         button.autosize();
         button.setLayoutX(RUN_BUTTON_LOCATION.getX());
         button.setLayoutY(RUN_BUTTON_LOCATION.getY());
+        button.setPrefSize(RUN_BUTTON_SIZE.getWidth(), RUN_BUTTON_SIZE.getHeight());
         button.setOnAction(e ->
                 run());
+        return button;
+    }
+
+    private Button clearButton() {
+        var button = new Button("Clear");
+        button.autosize();
+        button.setLayoutX(CLEAR_BUTTON_LOCATION.getX());
+        button.setLayoutY(CLEAR_BUTTON_LOCATION.getY());
+        button.setPrefSize(CLEAR_BUTTON_SIZE.getWidth(), CLEAR_BUTTON_SIZE.getHeight());
+        button.setOnAction(e ->
+                myCommandWindow.clear());
         return button;
     }
 

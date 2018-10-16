@@ -2,10 +2,12 @@ package external;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 
 import java.util.Observable;
+import java.util.Observer;
 
-public class TurtleView {
+public class TurtleView extends ImageView {
     /**
      * The TurtleView is the graphical representation of the turtle. It is able to move and interact with the graphics
      * window. It needs access to various image files to set/change its image.
@@ -15,24 +17,24 @@ public class TurtleView {
 
     private static final double SIZE = 50;
 
-    private ImageView mySprite;
+    protected TurtleView(String url, double x, double y) {
+        super(url);
+        setFitWidth(SIZE);
+        setFitHeight(SIZE);
+        setPosition(x, y);
+    }
 
-    protected TurtleView(ImageView sprite, double x, double y) {
-        mySprite = sprite;
-        mySprite.setFitWidth(SIZE);
-        mySprite.setFitHeight(SIZE);
-        mySprite.setX(x - SIZE/2);
-        mySprite.setY(y - SIZE/2);
+    protected void setPosition(double x, double y) {
+        relocate(x - SIZE/2, y - SIZE/2);
     }
 
     /**
      * Updates position of turtle's image.
      */
-    void update(Observable turtle, Object args) {
-    }
-
-    protected ImageView getSprite() {
-        return mySprite;
+    public void update() {
+//        setPosition();
+//        setRotate();
+//        setVisible();
     }
 
 }

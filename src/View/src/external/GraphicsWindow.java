@@ -10,8 +10,13 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
-public class GraphicsWindow extends Pane {
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+public class GraphicsWindow extends Pane implements Observer {
     /**
      * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
      *
@@ -26,8 +31,30 @@ public class GraphicsWindow extends Pane {
         setPrefSize(size.getWidth(), size.getHeight());
         setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
 
-        myTurtle = new TurtleView(new ImageView("GreenTurtle.PNG"), size.getWidth()/2, size.getHeight()/2);
-        getChildren().add(myTurtle.getSprite());
+        myTurtle = new TurtleView("GreenTurtle.PNG", size.getWidth()/2, size.getHeight()/2);
+        getChildren().add(myTurtle);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        var state = (List<Double>) arg;
+
+        double x = state.get(0);
+        double y = state.get(1);
+        double heading = state.get(2);
+        boolean visible = Boolean.parseBoolean(state.get(3).toString());
+        boolean penDown = Boolean.parseBoolean(state.get(3).toString());
+
+        myTurtle.setPosition(x, y);
+        myTurtle.setRotate(heading);
+        myTurtle.setVisible(visible);
+        if (penDown) {
+            draw(x, y);
+        }
+    }
+
+    private void draw(double x, double y) {
+        getChildren().add(new Line(myTurtle.getX(), myTurtle.getY(), x, y));
     }
 
     /**
@@ -36,5 +63,4 @@ public class GraphicsWindow extends Pane {
     TurtleView getTurtle() {
         return myTurtle;
     }
-
 }
