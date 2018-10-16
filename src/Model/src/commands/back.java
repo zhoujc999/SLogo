@@ -24,6 +24,10 @@ public class back implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
+        catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            // TODO
+        }
 
     }
 
@@ -36,9 +40,9 @@ public class back implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue () {
+    public double returnValue() {
         return this.distance;
     }
-    
+
 
 }
