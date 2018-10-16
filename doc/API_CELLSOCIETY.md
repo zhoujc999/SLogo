@@ -61,7 +61,7 @@
  ## Final Descriptions
  
  ### Simulation
- #### Internal
+ #### internal
  - The highest level class is a Game class which contains a map of Nodes. A Node superclass serves a the
  vertices in an adjacency map. Every Node implements an updateNode method which updates cells based on its current conditions.
  It also implements getAdjacentNodes and getAdjacentCells which allow for easy access to the map and it implement
