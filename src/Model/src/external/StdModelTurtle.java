@@ -14,18 +14,22 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private double returnVal;
 
     /**
-     * Return a unique integer ID for this External.ModelTurtle. This method will be used in the event that multiple External.ModelTurtle
+     * Return a unique integer ID for this external.ModelTurtle. This method will be used in the event that multiple external.ModelTurtle
      * instances are created.
      *
-     * @return the ID of this External.ModelTurtle
+     * @return the ID of this external.ModelTurtle
      */
     @Override
     public int getID() {
         return TURTLE_ID;
     }
 
+    public double getReturnVal() {
+        return returnVal;
+    }
+
     /**
-     * @return a List of any variables representing the state of this External.ModelTurtle. The variables should be integers.
+     * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
      */
     @Override
     public Map<String, Double> getState() {
@@ -39,7 +43,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Moves the External.ModelTurtle forward by the specified number of pixels.
+     * Moves the external.ModelTurtle forward by the specified number of pixels.
      *
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved

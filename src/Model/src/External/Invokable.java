@@ -1,5 +1,4 @@
 package external;
-
 /**
  * An interface used for classes that encapsulate the execution of commands.
  */
