@@ -1,4 +1,4 @@
-module slogo_team03.view {
+module view {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.graphics;
