@@ -1,4 +1,4 @@
-package External;
+package external;
 
 public interface SLogoMathExecutable extends SLogoExecutable {
 

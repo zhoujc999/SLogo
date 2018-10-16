@@ -1,4 +1,4 @@
-package External;
+package external;
 
 /**
  * An interface used for classes that encapsulate the procedures with their parameters called by the commands

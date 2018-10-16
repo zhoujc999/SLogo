@@ -1,5 +1,5 @@
 package Internal;
-import External.Executable;
+import external.Executable;
 import java.util.List;
 
 public interface CommandFactory {
