@@ -1,10 +1,12 @@
-package Model.src.Commands;
+package Commands;
 
-import Model.src.External.*;
+
+import External.SLogoTurtleExecutable;
+
 
 import java.util.List;
 
-public class forward implements SLogoExecutable {
+public class forward implements SLogoTurtleExecutable {
     private External.ModelTurtle turtle;
     private double param1;
     private double distance;

@@ -1,22 +1,23 @@
-package Model.src;
+package CommandFactory;
 
-
+import External.Invokable;
+import External.SLogoExecutable;
+import Internal.CommandFactoryInterface;
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import Model.src.External.*;
 
-public class CommandFactory {
+public class CommandFactory implements CommandFactoryInterface {
 
-    private Invoker invoker;
+    private Invokable invoker;
     private static CommandFactory cmdFactory;
 
 
-    private CommandFactory(Invoker invoker) {
+    private CommandFactory(Invokable invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(Invoker invoker) {
+    public CommandFactory getInstance(Invokable invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)

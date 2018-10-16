@@ -1,8 +1,6 @@
-module slogo_team03.model {
+module model {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.media;
-
-    exports external;
 }
