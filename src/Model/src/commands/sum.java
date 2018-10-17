@@ -23,6 +23,7 @@ public class sum implements SLogoMathExecutable {
             e.printStackTrace();
         }
 
+
     }
 
     @Override
