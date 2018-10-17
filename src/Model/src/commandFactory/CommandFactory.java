@@ -1,22 +1,23 @@
-package Model.src;
+package commandFactory;
 
+import external.Invokable;
+import external.SLogoExecutable;
 
 import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import Model.src.External.*;
 
 public class CommandFactory {
 
-    private Invoker invoker;
     private static CommandFactory cmdFactory;
+    private Invokable invoker;
 
 
-    private CommandFactory(Invoker invoker) {
+    private CommandFactory(Invokable invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(Invoker invoker) {
+    public static CommandFactory getInstance(Invokable invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)
@@ -33,8 +34,8 @@ public class CommandFactory {
 
 
 
-    public void createCommand(String cmd, List params) {
-        String commandName = "src.Model.src.Commands." + cmd;
+    final public void createCommand(String cmd, List params) {
+        String commandName = "src.Model.src.commands." + cmd;
         Class<?> commandClass = null;
         try {
             commandClass = Class.forName(commandName);

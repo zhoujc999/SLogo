@@ -1,11 +1,13 @@
-package Model.src.Commands;
+package commands;
 
-import Model.src.External.*;
+
+import external.ModelTurtle;
+import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class forward implements SLogoExecutable {
-    private External.ModelTurtle turtle;
+public class forward implements SLogoTurtleExecutable {
+
     private double param1;
     private double distance;
     private final static int numParams = 1;
@@ -25,19 +27,15 @@ public class forward implements SLogoExecutable {
     }
 
     @Override
-    public void getTurtle(External.ModelTurtle turtle) {
-        this.turtle = turtle;
-    }
-
-    @Override
-    public void execute() {
+    public void execute(ModelTurtle turtle) {
         this.distance = param1;
         turtle.forward(distance);
     }
 
+
     @Override
-    public double returnValue () {
-        return  this.distance;
+    public double returnValue() {
+        return this.distance;
     }
 
 }

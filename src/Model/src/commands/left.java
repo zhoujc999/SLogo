@@ -1,38 +1,41 @@
-package Model.src.Commands;
+package commands;
 
-import Model.src.*;
+import external.ModelTurtle;
+import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class sum implements SLogoExecutable {
-    private final static int numParams = 2;
+public class left implements SLogoTurtleExecutable {
+
     private double param1;
-    private double param2;
-    private double result;
+    private double degree;
+    private final static int numParams = 1;
 
 
-    public sum(List params) {
+    public left(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
             param1 = (double) params.get(0);
-            param2 = (double) params.get(1);
         }
         catch (ClassCastException e) {
             e.printStackTrace();
         }
 
+
     }
 
     @Override
-    public void execute() {
-        this.result = this.param1 + this.param2;
+    public void execute(ModelTurtle turtle) {
+        this.degree = param1;
+        turtle.left(degree);
     }
+
 
     @Override
     public double returnValue() {
-        return result;
+        return this.degree;
     }
 
 }
