@@ -8,8 +8,6 @@ import java.util.List;
 
 public class forward implements SLogoTurtleExecutable {
 
-    private ModelTurtle turtle;
-
     private double param1;
     private double distance;
     private final static int numParams = 1;
@@ -25,16 +23,11 @@ public class forward implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            // TODO
-        }
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.turtle = turtle;
         this.distance = param1;
         turtle.forward(distance);
     }

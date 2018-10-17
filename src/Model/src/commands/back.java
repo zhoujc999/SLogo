@@ -7,7 +7,6 @@ import java.util.List;
 
 public class back implements SLogoTurtleExecutable {
 
-    private ModelTurtle turtle;
 
     private double param1;
     private double distance;
@@ -24,16 +23,10 @@ public class back implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            // TODO
-        }
-
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.turtle = turtle;
         this.distance = param1;
         turtle.back(distance);
     }

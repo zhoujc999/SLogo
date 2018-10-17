@@ -6,7 +6,6 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 public class towards implements SLogoTurtleExecutable {
-    private ModelTurtle turtle;
 
     private double param1;
     private double param2;
@@ -28,16 +27,12 @@ public class towards implements SLogoTurtleExecutable {
             e.printStackTrace();
             // TODO
         }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            // TODO
-        }
+
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.turtle = turtle;
         this.x = param1;
         this.y = param2;
         this.degreesTurned = turtle.towards(x, y);

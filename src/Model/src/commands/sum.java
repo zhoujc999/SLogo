@@ -22,10 +22,7 @@ public class sum implements SLogoMathExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            // TODO
-        }
+
 
     }
 
