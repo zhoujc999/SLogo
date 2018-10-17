@@ -4,15 +4,15 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
-
-    public sum(List params) {
+public class tan extends UnaryMathOperator {
+    public tan(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+        double angle = this.param1 * (Math.PI / 180);
+        this.result = Math.tan(angle);
     }
 
     @Override

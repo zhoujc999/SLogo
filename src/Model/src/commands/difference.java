@@ -4,15 +4,16 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
+public class difference extends BinaryMathOperator {
 
-    public sum(List params) {
+    public difference(List params) {
         super(params);
+
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+        this.result = this.param1 - this.param2;
     }
 
     @Override
