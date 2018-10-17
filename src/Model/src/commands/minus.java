@@ -17,7 +17,7 @@ public class minus extends UnaryMathOperator {
 
     @Override
     public double returnValue() {
-        return result;
+        return this.result;
     }
 
 }

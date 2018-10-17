@@ -1,6 +1,7 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoRandom;
 
 import java.util.List;
 import java.util.Random;
@@ -13,8 +14,7 @@ public class random extends UnaryMathOperator {
 
     @Override
     public void execute(ModelTurtle turtle) {
-
-        this.result = Math.random() * param1;
+        this.result = SLogoRandom.getInstance().nextD() * param1;
     }
 
     @Override

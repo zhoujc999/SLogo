@@ -7,17 +7,17 @@ import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class CommandFactory implements CommandFactoryInterface {
+public class CommandFactory {
 
-    private Invokable invoker;
     private static CommandFactory cmdFactory;
+    private Invokable invoker;
 
 
     private CommandFactory(Invokable invoker) {
         this.invoker = invoker;
     }
 
-    public CommandFactory getInstance(Invokable invoker) {
+    public static CommandFactory getInstance(Invokable invoker) {
         if (cmdFactory == null)
         {
             synchronized(CommandFactory.class)
@@ -34,7 +34,7 @@ public class CommandFactory implements CommandFactoryInterface {
 
 
 
-    public void createCommand(String cmd, List params) {
+    final public void createCommand(String cmd, List params) {
         String commandName = "src.Model.src.commands." + cmd;
         Class<?> commandClass = null;
         try {
