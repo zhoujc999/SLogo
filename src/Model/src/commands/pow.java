@@ -4,15 +4,15 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
+public class pow extends BinaryMathOperator {
 
-    public sum(List params) {
+    public pow(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+        this.result = Math.pow(param1, param2);
     }
 
     @Override

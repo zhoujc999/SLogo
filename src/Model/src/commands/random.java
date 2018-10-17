@@ -3,21 +3,22 @@ package commands;
 import external.ModelTurtle;
 
 import java.util.List;
+import java.util.Random;
 
-public class sum extends BinaryMathOperator {
+public class random extends UnaryMathOperator {
 
-    public sum(List params) {
+    public random(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+
+        this.result = Math.random() * param1;
     }
 
     @Override
     public double returnValue() {
         return result;
     }
-
 }
