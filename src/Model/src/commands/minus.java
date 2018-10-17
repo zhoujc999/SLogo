@@ -4,15 +4,15 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
+public class minus extends UnaryMathOperator {
 
-    public sum(List params) {
+    public minus(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+        this.result = -this.param1;
     }
 
     @Override

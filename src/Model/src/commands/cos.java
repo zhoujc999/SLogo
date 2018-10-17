@@ -4,15 +4,15 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
-
-    public sum(List params) {
+public class cos extends UnaryMathOperator {
+    public cos(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 + this.param2;
+        double angle = this.param1 * (Math.PI / 180);
+        this.result = Math.cos(angle);
     }
 
     @Override
