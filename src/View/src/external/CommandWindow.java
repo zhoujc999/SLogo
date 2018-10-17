@@ -1,27 +1,45 @@
 package external;
 
-public interface CommandWindow {
+import javafx.geometry.Dimension2D;
+import javafx.geometry.Point2D;
+import javafx.scene.control.TextArea;
+
+public class CommandWindow extends TextArea {
     /**
-     * The external.CommandWindow is the site where the user may type in text in order to execute the desired command. It is able
+     * The CommandWindow is the site where the user may type in text in order to execute the desired command. It is able
      * set its text to something that the user may not have typed in. This is useful for loading commands from the
-     * internal.CommandHistory.
+     * CommandHistory.
      *
      * @author Tahj Starr
      */
 
+    protected CommandWindow(Point2D location, Dimension2D size) {
+        setLayoutX(location.getX());
+        setLayoutY(location.getY());
+        setPrefSize(size.getWidth(), size.getHeight());
+    }
+
     /**
      * Returns text input from user.
      */
-    String getInput();
+    public String getInput() {
+        String text = getText();
+        clear();
+        return text;
+    }
 
     /**
      * Sets the text input to the specified value.
      */
-    void setInput(String command);
+    public void setInput(String command) {
+        setText(command);
+    }
 
     /**
-     * Sets the name displayed by external.CommandWindow based on the language to which external.GUI is set.
+     * Sets the name displayed by CommandWindow based on the language to which GUI is set.
      */
-    void setName(String name);
+    public void setName(String name) {
+
+    }
 
 }

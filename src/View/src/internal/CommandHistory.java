@@ -2,8 +2,8 @@ package internal;
 
 public interface CommandHistory {
     /**
-     * internal.CommandHistory keeps track of anything that the user runs or tries to run from the external.CommandWindow and displays it
-     * to the user. Users can load a command by clicking on it. The external.GUI handles saving commands.
+     * CommandHistory keeps track of anything that the user runs or tries to run from the CommandWindow and displays it
+     * to the user. Users can load a command by clicking on it. The GUI handles saving commands.
      *
      * @author Tahj Starr
      */
@@ -14,7 +14,7 @@ public interface CommandHistory {
     void saveCommand(String command);
 
     /**
-     * Sets the name displayed by internal.CommandHistory based on the language to which external.GUI is set.
+     * Sets the name displayed by CommandHistory based on the language to which GUI is set.
      */
     void setName(String name);
 
