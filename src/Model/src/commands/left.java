@@ -6,7 +6,6 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 public class left implements SLogoTurtleExecutable {
-    private ModelTurtle turtle;
 
     private double param1;
     private double degree;
@@ -23,16 +22,12 @@ public class left implements SLogoTurtleExecutable {
         catch (ClassCastException e) {
             e.printStackTrace();
         }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            // TODO
-        }
+
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.turtle = turtle;
         this.degree = param1;
         turtle.left(degree);
     }
