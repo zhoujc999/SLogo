@@ -3,9 +3,15 @@ package external;
 import internal.CommandHistory;
 import internal.CommandReference;
 import javafx.geometry.Dimension2D;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class GUI extends Region {
     /**
@@ -23,6 +29,9 @@ public class GUI extends Region {
     private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(50, 25);
     private static final Point2D CLEAR_BUTTON_LOCATION = new Point2D(10, 565);
     private static final Dimension2D CLEAR_BUTTON_SIZE = new Dimension2D(50, 25);
+    private static final Point2D BUTTON_PANEL_LOCATION = new Point2D(600, 50);
+    private static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(190, 200);
+
 
 
     private CommandWindow myCommandWindow;
@@ -32,8 +41,8 @@ public class GUI extends Region {
         setLayoutX(0);
         setLayoutY(0);
         myCommandWindow = new CommandWindow(COMMAND_WINDOW_LOCATION, COMMAND_WINDOW_SIZE);
-        myGraphicsWindow = new GraphicsWindow(GRAPHICS_WINDOW_LOCATION, GRAPHICS_WINDOW_SIZE);
-        getChildren().addAll(myCommandWindow, myGraphicsWindow, runButton(), clearButton());
+        myGraphicsWindow = new GraphicsWindow(GRAPHICS_WINDOW_LOCATION, GRAPHICS_WINDOW_SIZE, new CornerRadii(0), new Insets(0));
+        getChildren().addAll(myCommandWindow, myGraphicsWindow, runButton(), clearButton(), buttonPanel());
     }
 
     /**
@@ -45,7 +54,6 @@ public class GUI extends Region {
 
     private Button runButton() {
         var button = new Button("Run");
-        button.autosize();
         button.setLayoutX(RUN_BUTTON_LOCATION.getX());
         button.setLayoutY(RUN_BUTTON_LOCATION.getY());
         button.setPrefSize(RUN_BUTTON_SIZE.getWidth(), RUN_BUTTON_SIZE.getHeight());
@@ -56,13 +64,62 @@ public class GUI extends Region {
 
     private Button clearButton() {
         var button = new Button("Clear");
-        button.autosize();
         button.setLayoutX(CLEAR_BUTTON_LOCATION.getX());
         button.setLayoutY(CLEAR_BUTTON_LOCATION.getY());
         button.setPrefSize(CLEAR_BUTTON_SIZE.getWidth(), CLEAR_BUTTON_SIZE.getHeight());
         button.setOnAction(e ->
                 myCommandWindow.clear());
         return button;
+    }
+
+    private GridPane buttonPanel() {
+        var buttonPanel = new GridPane();
+        buttonPanel.setLayoutX(BUTTON_PANEL_LOCATION.getX());
+        buttonPanel.setLayoutY(BUTTON_PANEL_LOCATION.getY());
+        buttonPanel.setPrefSize(BUTTON_PANEL_SIZE.getWidth(), BUTTON_PANEL_SIZE.getHeight());
+        buttonPanel.addColumn(0,
+                new Text("Background Color"),
+                new Text("Turtle Image"),
+                new Text("Pen Color"),
+                new Text("Language"));
+        buttonPanel.addColumn(1,
+                backgroundPicker(),
+                turtlePicker(),
+                penPicker(),
+                languagePicker());
+        return buttonPanel;
+    }
+
+    private ColorPicker backgroundPicker() {
+        var picker = new ColorPicker(Color.WHITE);
+        picker.setStyle("-fx-color-label-visible: false");
+        picker.setOnAction(e -> myGraphicsWindow.setBackground(picker.getValue()));
+        return picker;
+    }
+
+    private ComboBox turtlePicker() {
+        var picker = new ComboBox<Image>();
+        picker.getItems().addAll(
+                new Image("GreenTurtle.png"),
+                new Image("RedTurtle.png"),
+                new Image("BlueTurtle.png")
+        );
+        picker.setOnAction(e -> myGraphicsWindow.getTurtle().setImage(picker.getValue()));
+        return picker;
+    }
+
+    private ColorPicker penPicker() {
+        var picker = new ColorPicker(Color.BLACK);
+        picker.setStyle("-fx-color-label-visible: false ;");
+        picker.setOnAction(e -> myGraphicsWindow.getTurtle().setPenColor(picker.getValue()));
+        return picker;
+    }
+
+    private ComboBox languagePicker() {
+        var picker = new ComboBox<String>();
+        picker.getItems().add("English");
+        //picker.setStyle("-fx-color-label-visible: false ;");
+        return picker;
     }
 
     /**

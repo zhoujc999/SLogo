@@ -2,6 +2,7 @@ package external;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.Observable;
@@ -16,16 +17,26 @@ public class TurtleView extends ImageView {
      */
 
     private static final double SIZE = 50;
+    private Color myPenColor;
 
     protected TurtleView(String url, double x, double y) {
         super(url);
         setFitWidth(SIZE);
         setFitHeight(SIZE);
         setPosition(x, y);
+        myPenColor = Color.BLACK;
     }
 
     protected void setPosition(double x, double y) {
         relocate(x - SIZE/2, y - SIZE/2);
+    }
+
+    protected Color getPenColor() {
+        return myPenColor;
+    }
+
+    protected void setPenColor(Color color) {
+        myPenColor = color;
     }
 
     /**
