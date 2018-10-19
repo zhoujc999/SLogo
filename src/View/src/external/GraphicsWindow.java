@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,13 +40,13 @@ public class GraphicsWindow extends Pane implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        var state = (List<Double>) arg;
+        var state = (Map<String, Double>) arg;
 
-        double x = state.get(0);
-        double y = state.get(1);
-        double heading = state.get(2);
-        boolean visible = Boolean.parseBoolean(state.get(3).toString());
-        boolean penDown = Boolean.parseBoolean(state.get(3).toString());
+        double x = state.get("xPos");
+        double y = state.get("yPos");
+        double heading = state.get("heading");
+        boolean visible = Boolean.parseBoolean(state.get("showing").toString());
+        boolean penDown = Boolean.parseBoolean(state.get("penDown").toString());
 
         setTurtlePosition(x, y);
         myTurtle.setRotate(heading);
