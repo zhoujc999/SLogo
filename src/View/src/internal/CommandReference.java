@@ -2,7 +2,7 @@ package internal;
 
 public interface CommandReference {
     /**
-     * internal.CommandReference provides users with a list of all the commands initially recognized by the SLogo program. It is
+     * CommandReference provides users with a list of all the commands initially recognized by the SLogo program. It is
      * displayed due to the click of a button and can be hidden again with another click of the button. It would need
      * access to the languages resources.
      *
@@ -20,7 +20,7 @@ public interface CommandReference {
     void hide();
 
     /**
-     * Sets the language of the text in internal.CommandReference.
+     * Sets the language of the text in CommandReference.
      */
     void setLanguage(String language);
 
