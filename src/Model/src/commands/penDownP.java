@@ -22,7 +22,7 @@ public class penDownP implements SLogoTurtleExecutable {
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getPenDown();
+        this.result = turtle.getPen().getPenDown();
     }
 
 

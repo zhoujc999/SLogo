@@ -3,15 +3,23 @@ package external;
 import java.util.Map;
 import java.util.Observable;
 
+/**
+ * @author jgp17
+ */
+
 public class StdModelTurtle extends Observable implements ModelTurtle {
     private int TURTLE_ID = 0;
     private double myXPos = 0;
     private double myYPos = 0;
     private double myHeading = 0;
-    private int penDown = 1;
     private int showing = 1;
     private int clearScreen = 0;
+    private ModelPen myPen;
     private double returnVal;
+
+    public StdModelTurtle() {
+        myPen = new StdModelPen();
+    }
 
     /**
      * Return a unique integer ID for this external.ModelTurtle. This method will be used in the event that multiple external.ModelTurtle
@@ -37,17 +45,18 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
 //    }
 
     /**
-     * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
+     * @return a List of any variables representing the state of this ModelTurtle and its ModelPen. The variables should be doubles.
      */
     @Override
     public Map<String, Double> getState() {
-        return Map.ofEntries(
+        Map<String, Double> turtleState = Map.ofEntries(
                 Map.entry("xPos", myXPos),
                 Map.entry("yPos", myYPos),
                 Map.entry("heading", myHeading),
-                Map.entry("penDown", (double) penDown),
                 Map.entry("showing", (double) showing),
                 Map.entry("clearScreen", (double) clearScreen));
+        turtleState.putAll(myPen.getState());
+        return turtleState;
     }
 
     /**
@@ -169,36 +178,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * puts pen down such that when the turtle moves, it leaves a trail
-     *
-     * @return 1
-     */
-    @Override
-    public int penDown() {
-        Map<String, Double> dataMap = getOldXYMap();
-        penDown = 1;
-        returnVal = penDown;
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        return penDown;
-    }
-
-    /**
-     * puts pen up such that when the turtle moves, it does not leave a trail
-     *
-     * @return 0
-     */
-    @Override
-    public int penUp() {
-        Map<String, Double> dataMap = getOldXYMap();
-        penDown = 0;
-        returnVal = penDown;
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        return penDown;
-    }
-
-    /**
      * makes turtle visible
      *
      * @return 1
@@ -280,20 +259,19 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * @return 1 if turtle's pen is down, 0 if it is up
-     */
-    @Override
-    public int getPenDown() {
-        returnVal = penDown;
-        return penDown;
-    }
-
-    /**
      * @return 1 if turtle is showing, 0 if it is hiding
      */
     @Override
     public int getShowing() {
         returnVal = showing;
         return showing;
+    }
+
+    /**
+     * @return the ModelPen object associated with this ModelTurtle
+     */
+    @Override
+    public ModelPen getPen() {
+        return myPen;
     }
 }
