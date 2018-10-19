@@ -2,6 +2,10 @@ package external;
 
 import java.util.Map;
 
+/**
+ * @author jgp17
+ */
+
 public class StdModelPen implements ModelPen {
     private double returnVal;
     private int penDown;
@@ -49,7 +53,7 @@ public class StdModelPen implements ModelPen {
      */
     @Override
     public int penUp() {
-        penDown = 1;
+        penDown = 0;
         returnVal = penDown;
         return penDown;
     }

@@ -6,13 +6,15 @@ import java.util.Map;
  * Instances of classes implementing this interface are abstract representations of a turtle
  * (i.e. a specific state could be displayed differently depending on how the view is implemented).
  * The methods in this interface provides access to the turtle's state and provide ways to modify that state.
+ *
+ * @author jgp17
  */
 public interface ModelTurtle {
 
     //methods below are part of external Model API
 
     /**
-     * Return a unique integer ID for this external.ModelTurtle. This method will be used in the event that multiple external.ModelTurtle
+     * Return a unique integer ID for this ModelTurtle. This method will be used in the event that multiple ModelTurtle
      * instances are created.
      *
      * @return the ID of this external.ModelTurtle
@@ -30,7 +32,8 @@ public interface ModelTurtle {
     //methods below are part of internal Model API
 
     /**
-     * @return a Map of any variables representing the state of this ModelTurtle. The variables should be doubles.
+     * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen. The variables should
+     * be doubles.
      */
     Map<String, Double> getState();
 
@@ -145,4 +148,10 @@ public interface ModelTurtle {
      * @return 1 if turtle is showing, 0 if it is hiding
      */
     int getShowing();
+
+    /**
+     *
+     * @return the ModelPen object associated with this ModelTurtle
+     */
+    ModelPen getPen();
 }

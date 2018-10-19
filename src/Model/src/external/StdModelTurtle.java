@@ -3,6 +3,10 @@ package external;
 import java.util.Map;
 import java.util.Observable;
 
+/**
+ * @author jgp17
+ */
+
 public class StdModelTurtle extends Observable implements ModelTurtle {
     private int TURTLE_ID = 0;
     private double myXPos = 0;
@@ -41,7 +45,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
 //    }
 
     /**
-     * @return a List of any variables representing the state of this ModelTurtle. The variables should be integers.
+     * @return a List of any variables representing the state of this ModelTurtle and its ModelPen. The variables should be doubles.
      */
     @Override
     public Map<String, Double> getState() {
@@ -261,5 +265,13 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public int getShowing() {
         returnVal = showing;
         return showing;
+    }
+
+    /**
+     * @return the ModelPen object associated with this ModelTurtle
+     */
+    @Override
+    public ModelPen getPen() {
+        return myPen;
     }
 }
