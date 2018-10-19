@@ -20,11 +20,19 @@ public interface ModelTurtle {
     int getID();
 
     /**
-     * @return a List of any variables representing the state of this external.ModelTurtle. The variables should be integers.
+     * Returns the return value from the last method called on this ModelTurtle so that the Parser can parse any
+     * commands that require this return value.
+     *
+     * @return the return value from the last method called on this ModelTurtle.
      */
-    Map<String, Double> getState();
+    double getReturnVal();
 
     //methods below are part of internal Model API
+
+    /**
+     * @return a Map of any variables representing the state of this ModelTurtle. The variables should be doubles.
+     */
+    Map<String, Double> getState();
 
     /**
      * Moves the external.ModelTurtle forward by the specified number of pixels.
@@ -87,20 +95,6 @@ public interface ModelTurtle {
     double goTo(double x, double y);
 
     /**
-     * puts pen down such that when the turtle moves, it leaves a trail
-     *
-     * @return 1
-     */
-    int penDown();
-
-    /**
-     * puts pen up such that when the turtle moves, it does not leave a trail
-     *
-     * @return 0
-     */
-    int penUp();
-
-    /**
      * makes turtle visible
      *
      * @return 1
@@ -145,12 +139,6 @@ public interface ModelTurtle {
      * @return 	the turtle's heading as the number of degrees right of north/up
      */
     double getHeading();
-
-    /**
-     *
-     * @return 1 if turtle's pen is down, 0 if it is up
-     */
-    int getPenDown();
 
     /**
      *
