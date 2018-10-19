@@ -5,6 +5,7 @@ import internal.CommandReference;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.CornerRadii;
@@ -57,8 +58,7 @@ public class GUI extends Region {
         button.setLayoutX(RUN_BUTTON_LOCATION.getX());
         button.setLayoutY(RUN_BUTTON_LOCATION.getY());
         button.setPrefSize(RUN_BUTTON_SIZE.getWidth(), RUN_BUTTON_SIZE.getHeight());
-        button.setOnAction(e ->
-                run());
+        button.setOnAction(e -> run());
         return button;
     }
 
@@ -67,8 +67,7 @@ public class GUI extends Region {
         button.setLayoutX(CLEAR_BUTTON_LOCATION.getX());
         button.setLayoutY(CLEAR_BUTTON_LOCATION.getY());
         button.setPrefSize(CLEAR_BUTTON_SIZE.getWidth(), CLEAR_BUTTON_SIZE.getHeight());
-        button.setOnAction(e ->
-                myCommandWindow.clear());
+        button.setOnAction(e -> myCommandWindow.clear());
         return button;
     }
 
@@ -87,6 +86,7 @@ public class GUI extends Region {
                 turtlePicker(),
                 penPicker(),
                 languagePicker());
+        buttonPanel.add(referenceButton(), 0, 4, 2, 1);
         return buttonPanel;
     }
 
@@ -120,6 +120,12 @@ public class GUI extends Region {
         picker.getItems().add("English");
         //picker.setStyle("-fx-color-label-visible: false ;");
         return picker;
+    }
+
+    private Button referenceButton() {
+        var button = new Button("Reference");
+        //button.setOnAction(e -> );
+        return button;
     }
 
     /**
