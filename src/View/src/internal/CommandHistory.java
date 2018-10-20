@@ -1,6 +1,13 @@
 package internal;
 
-public interface CommandHistory {
+import external.GUIList;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+
+import java.util.List;
+
+public class CommandHistory extends ListView implements GUIList {
     /**
      * CommandHistory keeps track of anything that the user runs or tries to run from the CommandWindow and displays it
      * to the user. Users can load a command by clicking on it. The GUI handles saving commands.
@@ -8,14 +15,19 @@ public interface CommandHistory {
      * @author Tahj Starr
      */
 
-    /**
-     * Adds a command to the command history.
-     */
-    void saveCommand(String command);
+    @Override
+    public void save(String name, String value) {
+        getItems().add(new Text(name));
+    }
 
-    /**
-     * Sets the name displayed by CommandHistory based on the language to which GUI is set.
-     */
-    void setName(String name);
+    @Override
+    public String load(String name) {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+
+    }
 
 }
