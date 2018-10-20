@@ -52,12 +52,12 @@ public interface ModelPen {
     int setColor(int color);
 
     /**
-     * Sets the pen width based on the specified double, returns that double.
+     * Sets the pen size based on the specified double number of pixels, returns that double.
      *
-     * @return the specified width.
+     * @return the specified size, in number of pixels.
      */
 
-    double setWidth(double width);
+    double setSize (double pixels);
 
     /**
      *
@@ -71,9 +71,9 @@ public interface ModelPen {
     int getColor();
 
     /**
-     * @return the current pen width.
+     * @return the current pen size, in pixels.
      */
-    double getWidth();
+    double getSize();
 
 
 }
