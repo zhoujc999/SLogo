@@ -29,4 +29,11 @@ public interface Parse extends Observer {
 
     public void update(Observable o, Object arg);
 
+    /**
+     * Changes the language that the Parser recognizes for commands
+     * @param lang The new language
+     */
+
+    public void changeLanguage(String lang);
+
 }
