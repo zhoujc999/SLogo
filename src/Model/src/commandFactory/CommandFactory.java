@@ -7,30 +7,16 @@ import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class CommandFactory {
+public class CommandFactory implements CommandFactoryInterface {
 
-    private static CommandFactory cmdFactory;
     private Invokable invoker;
 
 
-    private CommandFactory(Invokable invoker) {
+    public CommandFactory(Invokable invoker) {
         this.invoker = invoker;
     }
 
-    public static CommandFactory getInstance(Invokable invoker) {
-        if (cmdFactory == null)
-        {
-            synchronized(CommandFactory.class)
-            {
-                if (cmdFactory == null)
-                {
-                    cmdFactory = new CommandFactory(invoker);
-                }
-            }
-        }
 
-        return cmdFactory;
-    }
 
 
 
