@@ -13,6 +13,10 @@ public class CommandWindow extends TextArea {
      * @author Tahj Starr
      */
 
+    protected CommandWindow() {
+
+    }
+
     protected CommandWindow(Point2D location, Dimension2D size) {
         setLayoutX(location.getX());
         setLayoutY(location.getY());
