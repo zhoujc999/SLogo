@@ -51,7 +51,7 @@ public class GraphicsWindow extends Pane implements Observer {
         myInsets = insets;
         setPrefSize(580, 470);
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-        var turtle = new TurtleView("GreenTurtle.png", getPrefWidth()/2, getPrefHeight()/2);
+        var turtle = new TurtleView("TurtleImages/GreenTurtle.png", getPrefWidth()/2, getPrefHeight()/2);
         addTurtle(turtle);
         myTurtle = turtle;
     }
@@ -73,7 +73,7 @@ public class GraphicsWindow extends Pane implements Observer {
         tab2.setContent(new Rectangle(200,200, Color.LIGHTGREEN));
         tabPane.getTabs().addAll(tab, tab2);
 
-        myTurtle = new TurtleView("GreenTurtle.png", size.getWidth()/2, size.getHeight()/2);
+        myTurtle = new TurtleView("TurtleImages/GreenTurtle.png", size.getWidth()/2, size.getHeight()/2);
         getChildren().addAll(myTurtle, tabPane);
     }
 
