@@ -11,6 +11,9 @@ import java.util.Map;
  */
 
 public class StdModelPen implements ModelPen {
+    public static final String PEN_DOWN_KEY = "penDown";
+    public static final String PEN_COLOR_KEY = "penColor";
+    public static final String PEN_SIZE_KEY = "penSize";
     private double returnVal;
     private int penDown;
     private int myColor;
@@ -33,9 +36,9 @@ public class StdModelPen implements ModelPen {
     @Override
     public Map<String, Double> getState() {
         return Map.ofEntries(
-                Map.entry("penDown", (double) penDown),
-                Map.entry("penColor", (double) myColor),
-                Map.entry("penSize", mySize));
+                Map.entry(PEN_DOWN_KEY, (double) penDown),
+                Map.entry(PEN_COLOR_KEY, (double) myColor),
+                Map.entry(PEN_SIZE_KEY, mySize));
     }
 
     /**
