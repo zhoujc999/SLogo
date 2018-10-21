@@ -22,6 +22,7 @@ public class Parser implements Observer, Parse {
     public static final String CONSTANT_KEY = "Constant";
     public static final String COMMENT_KEY = "Comment";
     public static final String VARIABLE_KEY = "Variable";
+    public static final String LIST_KEY = ""
 
     private CommandFactoryInterface myFactory;
     private ResourceBundle langBundle;
@@ -33,7 +34,7 @@ public class Parser implements Observer, Parse {
     private Map<String, String> langMap;
     private List<Entry<String, Pattern>> mySyntax;
 
-    private Map<String, String> localVariables;
+    private Map<String, String> variableMap;
     private String replacementValue;
 
 
@@ -42,7 +43,7 @@ public class Parser implements Observer, Parse {
         errorBundle = ResourceBundle.getBundle(ERROR_MESSAGE_PATH);
         paramCountBundle = ResourceBundle.getBundle(PARAMETER_COUNTS_PATH);
 
-        localVariables = new HashMap<>();
+        variableMap = new HashMap<>();
         mySyntax = new ArrayList<>();
         changeLanguage(lang);
         paramMap = new HashMap<>();
@@ -87,8 +88,10 @@ public class Parser implements Observer, Parse {
         else if(type.equals(COMMENT_KEY)){
             return createSubTree(buildingNode, commandNode);
         }
-//        else if(type.equals(VARIABLE_KEY)){
-//        }
+        else if(type.equals(VARIABLE_KEY)){
+            buildingNode.addChild(new TreeNode(variableMap.get(currentWrd)));
+        }
+        else if(type.equals())
         return null;
     }
 
