@@ -43,6 +43,7 @@ public class GraphicsWindow extends Pane implements Observer {
     private CornerRadii myCornerRadii;
     private Insets myInsets;
     private TurtleView myTurtle;
+    private List<Node> lineList;
     private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
@@ -86,7 +87,7 @@ public class GraphicsWindow extends Pane implements Observer {
         double oldY = state.get("yPos");
         double heading = state.get("heading");
         boolean visible = (state.get("showing") == 1);
-        boolean clearScreen = (state.get("clearScreen") == 1);
+        boolean clearScreenFlag = (state.get("clearScreen") == 1);
         boolean penDown = (state.get("penDown") == 1);
         Color penColor = DOUBLE_TO_COLOR_MAP.get(state.get("penColor"));
         double penSize = state.get("penSize");
@@ -94,15 +95,18 @@ public class GraphicsWindow extends Pane implements Observer {
         setTurtlePosition(x, y);
         myTurtle.setRotate(heading);
         myTurtle.setVisible(visible);
-        if (clearScreen) {
-            //FIXME: finish this
-            Stream<Node> childrenStream = getChildren().stream();
-            setTurtlePosition(0, 0);
-
+        if (clearScreenFlag) {
+            clearScreen();
         }
         else if (penDown) {
             draw(oldX, oldY, x, y, penSize, penColor);
         }
+    }
+
+    private void clearScreen() {
+        getChildren().removeAll(lineList);
+        lineList.clear();
+        setTurtlePosition(0, 0);
     }
 
     private void setTurtlePosition(double x, double y) {
@@ -114,6 +118,7 @@ public class GraphicsWindow extends Pane implements Observer {
 //        Line line = new Line(oldX, oldY, x, y); //is this preferred?
         line.setStrokeWidth(width);
         line.setStroke(color);
+        lineList.add(line);
         getChildren().add(line);
     }
 
