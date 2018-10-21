@@ -1,13 +1,12 @@
 package parsing;
 
-import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 import external.Node;
 import external.Parse;
 import javafx.scene.control.Alert;
 
-import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
@@ -22,6 +21,9 @@ public class Parser implements Observer, Parse {
     public static final String CONSTANT_KEY = "Constant";
     public static final String COMMENT_KEY = "Comment";
     public static final String VARIABLE_KEY = "Variable";
+    public static final String LIST_START_KEY = "ListStart";
+    public static final String LIST_END_KEY = "ListEnd";
+
 
     private CommandFactoryInterface myFactory;
     private ResourceBundle langBundle;
@@ -33,7 +35,7 @@ public class Parser implements Observer, Parse {
     private Map<String, String> langMap;
     private List<Entry<String, Pattern>> mySyntax;
 
-    private Map<String, String> localVariables;
+    private Map<String, String> variableMap;
     private String replacementValue;
 
 
@@ -42,7 +44,7 @@ public class Parser implements Observer, Parse {
         errorBundle = ResourceBundle.getBundle(ERROR_MESSAGE_PATH);
         paramCountBundle = ResourceBundle.getBundle(PARAMETER_COUNTS_PATH);
 
-        localVariables = new HashMap<>();
+        variableMap = new HashMap<>();
         mySyntax = new ArrayList<>();
         changeLanguage(lang);
         paramMap = new HashMap<>();
@@ -62,6 +64,11 @@ public class Parser implements Observer, Parse {
         executeTree((TreeNode) commandTree.getChildren().get(0));
     }
 
+    @Override
+    public void addVariable(String name, String value) {
+        variableMap.put(name, value);
+    }
+
     private ListNode createSubTree(Node buildingNode, ListNode commandNode){
         if(commandNode == null){
             return commandNode;
@@ -70,14 +77,7 @@ public class Parser implements Observer, Parse {
         commandNode = commandNode.getChild();
         String type = getSymbol(mySyntax, currentWrd);
         if(type.equals(COMMAND_KEY)){
-            String translatedWrd = langMap.get(currentWrd);
-            int parameterNumber = Integer.parseInt(paramMap.get(translatedWrd));
-            TreeNode nwNode = new TreeNode(translatedWrd);
-            buildingNode.addChild(nwNode);
-            for(int i = 0; i < parameterNumber; i++){
-                commandNode = createSubTree(nwNode,commandNode);
-            }
-            return commandNode;
+            return handleCommands(buildingNode, commandNode, currentWrd);
         }
         else if(type.equals(CONSTANT_KEY)){
             TreeNode nwNode = new TreeNode(currentWrd);
@@ -87,19 +87,46 @@ public class Parser implements Observer, Parse {
         else if(type.equals(COMMENT_KEY)){
             return createSubTree(buildingNode, commandNode);
         }
-//        else if(type.equals(VARIABLE_KEY)){
-//        }
+        else if(type.equals(VARIABLE_KEY)){
+            buildingNode.addChild(new TreeNode(variableMap.get(currentWrd)));
+        }
+        else if(type.equals(LIST_START_KEY)){
+            ArrayList<String> listParts = new ArrayList<>();
+            listParts.add(currentWrd);
+            String curType = type;
+            while(!curType.equals(LIST_END_KEY)){
+                listParts.add(commandNode.getData());
+                curType = getSymbol(mySyntax, commandNode.getData());
+                commandNode = commandNode.getChild();
+            }
+
+        }
         return null;
+    }
+
+    private ListNode handleCommands(Node buildingNode, ListNode commandNode, String currentWrd){
+        String translatedWrd = langMap.get(currentWrd);
+        int parameterNumber = Integer.parseInt(paramMap.get(translatedWrd));
+        TreeNode nwNode = new TreeNode(translatedWrd);
+        buildingNode.addChild(nwNode);
+        for(int i = 0; i < parameterNumber; i++){
+            commandNode = createSubTree(nwNode,commandNode);
+        }
+        return commandNode;
     }
 
     private void executeTree(TreeNode root){
         String type = getSymbol(mySyntax, root.getData());
         if(type.equals(COMMAND_KEY)){
             ArrayList<TreeNode> children = root.getChildren();
-            ArrayList<Double> parameters = new ArrayList<>();
+            ArrayList<String> parameters = new ArrayList<>();
+            if(root.getData().equals("MakeVariable")){
+                parameters.add(children.get(0).getData());
+                children.remove(children.get(0));
+            }
             for(TreeNode child: children) {
                 executeTree(child);
-                parameters.add(Double.parseDouble(child.getData()));
+                parameters.add(child.getData());
             }
             myFactory.createCommand(root.getData(), parameters);
             root.setData(replacementValue);
@@ -118,7 +145,12 @@ public class Parser implements Observer, Parse {
     }
 
     public void update(Observable o, Object arg){
-        replacementValue = (String) arg;
+        if(arg instanceof Consumer){
+            ((Consumer) arg).accept(this);
+        }
+        else{
+            replacementValue = (String) arg;
+        }
     }
 
     public void changeLanguage(String lang){
