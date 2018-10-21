@@ -9,7 +9,7 @@ public interface Node {
      * Gets the data stored in node
      * @return the data stored in node
      */
-    public Object getData();
+    public String getData();
 
     /**
      * Gets the array list of child nodes of the current node
@@ -21,7 +21,7 @@ public interface Node {
      * Adds a new child to the node
      * @param nwChild the new node that is being added as a child of the current node
      */
-    public void addChild(Node nwChild) throws IllegalAccessException;
+    public void addChild(Node nwChild);
 
     /**
      * Sets the data of the current node

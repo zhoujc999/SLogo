@@ -25,13 +25,8 @@ public class TreeNode implements Node {
         return myChildren;
     }
 
-    public void addChild(Node nwChild) throws IllegalAccessException{
-        if(nwChild instanceof TreeNode){
-            myChildren.add((TreeNode) nwChild);
-        }
-        else{
-            throw new IllegalAccessException();
-        }
+    public void addChild(Node nwChild){
+        myChildren.add((TreeNode) nwChild);
     }
 
     public void setData(String nwData){
