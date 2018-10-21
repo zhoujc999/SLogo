@@ -3,6 +3,7 @@ module slogo_team03 {
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.media;
+    requires view;
 
     exports main;
 }

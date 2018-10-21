@@ -11,10 +11,5 @@ public interface SLogoExecutable {
      */
     public void execute(ModelTurtle turtle);
 
-    /**
-     * Returns the value that from the execution of the command object
-     */
-
-    public double returnValue();
 
 }

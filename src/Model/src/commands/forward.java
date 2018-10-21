@@ -18,12 +18,17 @@ public class forward implements SLogoTurtleExecutable {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
-            param1 = (double) params.get(0);
+            param1 = Double.parseDouble((String) params.get(0));
         }
         catch (ClassCastException e) {
             e.printStackTrace();
         }
-
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
