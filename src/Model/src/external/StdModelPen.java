@@ -3,25 +3,42 @@ package external;
 import java.util.Map;
 
 /**
+ * The basic implementation of a ModelPen. Other implementations of ModelPen can extend this class to avoid
+ * duplicating code. If other implementations wish to add additional variable representing state, they should override
+ * the getState method.
+ *
  * @author jgp17
  */
 
 public class StdModelPen implements ModelPen {
+    public static final String PEN_DOWN_KEY = "penDown";
+    public static final String PEN_COLOR_KEY = "penColor";
+    public static final String PEN_SIZE_KEY = "penSize";
     private double returnVal;
     private int penDown;
     private int myColor;
-    private double myWidth;
+    private double mySize;
+
+    public StdModelPen() {
+        penDown = 1;
+        myColor = 0;
+        mySize = 1;
+    }
 
 
     /**
-     * @return a Map of any variables representing the state of this ModelPen. The variables should be doubles.
+     * Returns a Map of any variables representing the state of this ModelPen. The variables should be doubles.
+     * Implementations extending this class that wish to add additional state variables must override this
+     * method. Include a call to super.getState to access the Map returned below.
+     *
+     * @return a Map of any variables representing the state of this ModelPen.
      */
     @Override
     public Map<String, Double> getState() {
         return Map.ofEntries(
-                Map.entry("penDown", (double) penDown),
-                Map.entry("penColor", (double) myColor),
-                Map.entry("penWidth", myWidth));
+                Map.entry(PEN_DOWN_KEY, (double) penDown),
+                Map.entry(PEN_COLOR_KEY, (double) myColor),
+                Map.entry(PEN_SIZE_KEY, mySize));
     }
 
     /**
@@ -73,16 +90,16 @@ public class StdModelPen implements ModelPen {
     }
 
     /**
-     * Sets the pen width based on the specified double, returns that double.
+     * Sets the pen size based on the specified double number of pixels, returns that double.
      *
-     * @param width
-     * @return the specified width.
+     * @param
+     * @return the specified size, in number of pixels.
      */
     @Override
-    public double setWidth(double width) {
-        myWidth = width;
-        returnVal = myWidth;
-        return myWidth;
+    public double setSize(double pixels) {
+        mySize = pixels;
+        returnVal = mySize;
+        return mySize;
     }
 
     /**
@@ -104,11 +121,11 @@ public class StdModelPen implements ModelPen {
     }
 
     /**
-     * @return the current pen width.
+     * @return the current pen size, in pixels.
      */
     @Override
-    public double getWidth() {
-        returnVal = myWidth;
-        return myWidth;
+    public double getSize() {
+        returnVal = mySize;
+        return mySize;
     }
 }

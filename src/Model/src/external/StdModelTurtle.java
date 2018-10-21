@@ -4,20 +4,37 @@ import java.util.Map;
 import java.util.Observable;
 
 /**
+ * The basic implementation of a ModelTurtle. Other implementations of ModelTurtle can extend this class to avoid
+ * duplicating code. If other implementations wish to add additional variable representing state, they should override
+ * the getState method.
+ *
  * @author jgp17
  */
 
 public class StdModelTurtle extends Observable implements ModelTurtle {
-    private int TURTLE_ID = 0;
-    private double myXPos = 0;
-    private double myYPos = 0;
-    private double myHeading = 0;
-    private int showing = 1;
-    private int clearScreen = 0;
+    public static final String OLD_XPOS_KEY = "oldXPos";
+    public static final String OLD_YPOS_KEY = "oldYPos";
+    public static final String XPOS_KEY = "xPos";
+    public static final String YPOS_KEY = "yPos";
+    public static final String HEADING_KEY = "heading";
+    public static final String SHOWING_KEY = "showing";
+    public static final String CLEARSCREEN_KEY = "clearScreen";
+    private int TURTLE_ID;
+    private double myXPos;
+    private double myYPos;
+    private double myHeading;
+    private int showing;
+    private int clearScreen;
     private ModelPen myPen;
     private double returnVal;
 
     public StdModelTurtle() {
+        TURTLE_ID = 0;
+        myXPos = 0;
+        myYPos = 0;
+        myHeading = 0;
+        showing = 1;
+        clearScreen = 0;
         myPen = new StdModelPen();
     }
 
@@ -37,24 +54,24 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     private Map<String, Double> getOldXYMap() {
-        return Map.of("oldXPos", myXPos,"oldYPos", myYPos);
+        return Map.of(OLD_XPOS_KEY, myXPos, OLD_YPOS_KEY, myYPos);
     }
 
-//    private void notifyGivenStates(Map<String, Double> oldState, Map<String, Double> newState) {
-//        notifyObservers(Map.of("oldState", oldState, "newState", newState));
-//    }
-
     /**
-     * @return a List of any variables representing the state of this ModelTurtle and its ModelPen. The variables should be doubles.
+     * Returns a Map of any variables representing the state of this ModelTurtle and its ModelPen.
+     * The variables should be doubles. Implementations extending this class that wish to add additional state
+     * variables must override this method. Include a call to super.getState to access the Map returned below.
+     *
+     * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen.
      */
     @Override
     public Map<String, Double> getState() {
         Map<String, Double> turtleState = Map.ofEntries(
-                Map.entry("xPos", myXPos),
-                Map.entry("yPos", myYPos),
-                Map.entry("heading", myHeading),
-                Map.entry("showing", (double) showing),
-                Map.entry("clearScreen", (double) clearScreen));
+                Map.entry(XPOS_KEY, myXPos),
+                Map.entry(YPOS_KEY, myYPos),
+                Map.entry(HEADING_KEY, myHeading),
+                Map.entry(SHOWING_KEY, (double) showing),
+                Map.entry(CLEARSCREEN_KEY, (double) clearScreen));
         turtleState.putAll(myPen.getState());
         return turtleState;
     }
@@ -73,8 +90,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myXPos += xDist;
         myYPos += yDist;
         returnVal = pixels;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return pixels;
     }
 
@@ -111,8 +130,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         myHeading += degrees;
         returnVal = degrees;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return degrees;
     }
 
@@ -128,8 +149,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double diff = degrees - myHeading;
         myHeading = degrees;
         returnVal = diff;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return diff;
     }
 
@@ -150,8 +173,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return headingDiff;
     }
 
@@ -172,8 +197,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myYPos = y;
         double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
         returnVal = dist;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return dist;
     }
 
@@ -187,8 +214,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         showing = 1;
         returnVal = showing;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return showing;
     }
 
@@ -202,8 +231,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         showing = 0;
         returnVal = showing;
+        setChanged();
         dataMap.putAll(getState());
         notifyObservers(dataMap);
+        clearChanged();
         return showing;
     }
 
