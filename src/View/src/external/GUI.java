@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.util.ResourceBundle;
+
 public class GUI extends SplitPane {
     /**
      * The GUI contains and defines the position of all the classes in the View. The language of its text is able to be
@@ -33,7 +35,8 @@ public class GUI extends SplitPane {
     private static final Point2D PROJECT_WINDOW_LOCATION = new Point2D(600, 210);
     private static final Dimension2D PROJECT_WINDOW_SIZE = new Dimension2D(190, 380);
 
-
+    private static final String DEFAULT_RESOURCES = "GUI";
+    private ResourceBundle myResources;
 
     private CommandWindow myCommandWindow;
     private GraphicsWindow myGraphicsWindow;
@@ -58,6 +61,8 @@ public class GUI extends SplitPane {
 //    }
 
     public GUI(String language) {
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+
         myCommandWindow = new CommandWindow();
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
         myCommandReference = new CommandReference(language);
@@ -66,7 +71,8 @@ public class GUI extends SplitPane {
         myCommands = new DefinitionList();
         myCommands.save("length", "5");
         myCommandHistory = new CommandHistory();
-        myProjectWindow = new TabPane(new Tab("Variables", myVariables), new Tab("Commands", myCommands), new Tab("Command History", myCommandHistory));
+        myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
+
         var commandControl = new VBox(runButton(), clearButton());
         var commandPanel = new HBox(commandControl, myCommandWindow);
         var sidePanel = new VBox(buttonPanel(), myProjectWindow);
@@ -85,7 +91,7 @@ public class GUI extends SplitPane {
     }
 
     private Button runButton() {
-        var button = new Button("Run");
+        var button = new Button(myResources.getString("RunButton"));
         button.setLayoutX(RUN_BUTTON_LOCATION.getX());
         button.setLayoutY(RUN_BUTTON_LOCATION.getY());
         button.setPrefSize(RUN_BUTTON_SIZE.getWidth(), RUN_BUTTON_SIZE.getHeight());
@@ -94,7 +100,7 @@ public class GUI extends SplitPane {
     }
 
     private Button clearButton() {
-        var button = new Button("Clear");
+        var button = new Button(myResources.getString("ClearButton"));
         button.setLayoutX(CLEAR_BUTTON_LOCATION.getX());
         button.setLayoutY(CLEAR_BUTTON_LOCATION.getY());
         button.setPrefSize(CLEAR_BUTTON_SIZE.getWidth(), CLEAR_BUTTON_SIZE.getHeight());
@@ -108,10 +114,10 @@ public class GUI extends SplitPane {
         buttonPanel.setLayoutY(BUTTON_PANEL_LOCATION.getY());
         buttonPanel.setPrefSize(BUTTON_PANEL_SIZE.getWidth(), BUTTON_PANEL_SIZE.getHeight());
         buttonPanel.addColumn(0,
-                new Text("Background Color"),
-                new Text("Turtle Image"),
-                new Text("Pen Color"),
-                new Text("Language"),
+                new Text(myResources.getString("BackgroundPicker")),
+                new Text(myResources.getString("TurtlePicker")),
+                new Text(myResources.getString("PenPicker")),
+                new Text(myResources.getString("LanguagePicker")),
                 referenceButton());
 
         buttonPanel.addColumn(1,
@@ -154,7 +160,7 @@ public class GUI extends SplitPane {
     }
 
     private Button referenceButton() {
-        var button = new Button("Reference");
+        var button = new Button(myResources.getString("ReferenceButton"));
         button.setOnAction(e -> myCommandReference.show());
         return button;
     }
@@ -163,41 +169,42 @@ public class GUI extends SplitPane {
      * Access GUI's CommandHistory.
      */
     public CommandHistory getCommandHistory() {
-        return null;
+        return myCommandHistory;
     }
 
     /**
      * Access GUI's CommandReference.
      */
     public CommandReference getCommandReference() {
-        return null;
+        return myCommandReference;
     }
 
     /**
      * Access GUI's CommandWindow.
      */
     public CommandWindow getCommandWindow() {
-        return null;
+        return myCommandWindow;
     }
 
     /**
      * Access GUI's DefinitionList.
      */
     public DefinitionList getVariableWindow() {
-        return null;
+        return myVariables;
     }
 
     /**
      * Access GUI's GraphicsWindow.
      */
     public GraphicsWindow getGraphicsWindow() {
-        return null;
+        return myGraphicsWindow;
     }
 
     /**
      * Sets the language of the text in CommandReference.
      */
     void setLanguage(String language) {
+        myCommandReference.setLanguage(language);
     }
 
 }

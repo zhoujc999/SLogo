@@ -70,7 +70,7 @@ public class CommandReference extends Stage {
     /**
      * Sets the language of the text in CommandReference.
      */
-    void setLanguage(String language) {
+    public void setLanguage(String language) {
         myLanguage = language;
     }
 
