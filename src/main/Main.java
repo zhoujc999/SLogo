@@ -1,3 +1,5 @@
+package main;
+
 import external.GUI;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;

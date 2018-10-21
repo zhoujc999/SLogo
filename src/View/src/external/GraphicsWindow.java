@@ -1,24 +1,18 @@
 package external;
 
-import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.stream.Stream;
 
 /**
  * @author Tahj Starr
@@ -39,6 +33,7 @@ public class GraphicsWindow extends Pane implements Observer {
             Map.entry(12.0, Color.SALMON), Map.entry(13.0, Color.PURPLE),
             Map.entry(14.0, Color.ORANGE), Map.entry(15.0, Color.GRAY)
     );
+    public static final String GREEN_TURTLE_FILENAME = "TurtleImages/GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
@@ -51,31 +46,33 @@ public class GraphicsWindow extends Pane implements Observer {
         myInsets = insets;
         setPrefSize(580, 470);
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-        var turtle = new TurtleView("TurtleImages/GreenTurtle.png", getPrefWidth()/2, getPrefHeight()/2);
+//        Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(GREEN_TURTLE_FILENAME));
+//        var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
+        var turtle = new TurtleView(GREEN_TURTLE_FILENAME, getPrefWidth()/2, getPrefHeight()/2);
         addTurtle(turtle);
         myTurtle = turtle;
     }
 
-    protected GraphicsWindow(Point2D location, Dimension2D size, CornerRadii cornerRadii, Insets insets) {
-        setLayoutX(location.getX());
-        setLayoutY(location.getY());
-        setPrefSize(size.getWidth(), size.getHeight());
-        myCornerRadii = cornerRadii;
-        myInsets = insets;
-        setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-
-        TabPane tabPane = new TabPane();
-        Tab tab = new Tab();
-        tab.setText("new tab");
-        tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
-        Tab tab2 = new Tab();
-        tab2.setText("newer tab");
-        tab2.setContent(new Rectangle(200,200, Color.LIGHTGREEN));
-        tabPane.getTabs().addAll(tab, tab2);
-
-        myTurtle = new TurtleView("TurtleImages/GreenTurtle.png", size.getWidth()/2, size.getHeight()/2);
-        getChildren().addAll(myTurtle, tabPane);
-    }
+//    protected GraphicsWindow(Point2D location, Dimension2D size, CornerRadii cornerRadii, Insets insets) {
+//        setLayoutX(location.getX());
+//        setLayoutY(location.getY());
+//        setPrefSize(size.getWidth(), size.getHeight());
+//        myCornerRadii = cornerRadii;
+//        myInsets = insets;
+//        setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
+//
+//        TabPane tabPane = new TabPane();
+//        Tab tab = new Tab();
+//        tab.setText("new tab");
+//        tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+//        Tab tab2 = new Tab();
+//        tab2.setText("newer tab");
+//        tab2.setContent(new Rectangle(200,200, Color.LIGHTGREEN));
+//        tabPane.getTabs().addAll(tab, tab2);
+//
+//        myTurtle = new TurtleView("TurtleImages/GreenTurtle.png", size.getWidth()/2, size.getHeight()/2);
+//        getChildren().addAll(myTurtle, tabPane);
+//    }
 
     @Override
     public void update(Observable o, Object arg) {

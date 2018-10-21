@@ -131,11 +131,10 @@ public class GUI extends SplitPane {
 
     private ComboBox turtlePicker() {
         var picker = new ComboBox<Image>();
-        picker.getItems().addAll(
-                new Image("TurtleImages/GreenTurtle.png"),
-                new Image("TurtleImages/RedTurtle.png"),
-                new Image("TurtleImages/BlueTurtle.png")
-        );
+        Image GreenTurtleImage = new Image("TurtleImages/GreenTurtle.png");
+        Image RedTurtleImage = new Image("TurtleImages/RedTurtle.png");
+        Image BlueTurtleImage = new Image("TurtleImages/BlueTurtle.png");
+        picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
         picker.setOnAction(e -> myGraphicsWindow.getTurtle().setImage(picker.getValue()));
         return picker;
     }
