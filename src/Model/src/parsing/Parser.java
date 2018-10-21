@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
 
-public class Parser implements Parse {
+public class Parser implements Observer, Parse {
     public static final String ERROR_MESSAGE_PATH = "/languages/Errors";
     public static final String SYNTAX_PATH = "/languages/Syntax";
     public static final String PARAMETER_COUNTS_PATH = "/languages/Command";
@@ -172,11 +172,7 @@ public class Parser implements Parse {
         Alert err = new Alert(Alert.AlertType.WARNING, message);
         err.showAndWait();
     }
-
-    public static void main(String ars[]){
-        //Parser p = new Parser("English");
-        //p.parseCommand("fd 50");
-    }
+    
 }
 
 
