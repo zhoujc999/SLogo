@@ -33,6 +33,8 @@ public class GUI extends SplitPane {
     private static final Point2D PROJECT_WINDOW_LOCATION = new Point2D(600, 210);
     private static final Dimension2D PROJECT_WINDOW_SIZE = new Dimension2D(190, 380);
 
+
+
     private CommandWindow myCommandWindow;
     private GraphicsWindow myGraphicsWindow;
     private TabPane myProjectWindow;
@@ -55,10 +57,10 @@ public class GUI extends SplitPane {
 //        getChildren().addAll(myCommandWindow, myGraphicsWindow, myProjectWindow, runButton(), clearButton(), buttonPanel());
 //    }
 
-    public GUI() {
+    public GUI(String language) {
         myCommandWindow = new CommandWindow();
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
-        myCommandReference = new CommandReference();
+        myCommandReference = new CommandReference(language);
         myVariables = new DefinitionList();
         myVariables.save("length", "5");
         myCommands = new DefinitionList();
@@ -73,7 +75,6 @@ public class GUI extends SplitPane {
         mainPanel.setOrientation(Orientation.VERTICAL);
         setDividerPosition(0, 0.75);
         getItems().addAll(mainPanel, sidePanel);
-//        System.out.println(myGraphicsWindow.widthProperty());
     }
 
     /**
@@ -131,9 +132,9 @@ public class GUI extends SplitPane {
     private ComboBox turtlePicker() {
         var picker = new ComboBox<Image>();
         picker.getItems().addAll(
-                new Image("GreenTurtle.png"),
-                new Image("RedTurtle.png"),
-                new Image("BlueTurtle.png")
+                new Image("TurtleImages/GreenTurtle.png"),
+                new Image("TurtleImages/RedTurtle.png"),
+                new Image("TurtleImages/BlueTurtle.png")
         );
         picker.setOnAction(e -> myGraphicsWindow.getTurtle().setImage(picker.getValue()));
         return picker;
