@@ -4,6 +4,10 @@ public class ListNode{
     private String myData;
     private ListNode myChild;
 
+    public ListNode(){
+
+    }
+
     public ListNode(String data){
         myData = data;
     }
