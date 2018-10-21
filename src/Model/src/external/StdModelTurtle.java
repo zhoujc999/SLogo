@@ -12,6 +12,13 @@ import java.util.Observable;
  */
 
 public class StdModelTurtle extends Observable implements ModelTurtle {
+    public static final String OLD_XPOS_KEY = "oldXPos";
+    public static final String OLD_YPOS_KEY = "oldYPos";
+    public static final String XPOS_KEY = "xPos";
+    public static final String YPOS_KEY = "yPos";
+    public static final String HEADING_KEY = "heading";
+    public static final String SHOWING_KEY = "showing";
+    public static final String CLEARSCREEN_KEY = "clearScreen";
     private int TURTLE_ID;
     private double myXPos;
     private double myYPos;
@@ -47,7 +54,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     private Map<String, Double> getOldXYMap() {
-        return Map.of("oldXPos", myXPos,"oldYPos", myYPos);
+        return Map.of(OLD_XPOS_KEY, myXPos, OLD_YPOS_KEY, myYPos);
     }
 
     /**
@@ -60,11 +67,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public Map<String, Double> getState() {
         Map<String, Double> turtleState = Map.ofEntries(
-                Map.entry("xPos", myXPos),
-                Map.entry("yPos", myYPos),
-                Map.entry("heading", myHeading),
-                Map.entry("showing", (double) showing),
-                Map.entry("clearScreen", (double) clearScreen));
+                Map.entry(XPOS_KEY, myXPos),
+                Map.entry(YPOS_KEY, myYPos),
+                Map.entry(HEADING_KEY, myHeading),
+                Map.entry(SHOWING_KEY, (double) showing),
+                Map.entry(CLEARSCREEN_KEY, (double) clearScreen));
         turtleState.putAll(myPen.getState());
         return turtleState;
     }
