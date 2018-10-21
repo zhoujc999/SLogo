@@ -35,7 +35,7 @@ public class TreeNode implements Node {
     }
 
     public void setData(String nwData){
-
+        myData = nwData;
     }
 
 
