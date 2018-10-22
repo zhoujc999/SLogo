@@ -3,7 +3,7 @@ package main;
 import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
-import gui.*;
+import gui.GUI;
 import external.Invokable;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
