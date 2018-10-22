@@ -2,29 +2,16 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoBooleanExecutable;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class greaterP implements SLogoBooleanExecutable {
-    private final static int numParams = 2;
-    protected double param1;
-    protected double param2;
-    protected double result;
-
+public class greaterP extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public greaterP(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (double) params.get(0);
-            param2 = (double) params.get(1);
-        }
-        catch (ClassCastException e) {
-            e.printStackTrace();
-        }
+        super(params);
     }
-
 
     @Override
     public void execute(ModelTurtle turtle) {
@@ -36,14 +23,5 @@ public class greaterP implements SLogoBooleanExecutable {
         }
     }
 
-
-    @Override
-    public double returnValue() {
-        return this.result;
-    }
-
-
-
-
-
 }
+

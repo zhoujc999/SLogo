@@ -153,6 +153,10 @@ public class Parser implements Observer, Parse {
         }
     }
 
+    public void setReplacementValue(String s) {
+        replacementValue = s;
+    }
+
     public void changeLanguage(String lang){
         try{
             langBundle = ResourceBundle.getBundle(PROPERTIES_PATH + lang);

@@ -3,11 +3,12 @@ package commands;
 import external.ModelTurtle;
 import external.Parse;
 import external.SLogoAbstractExecutable;
+import external.SLogoConsumerReturnable;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class make implements SLogoAbstractExecutable {
+public class make implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int numParams = 2;
     private String param1;
     private String param2;
@@ -30,7 +31,9 @@ public class make implements SLogoAbstractExecutable {
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = (p) -> p.addVariable(param1, param2);
+        c = (p) -> {p.addVariable(param1, param2);
+                    p.setReplacementValue(param2);
+        };
     }
 
     @Override
