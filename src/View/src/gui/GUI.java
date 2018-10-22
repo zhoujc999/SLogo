@@ -1,4 +1,4 @@
-package external;
+package gui;
 
 import internal.CommandHistory;
 import internal.CommandReference;
