@@ -1,19 +1,16 @@
 package commands;
 
-
 import external.ModelTurtle;
-import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class forward implements SLogoTurtleExecutable {
+public abstract class UnaryTurtleOperator {
 
-    private double param1;
-    private double distance;
+    protected double param1;
+    protected double result;
     private final static int numParams = 1;
 
-
-    public forward(List params) {
+    public UnaryTurtleOperator(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
@@ -31,16 +28,9 @@ public class forward implements SLogoTurtleExecutable {
         }
     }
 
-    @Override
-    public void execute(ModelTurtle turtle) {
-        this.distance = param1;
-        turtle.forward(distance);
+    public abstract void execute(ModelTurtle turtle);
+
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
-
-    @Override
-    public double returnValue() {
-        return this.distance;
-    }
-
 }
