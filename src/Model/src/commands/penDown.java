@@ -1,11 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class penDown implements SLogoTurtleExecutable {
+public class penDown implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     private double result;
     private final static int numParams = 0;
@@ -25,8 +26,8 @@ public class penDown implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue() {
-        return this.result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
 
 }

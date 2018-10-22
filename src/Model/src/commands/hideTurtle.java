@@ -1,11 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class hideTurtle implements SLogoTurtleExecutable {
+
+public class hideTurtle implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     private double result;
     private final static int numParams = 0;
@@ -13,7 +15,7 @@ public class hideTurtle implements SLogoTurtleExecutable {
 
     public hideTurtle(List params) {
         if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
+            throw new IllegalArgumentException(String.format("%s Argument Length Error", this.getClass().getSimpleName()));
         }
 
     }
@@ -25,8 +27,8 @@ public class hideTurtle implements SLogoTurtleExecutable {
 
 
     @Override
-    public double returnValue() {
-        return this.result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
 
 }
