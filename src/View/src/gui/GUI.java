@@ -1,4 +1,4 @@
-package external;
+package gui;
 
 import internal.CommandHistory;
 import internal.CommandReference;
@@ -137,9 +137,9 @@ public class GUI extends SplitPane {
 
     private ComboBox turtlePicker() {
         var picker = new ComboBox<Image>();
-        Image GreenTurtleImage = new Image("TurtleImages/GreenTurtle.png");
-        Image RedTurtleImage = new Image("TurtleImages/RedTurtle.png");
-        Image BlueTurtleImage = new Image("TurtleImages/BlueTurtle.png");
+        Image GreenTurtleImage = new Image("GreenTurtle.png");
+        Image RedTurtleImage = new Image("RedTurtle.png");
+        Image BlueTurtleImage = new Image("BlueTurtle.png");
         picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
         picker.setOnAction(e -> myGraphicsWindow.getTurtle().setImage(picker.getValue()));
         return picker;

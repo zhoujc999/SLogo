@@ -1,4 +1,4 @@
-package external;
+package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -33,7 +33,7 @@ public class GraphicsWindow extends Pane implements Observer {
             Map.entry(12.0, Color.SALMON), Map.entry(13.0, Color.PURPLE),
             Map.entry(14.0, Color.ORANGE), Map.entry(15.0, Color.GRAY)
     );
-    public static final String GREEN_TURTLE_FILENAME = "TurtleImages/GreenTurtle.png";
+    public static final String GREEN_TURTLE_FILENAME = "GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;

@@ -1,10 +1,10 @@
 package main;
 
-import external.GUI;
+import external.ModelTurtle;
+import gui.GUI;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class Main extends Application {

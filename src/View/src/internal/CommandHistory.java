@@ -1,11 +1,8 @@
 package internal;
 
-import external.GUIList;
+import gui.GUIList;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-
-import java.util.List;
 
 public class CommandHistory extends ListView implements GUIList {
     /**

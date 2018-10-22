@@ -30,7 +30,7 @@ public class CommandReference extends Stage {
 
     public CommandReference(String language) {
         myLanguage = language;
-        myCommandCategories = ResourceBundle.getBundle(DEFAULT_RESOURCES + language + "/CommandCategories");
+        myCommandCategories = ResourceBundle.getBundle(DEFAULT_RESOURCES + language + ".CommandCategories");
         setScene(new Scene(writePage(), 600, 800));
     }
 
