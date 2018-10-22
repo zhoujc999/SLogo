@@ -34,6 +34,8 @@ public interface Parse extends Observer {
      * @param lang The new language
      */
 
+    public void setReplacementValue(String s);
+
     public void changeLanguage(String lang);
 
     /**

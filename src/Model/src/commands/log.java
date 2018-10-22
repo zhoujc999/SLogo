@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class log extends UnaryMathOperator {
+public class log extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public log(List params) {
         super(params);
     }
@@ -12,11 +14,6 @@ public class log extends UnaryMathOperator {
     @Override
     public void execute(ModelTurtle turtle) {
         this.result = Math.log(this.param1);
-    }
-
-    @Override
-    public double returnValue() {
-        return result;
     }
 
 }

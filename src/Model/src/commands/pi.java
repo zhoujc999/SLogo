@@ -2,29 +2,19 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class pi implements SLogoMathExecutable {
-
-    private double result;
-    private final static int numParams = 0;
+public class pi extends MathOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public pi(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
         this.result = Math.PI;
-    }
-
-    @Override
-    public double returnValue() {
-        return this.result;
     }
 
 }
