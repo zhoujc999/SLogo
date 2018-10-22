@@ -1,41 +1,20 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class back implements SLogoTurtleExecutable {
-
-
-    private double param1;
-    private double distance;
-    private final static int numParams = 1;
-
+public class back extends UnaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public back(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (double) params.get(0);
-        }
-        catch (ClassCastException e) {
-            e.printStackTrace();
-        }
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.distance = param1;
-        turtle.back(distance);
+        this.result = turtle.back(param1);
     }
-
-
-    @Override
-    public double returnValue() {
-        return this.distance;
-    }
-
 
 }

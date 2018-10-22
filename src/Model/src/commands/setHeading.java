@@ -1,43 +1,20 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class setHeading implements SLogoTurtleExecutable {
-
-    private double param1;
-    private double degree;
-    private double degreesTurned;
-    private final static int numParams = 1;
-
+public class setHeading extends UnaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public setHeading(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (double) params.get(0);
-        }
-        catch (ClassCastException e) {
-            e.printStackTrace();
-        }
-
-
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.degree = param1;
-        this.degreesTurned = turtle.setHeading(degree);
+        this.result = turtle.setHeading(param1);
     }
-
-
-    @Override
-    public double returnValue() {
-        return this.degreesTurned;
-    }
-
 
 }
