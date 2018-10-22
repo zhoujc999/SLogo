@@ -1,11 +1,16 @@
 package main;
 
+import Invoking.Invoker;
+import commandFactory.CommandFactory;
+import commandFactory.CommandFactoryInterface;
 import external.GUI;
+import external.Invokable;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import parsing.Parser;
 
 public class Main extends Application {
 
@@ -16,7 +21,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle(TITLE);
-        GUI gui = new GUI(DEFAULT_LANGUAGE);
+        Invokable invoker = new Invoker();
+        CommandFactoryInterface myFactory = new CommandFactory(invoker);
+        Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
+        GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand);
+        gui.getCommandWindow().getInput();
         primaryStage.setScene(new Scene(gui, SIZE.getWidth(), SIZE.getHeight()));
         primaryStage.show();
     }

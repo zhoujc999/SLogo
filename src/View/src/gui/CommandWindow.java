@@ -1,4 +1,4 @@
-package external;
+package gui;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;

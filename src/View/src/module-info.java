@@ -4,5 +4,5 @@ module view {
     requires javafx.graphics;
     requires javafx.media;
 
-    exports external;
+    exports gui;
 }
