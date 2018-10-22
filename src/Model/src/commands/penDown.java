@@ -6,28 +6,16 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class penDown implements SLogoTurtleExecutable, SLogoStringReturnable {
-
-    private double result;
-    private final static int numParams = 0;
-
+public class penDown extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public penDown(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
+        super(params);
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
         this.result = turtle.getPen().penDown();
-    }
-
-
-    @Override
-    public String returnValue() {
-        return Double.toString(this.result);
     }
 
 }

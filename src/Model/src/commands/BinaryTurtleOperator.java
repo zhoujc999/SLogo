@@ -1,11 +1,10 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoMathExecutable;
 
 import java.util.List;
 
-public abstract class BinaryMathOperator {
+public abstract class BinaryTurtleOperator {
 
     private final static int numParams = 2;
 
@@ -13,8 +12,7 @@ public abstract class BinaryMathOperator {
     protected double param2;
     protected double result;
 
-
-    public BinaryMathOperator(List params) {
+    public BinaryTurtleOperator(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
