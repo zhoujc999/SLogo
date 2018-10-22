@@ -17,14 +17,8 @@ public abstract class UnaryTurtleOperator {
         try {
             param1 = Double.parseDouble((String) params.get(0));
         }
-        catch (ClassCastException e) {
-            e.printStackTrace();
-        }
-        catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        catch (NumberFormatException e) {
-            e.printStackTrace();
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s Argument Error", this.getClass().getSimpleName()));
         }
     }
 
@@ -33,4 +27,5 @@ public abstract class UnaryTurtleOperator {
     public String returnValue() {
         return Double.toString(this.result);
     }
+
 }
