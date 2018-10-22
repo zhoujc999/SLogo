@@ -1,6 +1,6 @@
 package main;
 
-import Invoking.Invoker;
+import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 import gui.GUI;
