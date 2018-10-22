@@ -1,45 +1,19 @@
 package commands;
 
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 import external.ModelTurtle;
 import java.util.List;
 
-public class goTo implements SLogoTurtleExecutable {
-
-    private double param1;
-    private double param2;
-    private double x;
-    private double y;
-    private double distance;
-    private final static int numParams = 2;
-
+public class goTo extends BinaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public goTo(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (double) params.get(0);
-            param2 = (double) params.get(1);
-        }
-        catch (ClassCastException e) {
-            e.printStackTrace();
-            // TODO
-        }
-
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.x = param1;
-        this.y = param2;
-        this.distance = turtle.goTo(x, y);
-    }
-
-
-    @Override
-    public double returnValue() {
-        return this.distance;
+        this.result = turtle.goTo(param1, param2);
     }
 
 }
