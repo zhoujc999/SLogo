@@ -1,14 +1,13 @@
 package main;
 
-import Invoking.Invoker;
+import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
-import external.GUI;
+import gui.*;
 import external.Invokable;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import parsing.Parser;
 

@@ -1,9 +1,7 @@
-package Invoking;
+package invoking;
 
-import external.Invokable;
-import external.ModelTurtle;
-import external.SLogoExecutable;
-import external.StdModelTurtle;
+import external.*;
+
 import java.util.Observable;
 
 

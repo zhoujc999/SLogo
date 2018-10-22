@@ -6,4 +6,7 @@ module model {
     requires javafx.media;
 
     exports external;
+    exports invoking;
+    exports commandFactory;
+    exports parsing;
 }
