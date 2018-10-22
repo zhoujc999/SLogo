@@ -1,4 +1,4 @@
-package external;
+package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
