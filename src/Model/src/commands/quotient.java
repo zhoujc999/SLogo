@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class quotient extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class quotient extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public quotient(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class quotient extends BinaryMathOperator implements SLogoMathExecutable,
         this.result = this.param1 / this.param2;
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

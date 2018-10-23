@@ -6,7 +6,7 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class heading extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class heading extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public heading(List params) {
         super(params);
@@ -18,4 +18,7 @@ public class heading extends TurtleOperator implements SLogoTurtleExecutable, SL
         this.result = turtle.getHeading();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

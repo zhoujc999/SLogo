@@ -6,7 +6,7 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class yCor extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class yCor extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public yCor(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class yCor extends TurtleOperator implements SLogoTurtleExecutable, SLogo
         this.result = turtle.getY();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

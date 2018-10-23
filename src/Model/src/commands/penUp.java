@@ -6,12 +6,11 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class penUp extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class penUp extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
 
     public penUp(List params) {
         super(params);
-
     }
 
     @Override
@@ -19,4 +18,7 @@ public class penUp extends TurtleOperator implements SLogoTurtleExecutable, SLog
         this.result = turtle.getPen().penUp();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

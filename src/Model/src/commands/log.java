@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class log extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class log extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public log(List params) {
         super(params);
     }
@@ -16,4 +16,7 @@ public class log extends UnaryMathOperator implements SLogoMathExecutable, SLogo
         this.result = Math.log(this.param1);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }
