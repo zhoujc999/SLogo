@@ -8,12 +8,10 @@ public abstract class UnaryTurtleOperator {
 
     protected double param1;
     protected double result;
-    private final static int numParams = 1;
+    private final static int NUMPARAMS = 1;
 
     public UnaryTurtleOperator(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
+        checkNumParams(params);
         try {
             param1 = Double.parseDouble((String) params.get(0));
         }
@@ -23,6 +21,12 @@ public abstract class UnaryTurtleOperator {
     }
 
     public abstract void execute(ModelTurtle turtle);
+
+    protected void checkNumParams(List p) {
+        if (p.size() != NUMPARAMS) {
+            throw new IllegalArgumentException("Argument Length Error");
+        }
+    }
 
     public String returnValue() {
         return Double.toString(this.result);
