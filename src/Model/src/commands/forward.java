@@ -6,7 +6,7 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class forward extends UnaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class forward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public forward(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class forward extends UnaryTurtleOperator implements SLogoTurtleExecutabl
         this.result = turtle.forward(param1);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

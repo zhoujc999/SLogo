@@ -7,7 +7,7 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 // equivalent to command "showing?"
-public class showingP extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class showingP extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public showingP(List params) {
         super(params);
@@ -18,4 +18,7 @@ public class showingP extends TurtleOperator implements SLogoTurtleExecutable, S
         this.result = turtle.getShowing();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

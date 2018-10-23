@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class atan extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class atan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public atan(List params) {
         super(params);
     }
@@ -16,5 +16,7 @@ public class atan extends UnaryMathOperator implements SLogoMathExecutable, SLog
         double angle = this.param1 * (Math.PI / 180);
         this.result = Math.atan(angle);
     }
-
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

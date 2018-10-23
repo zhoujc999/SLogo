@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class pi extends MathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class pi extends Operator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public pi(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class pi extends MathOperator implements SLogoMathExecutable, SLogoString
         this.result = Math.PI;
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

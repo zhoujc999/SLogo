@@ -7,7 +7,7 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 
-public class clearScreen extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class clearScreen extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public clearScreen(List params) {
         super(params);
@@ -18,4 +18,7 @@ public class clearScreen extends TurtleOperator implements SLogoTurtleExecutable
         this.result = turtle.clearScreen();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

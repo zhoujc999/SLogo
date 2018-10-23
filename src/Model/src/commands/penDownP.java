@@ -8,7 +8,7 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 // equivalent to command "pendown?"
-public class penDownP extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class penDownP extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public penDownP(List params) {
         super(params);
@@ -19,4 +19,7 @@ public class penDownP extends TurtleOperator implements SLogoTurtleExecutable, S
         this.result = turtle.getPen().getPenDown();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

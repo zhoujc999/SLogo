@@ -1,13 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoBooleanExecutable;
 import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class greaterP extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class greaterP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public greaterP(List params) {
         super(params);
@@ -22,6 +21,8 @@ public class greaterP extends BinaryMathOperator implements SLogoMathExecutable,
             this.result = 0;
         }
     }
-
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }
 

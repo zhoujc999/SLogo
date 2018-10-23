@@ -1,15 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoBooleanExecutable;
 import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
 
 import java.util.List;
 
-import java.util.List;
-
-public class or extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class or extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public or(List params) {
         super(params);
@@ -25,4 +22,7 @@ public class or extends BinaryMathOperator implements SLogoMathExecutable, SLogo
         }
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

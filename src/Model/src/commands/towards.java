@@ -6,7 +6,7 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class towards extends BinaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class towards extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public towards(List params) {
         super(params);
@@ -18,4 +18,7 @@ public class towards extends BinaryTurtleOperator implements SLogoTurtleExecutab
         this.result = turtle.towards(param1, param2);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }
