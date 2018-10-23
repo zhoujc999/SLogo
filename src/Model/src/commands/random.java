@@ -6,9 +6,8 @@ import external.SLogoRandom;
 import external.SLogoStringReturnable;
 
 import java.util.List;
-import java.util.Random;
 
-public class random extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class random extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public random(List params) {
         super(params);
@@ -19,4 +18,7 @@ public class random extends UnaryMathOperator implements SLogoMathExecutable, SL
         this.result = SLogoRandom.getInstance().nextD() * param1;
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

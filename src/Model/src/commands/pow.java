@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class pow extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class pow extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public pow(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class pow extends BinaryMathOperator implements SLogoMathExecutable, SLog
         this.result = Math.pow(param1, param2);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

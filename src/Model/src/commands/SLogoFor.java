@@ -8,13 +8,9 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SLogoFor implements SLogoAbstractExecutable, SLogoConsumerReturnable {
-    private final static int numParams = 2;
+public class SLogoFor extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int NUMLOOPITEMS = 4;
     private final static String ZERO = "0";
-
-    private String param1;
-    private String param2;
 
 
     private String variable;
@@ -28,16 +24,7 @@ public class SLogoFor implements SLogoAbstractExecutable, SLogoConsumerReturnabl
 
 
     public SLogoFor(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (String) params.get(0);
-            param2 = (String) params.get(1);
-        }
-        catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            e.printStackTrace();
-        }
+        super(params);
         commands = stripBrackets(param2);
         String[] loopList = breakLoopCommands(stripBrackets(param1));
         if (loopList.length != NUMLOOPITEMS) {
@@ -47,13 +34,11 @@ public class SLogoFor implements SLogoAbstractExecutable, SLogoConsumerReturnabl
         start = (int) Double.parseDouble(loopList[1]);
         stop = (int) Double.parseDouble(loopList[2]);
         increment = (int) Double.parseDouble(loopList[3]);
-
-
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = (p) -> loopFunction(p);
+        c = this::loopFunction;
     }
 
     private String stripBrackets(String s) {

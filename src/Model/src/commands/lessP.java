@@ -1,13 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoBooleanExecutable;
 import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class lessP extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class lessP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public lessP(List params) {
         super(params);
@@ -23,4 +22,7 @@ public class lessP extends BinaryMathOperator implements SLogoMathExecutable, SL
         }
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

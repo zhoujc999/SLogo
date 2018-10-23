@@ -5,7 +5,7 @@ import external.SLogoTurtleExecutable;
 import external.ModelTurtle;
 import java.util.List;
 
-public class goTo extends BinaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class goTo extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public goTo(List params) {
         super(params);
@@ -16,4 +16,7 @@ public class goTo extends BinaryTurtleOperator implements SLogoTurtleExecutable,
         this.result = turtle.goTo(param1, param2);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

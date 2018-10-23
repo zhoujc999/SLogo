@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class tan extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class tan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public tan(List params) {
         super(params);
     }
@@ -17,4 +17,7 @@ public class tan extends UnaryMathOperator implements SLogoMathExecutable, SLogo
         this.result = Math.tan(angle);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

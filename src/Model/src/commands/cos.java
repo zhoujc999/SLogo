@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class cos extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class cos extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public cos(List params) {
         super(params);
     }
@@ -17,4 +17,7 @@ public class cos extends UnaryMathOperator implements SLogoMathExecutable, SLogo
         this.result = Math.cos(angle);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

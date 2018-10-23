@@ -6,7 +6,7 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class setHeading extends UnaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class setHeading extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public setHeading(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class setHeading extends UnaryTurtleOperator implements SLogoTurtleExecut
         this.result = turtle.setHeading(param1);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }
