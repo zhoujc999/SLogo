@@ -22,7 +22,7 @@ public class SLogoFor implements SLogoAbstractExecutable, SLogoConsumerReturnabl
     private int stop;
     private int increment;
     private String commands;
-    
+
     private Consumer<Parse> c;
 
 
