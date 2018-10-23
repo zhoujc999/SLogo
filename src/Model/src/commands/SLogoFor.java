@@ -10,6 +10,8 @@ import java.util.function.Consumer;
 
 public class SLogoFor implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int numParams = 2;
+
+    private
     private String param1;
     private String param2;
     private double result;
