@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class and extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class and extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public and(List params) {
         super(params);
@@ -20,6 +20,10 @@ public class and extends BinaryMathOperator implements SLogoMathExecutable, SLog
         else {
             this.result = 0;
         }
+    }
+
+    public String returnValue() {
+        return Double.toString(this.result);
     }
 
 }

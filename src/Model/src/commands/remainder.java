@@ -6,7 +6,7 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class remainder extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class remainder extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public remainder(List params) {
         super(params);
@@ -17,4 +17,7 @@ public class remainder extends BinaryMathOperator implements SLogoMathExecutable
         this.result = this.param1 % this.param2;
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

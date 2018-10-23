@@ -6,7 +6,8 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class sin extends UnaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class sin extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+
     public sin(List params) {
         super(params);
     }
@@ -17,4 +18,7 @@ public class sin extends UnaryMathOperator implements SLogoMathExecutable, SLogo
         this.result = Math.sin(angle);
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

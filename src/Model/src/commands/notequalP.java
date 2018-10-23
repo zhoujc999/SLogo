@@ -1,13 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoBooleanExecutable;
 import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class notEqualP extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class notEqualP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public notEqualP(List params) {
         super(params);
@@ -23,4 +22,7 @@ public class notEqualP extends BinaryMathOperator implements SLogoMathExecutable
         }
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }

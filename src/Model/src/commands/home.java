@@ -7,7 +7,7 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 
-public class home extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class home extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
 
     public home(List params) {
@@ -20,4 +20,7 @@ public class home extends TurtleOperator implements SLogoTurtleExecutable, SLogo
         this.result = turtle.home();
     }
 
+    public String returnValue() {
+        return Double.toString(this.result);
+    }
 }
