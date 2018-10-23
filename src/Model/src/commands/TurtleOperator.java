@@ -7,16 +7,19 @@ import java.util.List;
 public abstract class TurtleOperator {
 
     protected double result;
-    private final static int numParams = 0;
+    private final static int NUMPARAMS = 0;
 
     public TurtleOperator(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-
+        checkNumParams(params);
     }
 
     public abstract void execute(ModelTurtle turtle);
+
+    protected void checkNumParams(List p) {
+        if (p.size() != NUMPARAMS) {
+            throw new IllegalArgumentException("Argument Length Error");
+        }
+    }
 
     public String returnValue() {
         return Double.toString(this.result);

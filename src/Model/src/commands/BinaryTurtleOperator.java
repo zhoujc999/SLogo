@@ -6,16 +6,14 @@ import java.util.List;
 
 public abstract class BinaryTurtleOperator {
 
-    private final static int numParams = 2;
+    private final static int NUMPARAMS = 2;
 
     protected double param1;
     protected double param2;
     protected double result;
 
     public BinaryTurtleOperator(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
+        checkNumParams(params);
         try {
             param1 = Double.parseDouble((String) params.get(0));
         }
@@ -31,6 +29,12 @@ public abstract class BinaryTurtleOperator {
     }
 
     public abstract void execute(ModelTurtle turtle);
+
+    protected void checkNumParams(List p) {
+        if (p.size() != NUMPARAMS) {
+            throw new IllegalArgumentException("Argument Length Error");
+        }
+    }
 
     public String returnValue() {
         return Double.toString(this.result);
