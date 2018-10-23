@@ -1,32 +1,21 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class clearScreen implements SLogoTurtleExecutable {
 
-    private double distance;
-    private final static int numParams = 0;
-
+public class clearScreen extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public clearScreen(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.distance = turtle.clearScreen();
-    }
-
-
-    @Override
-    public double returnValue() {
-        return this.distance;
+        this.result = turtle.clearScreen();
     }
 
 }

@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class GUI extends SplitPane {
     /**
@@ -36,6 +37,7 @@ public class GUI extends SplitPane {
     private static final Dimension2D PROJECT_WINDOW_SIZE = new Dimension2D(190, 380);
 
     private static final String DEFAULT_RESOURCES = "GUI";
+    private final Consumer<String> myParsingFunc;
     private ResourceBundle myResources;
 
     private CommandWindow myCommandWindow;
@@ -60,8 +62,9 @@ public class GUI extends SplitPane {
 //        getChildren().addAll(myCommandWindow, myGraphicsWindow, myProjectWindow, runButton(), clearButton(), buttonPanel());
 //    }
 
-    public GUI(String language) {
+    public GUI(String language, Consumer<String> parsingFunc) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myParsingFunc = parsingFunc;
 
         myCommandWindow = new CommandWindow();
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
@@ -87,7 +90,9 @@ public class GUI extends SplitPane {
      * Handles what happens when the user presses the 'Run' button.
      */
     void run() {
-        myCommandHistory.save(myCommandWindow.getInput(), "");
+        String input = myCommandWindow.getInput();
+        myCommandHistory.save(input, "");
+        myParsingFunc.accept(input);
     }
 
     private Button runButton() {

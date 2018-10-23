@@ -1,32 +1,20 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class yCor implements SLogoTurtleExecutable {
-
-    private double y;
-    private final static int numParams = 0;
-
+public class yCor extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public yCor(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.y = turtle.getY();
-    }
-
-
-    @Override
-    public double returnValue() {
-        return this.y;
+        this.result = turtle.getY();
     }
 
 }

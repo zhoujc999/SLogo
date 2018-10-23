@@ -4,15 +4,15 @@ import external.ModelTurtle;
 
 import java.util.List;
 
-public abstract class UnaryMathOperator {
+public abstract class BinaryTurtleOperator {
 
-    private final static int numParams = 1;
+    private final static int numParams = 2;
 
     protected double param1;
+    protected double param2;
     protected double result;
 
-
-    public UnaryMathOperator(List params) {
+    public BinaryTurtleOperator(List params) {
         if (params.size() != numParams) {
             throw new IllegalArgumentException("Argument Length Error");
         }
@@ -21,6 +21,12 @@ public abstract class UnaryMathOperator {
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
             throw new IllegalArgumentException(String.format("%s 1st Argument Error", this.getClass().getSimpleName()));
+        }
+        try {
+            param2 = Double.parseDouble((String) params.get(1));
+        }
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s 2nd Argument Error", this.getClass().getSimpleName()));
         }
     }
 

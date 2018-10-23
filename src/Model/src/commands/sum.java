@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class sum extends BinaryMathOperator {
+public class sum extends BinaryMathOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public sum(List params) {
         super(params);
@@ -13,11 +15,6 @@ public class sum extends BinaryMathOperator {
     @Override
     public void execute(ModelTurtle turtle) {
         this.result = this.param1 + this.param2;
-    }
-
-    @Override
-    public double returnValue() {
-        return result;
     }
 
 }

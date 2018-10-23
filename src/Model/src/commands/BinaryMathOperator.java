@@ -1,12 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoMathExecutable;
 
 import java.util.List;
 
-public abstract class BinaryMathOperator implements SLogoMathExecutable {
+public abstract class BinaryMathOperator {
+
     private final static int numParams = 2;
+
     protected double param1;
     protected double param2;
     protected double result;
@@ -17,21 +18,22 @@ public abstract class BinaryMathOperator implements SLogoMathExecutable {
             throw new IllegalArgumentException("Argument Length Error");
         }
         try {
-            param1 = (double) params.get(0);
-            param2 = (double) params.get(1);
+            param1 = Double.parseDouble((String) params.get(0));
         }
-        catch (ClassCastException e) {
-            e.printStackTrace();
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s 1st Argument Error", this.getClass().getSimpleName()));
         }
-
-
+        try {
+            param2 = Double.parseDouble((String) params.get(1));
+        }
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s 2nd Argument Error", this.getClass().getSimpleName()));
+        }
     }
 
-    @Override
     public abstract void execute(ModelTurtle turtle);
 
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
 }

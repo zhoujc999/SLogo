@@ -1,32 +1,21 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class showTurtle implements SLogoTurtleExecutable {
-
-    private double result;
-    private final static int numParams = 0;
-
+public class showTurtle extends TurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public showTurtle(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
+        super(params);
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
         this.result = turtle.show();
-    }
-
-
-    @Override
-    public double returnValue() {
-        return this.result;
     }
 
 }
