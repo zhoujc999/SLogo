@@ -9,7 +9,7 @@ public class Invoker extends Observable implements Invokable{
     private ModelTurtle myTurt;
 
     public Invoker(){
-        myTurt = new StdModelTurtle();
+        myTurt = new StdModelTurtle(0);
     }
 
     @Override
