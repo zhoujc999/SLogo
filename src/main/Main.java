@@ -1,5 +1,6 @@
 package main;
 
+import external.ModelPen;
 import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
@@ -10,6 +11,9 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import parsing.Parser;
+
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class Main extends Application {
 
@@ -24,8 +28,9 @@ public class Main extends Application {
         CommandFactoryInterface myFactory = new CommandFactory(invoker);
         Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
         GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand);
-        gui.getCommandWindow().getInput();
         primaryStage.setScene(new Scene(gui, SIZE.getWidth(), SIZE.getHeight()));
         primaryStage.show();
     }
+
+//    public Map<String, Consumer> getConsumers()
 }

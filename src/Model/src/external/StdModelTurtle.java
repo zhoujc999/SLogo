@@ -19,13 +19,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String HEADING_KEY = "heading";
     public static final String SHOWING_KEY = "showing";
     public static final String CLEARSCREEN_KEY = "clearScreen";
+    public static final String X_DISPLACEMENT_KEY = "xDisplacement";
+    public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
     private int TURTLE_ID;
     private double myXPos;
     private double myYPos;
     private double myHeading;
     private int showing;
     private int clearScreen;
-    private ModelPen myPen;
+    private final ModelPen thePen = new StdModelPen();
     private double returnVal;
 
     public StdModelTurtle() {
@@ -35,7 +37,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myHeading = 0;
         showing = 1;
         clearScreen = 0;
-        myPen = new StdModelPen();
     }
 
     /**
@@ -72,8 +73,17 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
                 Map.entry(HEADING_KEY, myHeading),
                 Map.entry(SHOWING_KEY, (double) showing),
                 Map.entry(CLEARSCREEN_KEY, (double) clearScreen));
-        turtleState.putAll(myPen.getState());
+        turtleState.putAll(thePen.getState());
         return turtleState;
+    }
+
+    public void notifyOfState(Map<String, Double> dataMap) {
+        setChanged();
+        dataMap.putAll(getState());
+        dataMap.put(X_DISPLACEMENT_KEY, dataMap.get(XPOS_KEY) - dataMap.get(OLD_XPOS_KEY));
+        dataMap.put(Y_DISPLACEMENT_KEY, dataMap.get(YPOS_KEY) - dataMap.get(OLD_YPOS_KEY));
+        notifyObservers(dataMap);
+        clearChanged();
     }
 
     /**
@@ -90,10 +100,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myXPos += xDist;
         myYPos += yDist;
         returnVal = pixels;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return pixels;
     }
 
@@ -130,10 +137,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         myHeading += degrees;
         returnVal = degrees;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return degrees;
     }
 
@@ -149,10 +153,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double diff = degrees - myHeading;
         myHeading = degrees;
         returnVal = diff;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return diff;
     }
 
@@ -173,10 +174,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return headingDiff;
     }
 
@@ -197,10 +195,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myYPos = y;
         double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
         returnVal = dist;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return dist;
     }
 
@@ -214,10 +209,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         showing = 1;
         returnVal = showing;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return showing;
     }
 
@@ -231,10 +223,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         Map<String, Double> dataMap = getOldXYMap();
         showing = 0;
         returnVal = showing;
-        setChanged();
-        dataMap.putAll(getState());
-        notifyObservers(dataMap);
-        clearChanged();
+        notifyOfState(dataMap);
         return showing;
     }
 
@@ -258,7 +247,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         clearScreen = 1;
         double dist = home(); //observers receive state within this call
         clearScreen = 0;
-        returnVal = dist;
+        returnVal = dist; //technically redundant
         return dist;
     }
 
@@ -303,6 +292,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public ModelPen getPen() {
-        return myPen;
+        return thePen;
     }
 }
