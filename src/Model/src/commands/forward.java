@@ -2,11 +2,12 @@ package commands;
 
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class forward extends UnaryTurtleOperator implements SLogoTurtleExecutable {
+public class forward extends UnaryTurtleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public forward(List params) {
         super(params);

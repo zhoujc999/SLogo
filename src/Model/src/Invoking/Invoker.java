@@ -1,9 +1,7 @@
 package Invoking;
 
-import external.Invokable;
-import external.ModelTurtle;
-import external.SLogoExecutable;
-import external.StdModelTurtle;
+import external.*;
+
 import java.util.Observable;
 
 
@@ -18,7 +16,9 @@ public class Invoker extends Observable implements Invokable{
     @Override
     public void acceptCommand(SLogoExecutable cmd) {
         cmd.execute(myTurt);
-        notifyObservers(cmd.returnValue());
+        if(cmd instanceof SLogoStringReturnable){
+            notifyObservers(((SLogoStringReturnable) cmd).returnValue());
+        }
 
     }
 }
