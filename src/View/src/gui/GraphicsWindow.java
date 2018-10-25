@@ -2,6 +2,7 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -45,15 +46,14 @@ public class GraphicsWindow extends Pane implements Observer {
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(580, 540);
-        var primaryTurtle = new TurtleView(GREEN_TURTLE_FILENAME);
+        var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
         activate(primaryTurtle);
         addTurtle(primaryTurtle, getPrefWidth()/2, getPrefHeight()/2);
 
-//        Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(GREEN_TURTLE_FILENAME));
-//        var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
+//        Image turtleImage = new Image(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
+//        //var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
 //        var turtle = new TurtleView(GREEN_TURTLE_FILENAME, getPrefWidth()/2, getPrefHeight()/2);
-//        addTurtle(turtle);
-//        myTurtle = turtle;
+//        addTurtle(turtle, 0, 0);
     }
 
 //    protected GraphicsWindow(Point2D location, Dimension2D size, CornerRadii cornerRadii, Insets insets) {
