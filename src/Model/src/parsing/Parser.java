@@ -1,5 +1,7 @@
 package parsing;
 
+import invoking.Invoker;
+import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 import external.Node;
 import external.Parse;
@@ -128,6 +130,7 @@ public class Parser implements Observer, Parse {
                 executeTree(child);
                 parameters.add(child.getData());
             }
+            System.out.println("Hello");
             myFactory.createCommand(root.getData(), parameters);
             root.setData(replacementValue);
         }
@@ -207,6 +210,13 @@ public class Parser implements Observer, Parse {
         String message = errorBundle.getString(LANGUAGE_ERROR_KEY);
         Alert err = new Alert(Alert.AlertType.WARNING, message);
         err.showAndWait();
+    }
+
+    public static void main(String args[]){
+        Invoker i = new Invoker();
+        CommandFactory c = new CommandFactory(i);
+        Parser p = new Parser(c, "English");
+        p.parseCommand("fd 50");
     }
     
 }

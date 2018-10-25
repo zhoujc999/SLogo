@@ -37,9 +37,9 @@ public class GUI extends SplitPane {
 
     private static final double SPACING = 10;
     private static final double DEFINITION_LIST_COLUMN_WIDTH = 100;
-
-    private static final String DEFAULT_RESOURCES = "GUI";
     private static final String DEFAULT_TURTLE = "GreenTurtle.png";
+    private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
+
     private final Consumer<String> myParsingFunc;
     private ResourceBundle myResources;
     private static final Font CODE_FONT = new Font("Courier New", 10);
@@ -67,7 +67,7 @@ public class GUI extends SplitPane {
 //    }
 
     public GUI(String language, Consumer<String> parsingFunc) {
-        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language); //+ ".properties");
         myParsingFunc = parsingFunc;
 
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
@@ -161,9 +161,11 @@ public class GUI extends SplitPane {
 
     private ComboBox turtlePicker() {
         var picker = new ComboBox<Image>();
-        Image GreenTurtleImage = new Image("GreenTurtle.png");
-        Image RedTurtleImage = new Image("RedTurtle.png");
-        Image BlueTurtleImage = new Image("BlueTurtle.png");
+
+        Image GreenTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/GreenTurtle.png").toExternalForm());
+        Image RedTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/RedTurtle.png").toExternalForm());
+        Image BlueTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/BlueTurtle.png").toExternalForm());
+
         picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
         picker.setOnAction(e -> transformTurtles(picker.getValue()));
         return picker;

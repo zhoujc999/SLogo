@@ -24,7 +24,7 @@ public class CommandReference extends Stage {
     private static final Font COMMAND_CATEGORIES_FONT = new Font("Agency FB", 30);
     private static final Font DESCRIPTIONS_FONT = new Font(10);
 
-    private String DEFAULT_RESOURCES = "Reference";
+    private String DEFAULT_RESOURCES = "/internal/Reference";
     private ResourceBundle myCommandCategories;
     private String myLanguage;
 
