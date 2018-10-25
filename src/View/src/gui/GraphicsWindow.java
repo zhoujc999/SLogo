@@ -33,7 +33,7 @@ public class GraphicsWindow extends Pane implements Observer {
             Map.entry(12.0, Color.SALMON), Map.entry(13.0, Color.PURPLE),
             Map.entry(14.0, Color.ORANGE), Map.entry(15.0, Color.GRAY)
     );
-    public static final String GREEN_TURTLE_FILENAME = "TurtleImages/GreenTurtle.png";
+    public static final String GREEN_TURTLE_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
@@ -48,7 +48,7 @@ public class GraphicsWindow extends Pane implements Observer {
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
 //        Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(GREEN_TURTLE_FILENAME));
 //        var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
-        var turtle = new TurtleView(GREEN_TURTLE_FILENAME, getPrefWidth()/2, getPrefHeight()/2);
+        var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), getPrefWidth()/2, getPrefHeight()/2);
         addTurtle(turtle);
         myTurtle = turtle;
     }
