@@ -2,22 +2,16 @@ package commands;
 
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 // equivalent to command "pendown?"
-public class penDownP implements SLogoTurtleExecutable {
-
-    private double result;
-    private final static int numParams = 0;
-
+public class penDownP extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public penDownP(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-
+        super(params);
     }
 
     @Override
@@ -25,10 +19,7 @@ public class penDownP implements SLogoTurtleExecutable {
         this.result = turtle.getPen().getPenDown();
     }
 
-
-    @Override
-    public double returnValue() {
-        return this.result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

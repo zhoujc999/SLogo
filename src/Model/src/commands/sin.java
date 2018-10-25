@@ -1,10 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class sin extends UnaryMathOperator {
+public class sin extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+
     public sin(List params) {
         super(params);
     }
@@ -15,9 +18,7 @@ public class sin extends UnaryMathOperator {
         this.result = Math.sin(angle);
     }
 
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

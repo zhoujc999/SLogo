@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class pow extends BinaryMathOperator {
+public class pow extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public pow(List params) {
         super(params);
@@ -15,9 +17,7 @@ public class pow extends BinaryMathOperator {
         this.result = Math.pow(param1, param2);
     }
 
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

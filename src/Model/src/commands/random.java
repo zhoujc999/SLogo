@@ -1,12 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
 import external.SLogoRandom;
+import external.SLogoStringReturnable;
 
 import java.util.List;
-import java.util.Random;
 
-public class random extends UnaryMathOperator {
+public class random extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public random(List params) {
         super(params);
@@ -17,8 +18,7 @@ public class random extends UnaryMathOperator {
         this.result = SLogoRandom.getInstance().nextD() * param1;
     }
 
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
 }

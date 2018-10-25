@@ -1,32 +1,24 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class heading implements SLogoTurtleExecutable {
-
-    private double degree;
-    private final static int numParams = 0;
-
+public class heading extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
     public heading(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
+        super(params);
 
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.degree = turtle.getHeading();
+        this.result = turtle.getHeading();
     }
 
-
-    @Override
-    public double returnValue() {
-        return this.degree;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

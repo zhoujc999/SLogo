@@ -3,38 +3,31 @@ package commands;
 import external.ModelTurtle;
 import external.Parse;
 import external.SLogoAbstractExecutable;
+import external.SLogoConsumerReturnable;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class make implements SLogoAbstractExecutable {
-    private final static int numParams = 2;
-    private String param1;
-    private String param2;
-    private double result;
+public class make extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+
     private Consumer<Parse> c;
 
-
-
     public make(List params) {
-        if (params.size() != numParams) {
-            throw new IllegalArgumentException("Argument Length Error");
-        }
-        try {
-            param1 = (String) params.get(0);
-            param2 = (String) params.get(1);
-        } catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            e.printStackTrace();
-        }
+        super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = (p) -> p.addVariable(param1, param2);
+        c = this::makeFunction;
     }
 
     @Override
     public Consumer<Parse> returnValue() {
         return c;
+    }
+
+    private void makeFunction(Parse p) {
+        p.addVariable(param1, param2);
+        p.setReplacementValue(param2);
     }
 }

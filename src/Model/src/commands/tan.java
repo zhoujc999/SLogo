@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class tan extends UnaryMathOperator {
+public class tan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public tan(List params) {
         super(params);
     }
@@ -15,9 +17,7 @@ public class tan extends UnaryMathOperator {
         this.result = Math.tan(angle);
     }
 
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class atan extends UnaryMathOperator {
+public class atan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
     public atan(List params) {
         super(params);
     }
@@ -14,10 +16,7 @@ public class atan extends UnaryMathOperator {
         double angle = this.param1 * (Math.PI / 180);
         this.result = Math.atan(angle);
     }
-
-    @Override
-    public double returnValue() {
-        return result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }

@@ -1,10 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
+import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class minus extends UnaryMathOperator {
+public class minus extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
     public minus(List params) {
         super(params);
@@ -15,9 +17,7 @@ public class minus extends UnaryMathOperator {
         this.result = -this.param1;
     }
 
-    @Override
-    public double returnValue() {
-        return this.result;
+    public String returnValue() {
+        return Double.toString(this.result);
     }
-
 }
