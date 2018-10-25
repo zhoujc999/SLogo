@@ -1,15 +1,10 @@
 package main;
 
-<<<<<<< HEAD
-import external.ModelTurtle;
-import gui.GUI;
-=======
 import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 import gui.GUI;
 import external.Invokable;
->>>>>>> efdd670be2dd3f8ce1d360e03f60f0644d077f86
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
