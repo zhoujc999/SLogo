@@ -102,7 +102,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Moves the external.ModelTurtle forward by the specified number of pixels.
+     * Moves the external.ModelTurtle Forward by the specified number of pixels.
      *
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
