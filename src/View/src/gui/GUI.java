@@ -36,7 +36,7 @@ public class GUI extends SplitPane {
     private static final Point2D PROJECT_WINDOW_LOCATION = new Point2D(600, 210);
     private static final Dimension2D PROJECT_WINDOW_SIZE = new Dimension2D(190, 380);
 
-    private static final String DEFAULT_RESOURCES = "GUI";
+    private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
     private final Consumer<String> myParsingFunc;
     private ResourceBundle myResources;
 
@@ -63,7 +63,7 @@ public class GUI extends SplitPane {
 //    }
 
     public GUI(String language, Consumer<String> parsingFunc) {
-        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language); //+ ".properties");
         myParsingFunc = parsingFunc;
 
         myCommandWindow = new CommandWindow();
@@ -142,9 +142,9 @@ public class GUI extends SplitPane {
 
     private ComboBox turtlePicker() {
         var picker = new ComboBox<Image>();
-        Image GreenTurtleImage = new Image("TurtleImages/GreenTurtle.png");
-        Image RedTurtleImage = new Image("TurtleImages/RedTurtle.png");
-        Image BlueTurtleImage = new Image("TurtleImages/BlueTurtle.png");
+        Image GreenTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/GreenTurtle.png").toExternalForm());
+        Image RedTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/RedTurtle.png").toExternalForm());
+        Image BlueTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/BlueTurtle.png").toExternalForm());
         picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
         picker.setOnAction(e -> myGraphicsWindow.getTurtle().setImage(picker.getValue()));
         return picker;
