@@ -126,6 +126,16 @@ public interface ModelTurtle {
     double clearScreen();
 
     /**
+     * "activates" the ModelTurtle by setting a flag
+     */
+    void activate();
+
+    /**
+     * "deactivates" the ModelTurtle by setting a flag
+     */
+    void deactivate();
+
+    /**
      *
      * @return the turtle's X coordinate, where the coordinates (0,0) are at the center of the screen
      */
@@ -154,4 +164,12 @@ public interface ModelTurtle {
      * @return the ModelPen object associated with this ModelTurtle
      */
     ModelPen getPen();
+
+    /**
+     * returns the number of turtles that have been created, according to the static counter kept by the implementing
+     * class.
+     *
+     * @return the number of turtles that have been created
+     */
+    int getNumTurtles();
 }

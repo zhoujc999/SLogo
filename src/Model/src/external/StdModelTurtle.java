@@ -21,22 +21,26 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String CLEARSCREEN_KEY = "clearScreen";
     public static final String X_DISPLACEMENT_KEY = "xDisplacement";
     public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
+    private static int numTurtles;
     private int TURTLE_ID;
     private double myXPos;
     private double myYPos;
     private double myHeading;
     private int showing;
     private int clearScreen;
+    private int active;
     private final ModelPen thePen = new StdModelPen();
     private double returnVal;
 
     public StdModelTurtle() {
-        TURTLE_ID = 0;
+        numTurtles++;
+        TURTLE_ID = numTurtles;
         myXPos = 0;
         myYPos = 0;
         myHeading = 0;
         showing = 1;
         clearScreen = 0;
+        active = 0;
     }
 
     /**
@@ -47,6 +51,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int getID() {
+        returnVal = TURTLE_ID;
         return TURTLE_ID;
     }
 
@@ -251,6 +256,14 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return dist;
     }
 
+    public void activate() {
+        active = 1;
+    }
+
+    public void deactivate() {
+        active = 0;
+    }
+
     /**
      * @return the turtle's X coordinate, where the coordinates (0,0) are at the center of the screen
      */
@@ -293,5 +306,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public ModelPen getPen() {
         return thePen;
+    }
+
+    public int getNumTurtles() {
+        returnVal = numTurtles;
+        return numTurtles;
     }
 }
