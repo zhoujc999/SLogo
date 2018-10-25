@@ -21,6 +21,8 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String CLEARSCREEN_KEY = "clearScreen";
     public static final String X_DISPLACEMENT_KEY = "xDisplacement";
     public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
+    private static final String ID_KEY = "ID";
+    private static final String ACTIVE_KEY = "active";
     private static int numTurtles;
     private int TURTLE_ID;
     private double myXPos;
@@ -32,9 +34,15 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private final ModelPen thePen = new StdModelPen();
     private double returnVal;
 
-    public StdModelTurtle() {
+    /**
+     * Creates a StdModelTurtle with the desired id
+     *
+     * @param id the desired id of the StdModelTurtle to be created
+     */
+
+    public StdModelTurtle(int id) {
         numTurtles++;
-        TURTLE_ID = numTurtles;
+        TURTLE_ID = id;
         myXPos = 0;
         myYPos = 0;
         myHeading = 0;
@@ -73,11 +81,13 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public Map<String, Double> getState() {
         Map<String, Double> turtleState = Map.ofEntries(
+                Map.entry(ID_KEY, (double) TURTLE_ID),
                 Map.entry(XPOS_KEY, myXPos),
                 Map.entry(YPOS_KEY, myYPos),
                 Map.entry(HEADING_KEY, myHeading),
                 Map.entry(SHOWING_KEY, (double) showing),
-                Map.entry(CLEARSCREEN_KEY, (double) clearScreen));
+                Map.entry(CLEARSCREEN_KEY, (double) clearScreen),
+                Map.entry(ACTIVE_KEY, (double) active));
         turtleState.putAll(thePen.getState());
         return turtleState;
     }
