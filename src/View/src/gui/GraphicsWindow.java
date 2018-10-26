@@ -46,7 +46,7 @@ public class GraphicsWindow extends Pane implements Observer {
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(580, 540);
-        var primaryTurtle = new TurtleView(GREEN_TURTLE_FILENAME);
+        var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
         activate(primaryTurtle);
         addTurtle(primaryTurtle, getPrefWidth()/2, getPrefHeight()/2);
 
