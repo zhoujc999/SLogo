@@ -14,10 +14,10 @@ import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
 
 public class Parser implements Observer, Parse {
-    public static final String ERROR_MESSAGE_PATH = "/languages/Errors";
-    public static final String SYNTAX_PATH = "/languages/Syntax";
-    public static final String PARAMETER_COUNTS_PATH = "/languages/Command";
-    public static final String PROPERTIES_PATH = "/languages/";
+    public static final String ERROR_MESSAGE_PATH = "/resourceFiles/languages/Errors";
+    public static final String SYNTAX_PATH = "/resourceFiles/languages/Syntax";
+    public static final String PARAMETER_COUNTS_PATH = "/resourceFiles/languages/Command";
+    public static final String PROPERTIES_PATH = "/resourceFiles/languages/";
     public static final String LANGUAGE_ERROR_KEY = "Language";
     public static final String COMMAND_KEY = "Command";
     public static final String CONSTANT_KEY = "Constant";
