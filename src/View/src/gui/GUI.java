@@ -67,7 +67,7 @@ public class GUI extends SplitPane {
 //    }
 
     public GUI(String language, Consumer<String> parsingFunc) {
-        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language); //+ ".properties");
         myParsingFunc = parsingFunc;
 
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));

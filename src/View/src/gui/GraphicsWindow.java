@@ -133,7 +133,6 @@ public class GraphicsWindow extends Pane implements Observer {
 //        Line line = new Line(oldX, oldY, x, y); //is this preferred?
         line.setStrokeWidth(width);
         line.setStroke(color);
-        System.out.print(color);
         lineList.add(line);
         getChildren().add(line);
     }
