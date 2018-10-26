@@ -9,10 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * @author Tahj Starr
@@ -38,7 +35,7 @@ public class GraphicsWindow extends Pane implements Observer {
     private CornerRadii myCornerRadii;
     private Insets myInsets;
     private TurtleView myTurtle;
-    private List<Node> lineList;
+    private List<Node> lineList = new ArrayList<>();
     private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
@@ -115,6 +112,7 @@ public class GraphicsWindow extends Pane implements Observer {
 //        Line line = new Line(oldX, oldY, x, y); //is this preferred?
         line.setStrokeWidth(width);
         line.setStroke(color);
+        System.out.print(color);
         lineList.add(line);
         getChildren().add(line);
     }
