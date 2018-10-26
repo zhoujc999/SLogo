@@ -22,7 +22,7 @@ public class StdModelPen implements ModelPen {
     public StdModelPen() {
         penDown = 1;
         myColor = 0;
-        mySize = 1;
+        mySize = 10;
     }
 
 

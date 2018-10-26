@@ -75,10 +75,10 @@ public class GraphicsWindow extends Pane implements Observer {
     public void update(Observable o, Object arg) {
         var state = (Map<String, Double>) arg;
 
-        double x = state.get("oldXPos");
-        double y = state.get("oldYPos");
-        double oldX = state.get("xPos");
-        double oldY = state.get("yPos");
+        double x = state.get("xPos");
+        double y = state.get("yPos");
+        double oldX = state.get("oldXPos");
+        double oldY = state.get("oldYPos");
         double heading = state.get("heading");
         boolean visible = (state.get("showing") == 1);
         boolean clearScreenFlag = (state.get("clearScreen") == 1);
@@ -108,8 +108,9 @@ public class GraphicsWindow extends Pane implements Observer {
     }
 
     private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
-        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
-//        Line line = new Line(oldX, oldY, x, y); //is this preferred?
+//        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
+        Line line = new Line(oldX + getWidth()/2, oldY + getHeight()/2,
+                x + getWidth()/2, y + getHeight()/2);
         line.setStrokeWidth(width);
         line.setStroke(color);
         System.out.print(color);
