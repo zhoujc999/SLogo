@@ -6,16 +6,15 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+public class Backward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
-
-    public Forward(List params) {
+    public Backward(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.forward(param1);
+        this.result = turtle.back(param1);
     }
 
     public String returnValue() {
