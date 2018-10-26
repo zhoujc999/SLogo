@@ -114,9 +114,9 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public double forward(double pixels) {
         HashMap<String, Double> dataMap = getOldXYMap();
-        double xDist = pixels*Math.cos(myHeading-90);
-        double yDist = pixels*Math.sin(myHeading-90);
-        myXPos += 0;
+        double xDist = pixels*Math.cos(Math.toRadians(myHeading - 90));
+        double yDist = pixels*Math.sin(Math.toRadians(myHeading - 90));
+        myXPos += xDist;
         myYPos += yDist;
         returnVal = pixels;
         notifyOfState(dataMap);
@@ -189,7 +189,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         HashMap<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
-        double newHeading = Math.tan(xDiff/yDiff);
+        double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + 90;
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
