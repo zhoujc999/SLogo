@@ -1,6 +1,5 @@
 package external;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
@@ -68,11 +67,8 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return returnVal;
     }
 
-    private HashMap<String, Double> getOldXYMap() {
-        HashMap<String, Double> map = new HashMap<>();
-        map.put(OLD_XPOS_KEY, myXPos);
-        map.put(OLD_YPOS_KEY, myYPos);
-        return map;
+    private Map<String, Double> getOldXYMap() {
+        return Map.of(OLD_XPOS_KEY, myXPos, OLD_YPOS_KEY, myYPos);
     }
 
     /**
@@ -83,20 +79,20 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen.
      */
     @Override
-    public HashMap<String, Double> getState() {
-        HashMap<String, Double> turtleState = new HashMap<String, Double>();
-        turtleState.put(ID_KEY, (double) TURTLE_ID);
-        turtleState.put(XPOS_KEY, myXPos);
-        turtleState.put(YPOS_KEY, myYPos);
-        turtleState.put(HEADING_KEY, myHeading);
-        turtleState.put(SHOWING_KEY, (double) showing);
-        turtleState.put(CLEARSCREEN_KEY, (double) clearScreen);
-        turtleState.put(ACTIVE_KEY, (double) active);
+    public Map<String, Double> getState() {
+        Map<String, Double> turtleState = Map.ofEntries(
+                Map.entry(ID_KEY, (double) TURTLE_ID),
+                Map.entry(XPOS_KEY, myXPos),
+                Map.entry(YPOS_KEY, myYPos),
+                Map.entry(HEADING_KEY, myHeading),
+                Map.entry(SHOWING_KEY, (double) showing),
+                Map.entry(CLEARSCREEN_KEY, (double) clearScreen),
+                Map.entry(ACTIVE_KEY, (double) active));
         turtleState.putAll(thePen.getState());
         return turtleState;
     }
 
-    public void notifyOfState(HashMap<String, Double> dataMap) {
+    public void notifyOfState(Map<String, Double> dataMap) {
         setChanged();
         dataMap.putAll(getState());
         dataMap.put(X_DISPLACEMENT_KEY, dataMap.get(XPOS_KEY) - dataMap.get(OLD_XPOS_KEY));
@@ -106,16 +102,16 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Moves the external.ModelTurtle Forward by the specified number of pixels.
+     * Moves the external.ModelTurtle forward by the specified number of pixels.
      *
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
      */
     @Override
     public double forward(double pixels) {
-        HashMap<String, Double> dataMap = getOldXYMap();
-        double xDist = pixels*Math.cos(Math.toRadians(myHeading - 90));
-        double yDist = pixels*Math.sin(Math.toRadians(myHeading - 90));
+        Map<String, Double> dataMap = getOldXYMap();
+        double xDist = pixels*Math.cos(myHeading);
+        double yDist = pixels*Math.sin(myHeading);
         myXPos += xDist;
         myYPos += yDist;
         returnVal = pixels;
@@ -153,7 +149,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double right(double degrees) {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         myHeading += degrees;
         returnVal = degrees;
         notifyOfState(dataMap);
@@ -168,7 +164,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double setHeading(double degrees) {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         double diff = degrees - myHeading;
         myHeading = degrees;
         returnVal = diff;
@@ -186,10 +182,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double towards(double x, double y) {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
-        double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + 90;
+        double newHeading = Math.tan(xDiff/yDiff);
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         returnVal = headingDiff;
@@ -207,7 +203,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double goTo(double x, double y) {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         myXPos = x;
@@ -225,7 +221,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int show() {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         showing = 1;
         returnVal = showing;
         notifyOfState(dataMap);
@@ -239,7 +235,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int hide() {
-        HashMap<String, Double> dataMap = getOldXYMap();
+        Map<String, Double> dataMap = getOldXYMap();
         showing = 0;
         returnVal = showing;
         notifyOfState(dataMap);

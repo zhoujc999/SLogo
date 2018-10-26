@@ -35,13 +35,8 @@ public class GraphicsWindow extends Pane implements Observer {
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
-<<<<<<< HEAD
     private List<TurtleView> myActiveTurtles;
     private List<Node> lineList;
-=======
-    private TurtleView myTurtle;
-    private List<Node> lineList = new ArrayList<>();
->>>>>>> f5b0b6cf9dcbef59db95ef9ee20036e514b436a4
     private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
@@ -137,7 +132,6 @@ public class GraphicsWindow extends Pane implements Observer {
 //        Line line = new Line(oldX, oldY, x, y); //is this preferred?
         line.setStrokeWidth(width);
         line.setStroke(color);
-        System.out.print(color);
         lineList.add(line);
         getChildren().add(line);
     }

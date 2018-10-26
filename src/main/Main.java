@@ -2,7 +2,6 @@ package main;
 
 import external.ModelPen;
 import external.ModelTurtle;
-import external.StdModelTurtle;
 import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
@@ -38,11 +37,7 @@ public class Main extends Application {
         Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
 //        BiConsumer<Integer, String> IDMethodConsumer = (id, method) -> invoker.getTurtles;
         GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand);
-        Consumer<StdModelTurtle> turtleObserverConsumer = (turt) -> turt.addObserver(gui.getGraphicsWindow());
-        ( (Invoker) invoker ).setAddObserver(turtleObserverConsumer);
-        Scene scene = new Scene(gui, SIZE.getWidth(), SIZE.getHeight());
-//        scene.setOnKeyPressed();
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(gui, SIZE.getWidth(), SIZE.getHeight()));
         primaryStage.show();
     }
 
