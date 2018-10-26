@@ -1,6 +1,5 @@
 package main;
 
-import external.ModelPen;
 import external.ModelTurtle;
 import external.StdModelTurtle;
 import invoking.Invoker;
@@ -11,11 +10,11 @@ import external.Invokable;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import parsing.Parser;
 
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Main extends Application {
@@ -41,9 +40,21 @@ public class Main extends Application {
         Consumer<StdModelTurtle> turtleObserverConsumer = (turt) -> turt.addObserver(gui.getGraphicsWindow());
         ( (Invoker) invoker ).setAddObserver(turtleObserverConsumer);
         Scene scene = new Scene(gui, SIZE.getWidth(), SIZE.getHeight());
-//        scene.setOnKeyPressed();
+        scene.setOnKeyPressed(event -> handleKeyInput(event.getCode(), myParser::parseCommand));
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void handleKeyInput(KeyCode code, Consumer<String> parsingFunc) {
+        if (code == KeyCode.W) {
+            parsingFunc.accept("fd 5");
+        } else if (code == KeyCode.S) {
+            parsingFunc.accept("fd 5");
+        } else if (code == KeyCode.A) {
+            parsingFunc.accept("fd 5");
+        } else if (code == KeyCode.D) {
+            parsingFunc.accept("fd 5");
+        }
     }
 
 
