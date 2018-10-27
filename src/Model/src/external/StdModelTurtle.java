@@ -1,7 +1,6 @@
 package external;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 
 /**
@@ -25,6 +24,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private static final String ID_KEY = "ID";
     private static final String ACTIVE_KEY = "active";
     private static int numTurtles;
+    private static StdModelBackground theBackground = new StdModelBackground();
     private int TURTLE_ID;
     private double myXPos;
     private double myYPos;
@@ -32,7 +32,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private int showing;
     private int clearScreen;
     private int active;
-    private final ModelPen thePen = new StdModelPen();
+    private ModelPen myPen;
     private double returnVal;
 
     /**
@@ -50,6 +50,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         showing = 1;
         clearScreen = 0;
         active = 0;
+        myPen = new StdModelPen();
     }
 
     /**
@@ -92,7 +93,8 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         turtleState.put(SHOWING_KEY, (double) showing);
         turtleState.put(CLEARSCREEN_KEY, (double) clearScreen);
         turtleState.put(ACTIVE_KEY, (double) active);
-        turtleState.putAll(thePen.getState());
+        turtleState.putAll(myPen.getState());
+        turtleState.putAll(theBackground.getState());
         return turtleState;
     }
 
@@ -319,7 +321,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public ModelPen getPen() {
-        return thePen;
+        return myPen;
     }
 
     public int getNumTurtles() {
