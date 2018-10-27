@@ -6,9 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class left extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Left extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public left(List params) {
+    public Left(List params) {
         super(params);
     }
 

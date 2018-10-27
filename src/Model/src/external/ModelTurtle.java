@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Instances of classes implementing this interface are abstract representations of a turtle
  * (i.e. a specific state could be displayed differently depending on how the view is implemented).
- * The methods in this interface provides access to the turtle's state and provide ways to modify that state.
+ * The methods in this interface provides access to the turtle's state And provide ways to modify that state.
  *
  * @author jgp17
  */
@@ -32,13 +32,13 @@ public interface ModelTurtle {
     //methods below are part of internal Model API
 
     /**
-     * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen. The variables should
+     * @return a Map of any variables representing the state of this ModelTurtle And its ModelPen. The variables should
      * be doubles.
      */
     Map<String, Double> getState();
 
     /**
-     * Moves the external.ModelTurtle forward by the specified number of pixels.
+     * Moves the external.ModelTurtle Forward by the specified number of pixels.
      *
      * @param pixels the number of pixels the turtle should move
      * @return the number of pixels the turtle moved
@@ -54,7 +54,7 @@ public interface ModelTurtle {
     double back(double pixels);
 
     /**
-     * Turns the turtle left by the specified number of degrees.
+     * Turns the turtle Left by the specified number of degrees.
      *
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
@@ -62,7 +62,7 @@ public interface ModelTurtle {
     double left(double degrees);
 
     /**
-     * Turns the turtle right by the specified number of degrees.
+     * Turns the turtle Right by the specified number of degrees.
      *
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
@@ -70,15 +70,15 @@ public interface ModelTurtle {
     double right(double degrees);
 
     /**
-     * Sets the heading of the turtle as by the specified number degrees right of north/up.
+     * Sets the Heading of the turtle as by the specified number degrees Right of north/up.
      *
-     * @param degrees the number of degrees right of north/up that the turtle's heading should be set to
+     * @param degrees the number of degrees Right of north/up that the turtle's Heading should be set to
      * @return the number of degrees the turtle turned
      */
     double setHeading(double degrees);
 
     /**
-     * Sets the heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
+     * Sets the Heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
      * screen.
      *
      * @param x the x-coordinate of the point the turtle should face
@@ -119,7 +119,7 @@ public interface ModelTurtle {
     double home();
 
     /**
-     * erases turtle's trails and sends it to the home position
+     * erases turtle's trails And sends it to the Home position
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */
@@ -149,7 +149,7 @@ public interface ModelTurtle {
 
     /**
      *
-     * @return 	the turtle's heading as the number of degrees right of north/up
+     * @return 	the turtle's Heading as the number of degrees Right of north/up
      */
     double getHeading();
 

@@ -21,7 +21,11 @@ public class CommandFactory implements CommandFactoryInterface {
 
 
     final public void createCommand(String cmd, List params) {
-        String commandName = "src.Model.src.commands." + cmd;
+        System.out.println("cmd");
+        System.out.println(cmd);
+        System.out.println("param list");
+        System.out.println(params);
+        String commandName = "commands." + cmd;
         Class<?> commandClass = null;
         try {
             commandClass = Class.forName(commandName);

@@ -7,9 +7,9 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 
-public class hideTurtle extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class HideTurtle extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public hideTurtle(List params) {
+    public HideTurtle(List params) {
         super(params);
 
     }

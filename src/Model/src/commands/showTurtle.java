@@ -6,9 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class showTurtle extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class ShowTurtle extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public showTurtle(List params) {
+    public ShowTurtle(List params) {
         super(params);
     }
 

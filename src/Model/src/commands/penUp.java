@@ -6,10 +6,10 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class penUp extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class PenUp extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
 
-    public penUp(List params) {
+    public PenUp(List params) {
         super(params);
     }
 
