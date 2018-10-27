@@ -13,7 +13,7 @@ public class Parser implements Observer, Parse {
     private CommandFactoryInterface myFactory;
 
     private TreeBuilder myBuilder;
-    private TreeExecutor myExecuter;
+    private TreeExecutor myExecutor;
     private VariableContainer myVars;
     private ResourceContainer myResources;
 
@@ -24,13 +24,13 @@ public class Parser implements Observer, Parse {
         myResources = new ResourceHandler(lang);
         myVars = new VariableContainer();
         myBuilder = new CommandTreeBuilder();
-        myExecuter = new CommandTreeExecutor(myFactory);
+        myExecutor = new CommandTreeExecutor(myFactory);
 
     }
 
     public void parseCommand(String cmd){
         commandTree = myBuilder.buildTree(cmd, myResources);
-        myExecuter.executeTree(commandTree.getChildren().get(0), );
+        myExecutor.executeTree(commandTree.getChildren().get(0), myResources);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Parser implements Observer, Parse {
             ((Consumer) arg).accept(this);
         }
         else{
-            myExecuter.setReplacementValue((String) arg);
+            myExecutor.setReplacementValue((String) arg);
         }
     }
 
@@ -52,11 +52,16 @@ public class Parser implements Observer, Parse {
         myResources.changeLanguage(lang);
     }
 
+    @Override
+    public void setReplacementValue(String s) {
+        myExecutor.setReplacementValue(s);
+    }
+
     public static void main(String args[]){
         Invoker i = new Invoker();
         CommandFactory c = new CommandFactory(i);
         Parser p = new Parser(c, "English");
-        p.parseCommand("fd 50");
+        p.parseCommand("fd fd 50");
     }
     
 }
