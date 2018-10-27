@@ -4,6 +4,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class DefinitionList extends ListView implements GUIList {
@@ -14,7 +15,12 @@ public class DefinitionList extends ListView implements GUIList {
      * @author Tahj Starr
      */
 
-    protected DefinitionList() {
+    private Font myFont;
+    private double myColumnWidth;
+
+    protected DefinitionList(Font font, double columnWidth) {
+        myFont = font;
+        myColumnWidth = columnWidth;
     }
 
     protected DefinitionList(Point2D location, Dimension2D size) {
@@ -26,9 +32,12 @@ public class DefinitionList extends ListView implements GUIList {
     @Override
     public void save(String name, String value) {
         var nameText = new Text(name);
-        nameText.prefHeight(50);
+        nameText.setFont(myFont);
+        nameText.setWrappingWidth(myColumnWidth);
         var valueText = new Text(value);
-        getItems().add(new HBox(nameText, valueText));
+        valueText.setFont(myFont);
+        var entry = new HBox(nameText, valueText);
+        getItems().add(entry);
     }
 
     @Override
