@@ -1,9 +1,9 @@
 package external;
 
 /**
- * An interface used by classes that parse strings into individual procedure calls and arguments.
- * This interface is designed such that the commands are not returned.
- * Therefore, construction of commands and execution of commands must occur from calls in the implementing class.
+ * An interface used by classes that parse strings into individual procedure calls And arguments.
+ * This interface is designed such that the commands are Not returned.
+ * Therefore, construction of commands And execution of commands must occur from calls in the implementing class.
  */
 
 import java.util.Observable;
@@ -12,7 +12,7 @@ import java.util.Observer;
 public interface Parse extends Observer {
 
     /**
-     * Takes a string and parses it into all sub commands and executes those sub commands
+     * Takes a string And parses it into all sub commands And executes those sub commands
      * @param cmd A string that stands for the commands to be executed
      */
 

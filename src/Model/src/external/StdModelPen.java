@@ -1,5 +1,6 @@
 package external;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,19 +11,21 @@ import java.util.Map;
  * @author jgp17
  */
 
-public class StdModelPen implements ModelPen {
-    public static final String PEN_DOWN_KEY = "penDown";
-    public static final String PEN_COLOR_KEY = "penColor";
+public class StdModelPen extends StdColorObject implements ModelPen {
+    public static final String PEN_DOWN_KEY = "PenDown";
+    public static final String PEN_COLOR_INDEX_KEY = "penColorIndex";
+    public static final String PEN_COLOR_R_KEY = "penColorRVal";
+    public static final String PEN_COLOR_G_KEY = "penColorGVal";
+    public static final String PEN_COLOR_B_KEY = "penColorBVal";
     public static final String PEN_SIZE_KEY = "penSize";
     private double returnVal;
     private int penDown;
-    private int myColor;
-    private double mySize;
+    private static int penColorIndex = 0;
+    private static double size = 10;
+    private static int bgColorIndex = 7;
 
     public StdModelPen() {
         penDown = 1;
-        myColor = 0;
-        mySize = 1;
     }
 
 
@@ -34,11 +37,12 @@ public class StdModelPen implements ModelPen {
      * @return a Map of any variables representing the state of this ModelPen.
      */
     @Override
-    public Map<String, Double> getState() {
-        return Map.ofEntries(
-                Map.entry(PEN_DOWN_KEY, (double) penDown),
-                Map.entry(PEN_COLOR_KEY, (double) myColor),
-                Map.entry(PEN_SIZE_KEY, mySize));
+    public HashMap<String, Double> getState() {
+         HashMap<String, Double> stateMap = new HashMap<>();
+         stateMap.put(PEN_DOWN_KEY, (double) penDown);
+         stateMap.put(PEN_SIZE_KEY, size);
+         stateMap.putAll(super.getState("pen"));
+         return stateMap;
     }
 
     /**
@@ -47,6 +51,7 @@ public class StdModelPen implements ModelPen {
      *
      * @return the return value from the last method called on this ModelPen.
      */
+    @Override
     public double getReturnVal() {
         return returnVal;
     }
@@ -64,7 +69,7 @@ public class StdModelPen implements ModelPen {
     }
 
     /**
-     * puts pen up such that when the turtle moves, it does not leave a trail
+     * puts pen up such that when the turtle moves, it does Not leave a trail
      *
      * @return 0
      */
@@ -76,20 +81,6 @@ public class StdModelPen implements ModelPen {
     }
 
     /**
-     * Set the pen color based on the specified int, returns that int.
-     * 0 black
-     *
-     * @param color
-     * @return an int representing the pen color.
-     */
-    @Override
-    public int setColor(int color) {
-        myColor = color;
-        returnVal = myColor;
-        return myColor;
-    }
-
-    /**
      * Sets the pen size based on the specified double number of pixels, returns that double.
      *
      * @param
@@ -97,9 +88,22 @@ public class StdModelPen implements ModelPen {
      */
     @Override
     public double setSize(double pixels) {
-        mySize = pixels;
-        returnVal = mySize;
-        return mySize;
+        size = pixels;
+        returnVal = size;
+        return size;
+    }
+
+    /**
+     * Set the pen color based on the specified int, returns that int.
+     *
+     * @param colorIndex
+     * @return an int representing the pen color.
+     */
+    @Override
+    public int setColor(int colorIndex) {
+        int index = super.setColor(colorIndex);
+        returnVal = index;
+        return index;
     }
 
     /**
@@ -112,20 +116,18 @@ public class StdModelPen implements ModelPen {
     }
 
     /**
-     * @return an int representing the pen color.
-     */
-    @Override
-    public int getColor() {
-        returnVal = myColor;
-        return myColor;
-    }
-
-    /**
      * @return the current pen size, in pixels.
      */
     @Override
     public double getSize() {
-        returnVal = mySize;
-        return mySize;
+        returnVal = size;
+        return size;
+    }
+
+    @Override
+    public int getColor() {
+        int index = super.getColor();
+        returnVal = index;
+        return index;
     }
 }

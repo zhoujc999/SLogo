@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class product extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Product extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public product(List params) {
+    public Product(List params) {
         super(params);
     }
 

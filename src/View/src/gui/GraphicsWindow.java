@@ -20,16 +20,7 @@ public class GraphicsWindow extends Pane implements Observer {
     /**
      * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
      */
-    private static final Map<Double, Color> DOUBLE_TO_COLOR_MAP = Map.ofEntries(
-            Map.entry(0.0, Color.BLACK), Map.entry(1.0, Color.BLUE),
-            Map.entry(2.0, Color.LIGHTGREEN), Map.entry(3.0, Color.CYAN),
-            Map.entry(4.0, Color.RED), Map.entry(5.0, Color.MAGENTA),
-            Map.entry(6.0, Color.YELLOW), Map.entry(7.0, Color.WHITE),
-            Map.entry(8.0, Color.BROWN), Map.entry(9.0, Color.TAN),
-            Map.entry(10.0, Color.GREEN), Map.entry(11.0, Color.AQUA),
-            Map.entry(12.0, Color.SALMON), Map.entry(13.0, Color.PURPLE),
-            Map.entry(14.0, Color.ORANGE), Map.entry(15.0, Color.GRAY)
-    );
+
     public static final String GREEN_TURTLE_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
@@ -81,17 +72,23 @@ public class GraphicsWindow extends Pane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         var state = (Map<String, Double>) arg;
-
-        double x = state.get("oldXPos");
-        double y = state.get("oldYPos");
-        double oldX = state.get("xPos");
-        double oldY = state.get("yPos");
-        double heading = state.get("heading");
+        double x = state.get("xPos");
+        double y = state.get("yPos");
+        double oldX = state.get("oldXPos");
+        double oldY = state.get("oldYPos");
+        double heading = state.get("Heading");
         boolean visible = (state.get("showing") == 1);
-        boolean clearScreenFlag = (state.get("clearScreen") == 1);
-        boolean penDown = (state.get("penDown") == 1);
-        Color penColor = DOUBLE_TO_COLOR_MAP.get(state.get("penColor"));
+        boolean clearScreenFlag = (state.get("ClearScreen") == 1);
+        boolean penDown = (state.get("PenDown") == 1);
+        int penColorR = (int) (state.get("penColorRVal")/1);
+        int penColorG = (int) (state.get("penColorGVal")/1);
+        int penColorB = (int) (state.get("penColorBVal")/1);
+        Color penColor = Color.rgb(penColorR, penColorG, penColorB);
         double penSize = state.get("penSize");
+        int bgColorR = (int) (state.get("bgColorRVal")/1);
+        int bgColorG = (int) (state.get("bgColorGVal")/1);
+        int bgColorB = (int) (state.get("bgColorBVal")/1);
+        Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
 
         for (TurtleView turtle: myActiveTurtles) {
             //setTurtlePosition(turtle, x, y);
@@ -103,7 +100,6 @@ public class GraphicsWindow extends Pane implements Observer {
                 draw(turtle, x, y, penSize, penColor);
             }
         }
-
         if (clearScreenFlag) {
             clearScreen();
         }

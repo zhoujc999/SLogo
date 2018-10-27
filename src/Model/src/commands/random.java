@@ -7,9 +7,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class random extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Random extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public random(List params) {
+    public Random(List params) {
         super(params);
     }
 

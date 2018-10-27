@@ -6,9 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class penDown extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class PenDown extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public penDown(List params) {
+    public PenDown(List params) {
         super(params);
     }
 

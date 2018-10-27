@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class not extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Not extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public not(List params) {
+    public Not(List params) {
         super(params);
     }
 
