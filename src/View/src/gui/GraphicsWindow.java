@@ -8,6 +8,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 
 import java.util.*;
 
@@ -104,6 +105,9 @@ public class GraphicsWindow extends Pane implements Observer {
         if (clearScreenFlag) {
             clearScreen();
         }
+        else if (penDown  && !(oldX==x && oldY==y)) {
+            draw(oldX, oldY, x, y, penSize, penColor);
+        }
     }
 
     private void clearScreen() {
@@ -131,7 +135,7 @@ public class GraphicsWindow extends Pane implements Observer {
                 x + getWidth()/2, y + getHeight()/2);
         line.setStrokeWidth(width);
         line.setStroke(color);
-        System.out.print(color);
+        line.setStrokeLineCap(StrokeLineCap.ROUND);
         lineList.add(line);
         getChildren().add(line);
     }

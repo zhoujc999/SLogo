@@ -8,15 +8,15 @@ public class StdColorObject implements ColorObject{
     public static final String COLOR_R_KEY = "ColorRVal";
     public static final String COLOR_G_KEY = "ColorGVal";
     public static final String COLOR_B_KEY = "ColorBVal";
-    private static int[][] colorPalette = {
+    private int[][] colorPalette = {
             {0, 0, 0}, {0 , 0, 255}, {0, 255, 0}, {0, 255, 255},
             {255, 0, 0}, {255 , 0, 255}, {255, 255, 0}, {255, 255, 255},
             {127, 0, 0}, {0, 127, 0}, {0, 0, 127}, {0, 127, 255},
             {255, 127, 127}, {127 , 0, 255}, {255, 127, 0}, {127, 127, 127}
     };
-    private static int rIndex = 0;
-    private static int gIndex = 1;
-    private static int bIndex = 2;
+    private static final int rIndex = 0;
+    private static final int gIndex = 1;
+    private static final int bIndex = 2;
     private double returnVal;
     private int colorIndex;
 
@@ -88,7 +88,7 @@ public class StdColorObject implements ColorObject{
         return this.colorIndex;
     }
 
-    public static int[][] getPalette() {
+    public int[][] getPalette() {
         return colorPalette;
     }
 
