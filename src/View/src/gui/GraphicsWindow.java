@@ -27,7 +27,7 @@ public class GraphicsWindow extends Pane implements Observer {
     private Insets myInsets;
 
     private List<TurtleView> myActiveTurtles;
-    private List<Node> lineList;
+    private List<Node> lineList = new ArrayList<>();
     private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
@@ -90,14 +90,15 @@ public class GraphicsWindow extends Pane implements Observer {
         int bgColorB = (int) (state.get("bgColorBVal")/1);
         Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
 
+        setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
         for (TurtleView turtle: myActiveTurtles) {
-            //setTurtlePosition(turtle, x, y);
-            turtle.move(x, y);
+            setTurtlePosition(turtle, x, y);
+            //turtle.move(x, y);
             turtle.setRotate(heading);
             turtle.setVisible(visible);
 
             if (penDown) {
-                draw(turtle, x, y, penSize, penColor);
+                draw(oldX, oldY, x, y, penSize, penColor);
             }
         }
         if (clearScreenFlag) {
@@ -124,14 +125,17 @@ public class GraphicsWindow extends Pane implements Observer {
 //        getChildren().add(line);
 //    }
 
-    private void draw(TurtleView turtle, double dx, double dy, double width, Color color) {
-        Line line = new Line(turtle.getTurtleX(), turtle.getTurtleY(), turtle.getTurtleX() + dx, turtle.getTurtleY() + dy);
-//        Line line = new Line(oldX, oldY, x, y); //is this preferred?
+    private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
+//        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
+        Line line = new Line(oldX + getWidth()/2, oldY + getHeight()/2,
+                x + getWidth()/2, y + getHeight()/2);
         line.setStrokeWidth(width);
         line.setStroke(color);
+        System.out.print(color);
         lineList.add(line);
         getChildren().add(line);
     }
+
 
     protected void addTurtle(TurtleView turtle, double x, double y) {
         turtle.setPosition(x, y);
