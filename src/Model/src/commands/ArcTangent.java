@@ -6,8 +6,8 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class atan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
-    public atan(List params) {
+public class ArcTangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+    public ArcTangent(List params) {
         super(params);
     }
 

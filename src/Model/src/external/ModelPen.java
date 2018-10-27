@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 /**
  * Instances of classes implementing this interface are abstract representations of a pen
  * (i.e. a specific state could be displayed differently depending on how the view is implemented).
- * The methods in this interface provides access to the pen's state and provide ways to modify that state.
+ * The methods in this interface provides access to the pen's state And provide ways to modify that state.
  * Each ModelTurtle will have its own ModelPen.
  *
  * @author jgp17

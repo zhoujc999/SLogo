@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class difference extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Difference extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public difference(List params) {
+    public Difference(List params) {
         super(params);
     }
 

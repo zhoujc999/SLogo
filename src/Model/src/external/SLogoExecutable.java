@@ -7,7 +7,7 @@ package external;
 public interface SLogoExecutable {
 
     /**
-     * Takes the turtle and manipulates according to the specific command object
+     * Takes the turtle And manipulates according to the specific command object
      */
     public void execute(ModelTurtle turtle);
 

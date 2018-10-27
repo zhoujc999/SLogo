@@ -19,7 +19,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String YPOS_KEY = "yPos";
     public static final String HEADING_KEY = "heading";
     public static final String SHOWING_KEY = "showing";
-    public static final String CLEARSCREEN_KEY = "clearScreen";
+    public static final String CLEARSCREEN_KEY = "ClearScreen";
     public static final String X_DISPLACEMENT_KEY = "xDisplacement";
     public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
     private static final String ID_KEY = "ID";
@@ -76,11 +76,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Returns a Map of any variables representing the state of this ModelTurtle and its ModelPen.
+     * Returns a Map of any variables representing the state of this ModelTurtle And its ModelPen.
      * The variables should be doubles. Implementations extending this class that wish to add additional state
      * variables must override this method. Include a call to super.getState to access the Map returned below.
      *
-     * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen.
+     * @return a Map of any variables representing the state of this ModelTurtle And its ModelPen.
      */
     @Override
     public HashMap<String, Double> getState() {
@@ -257,7 +257,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * erases turtle's trails and sends it to the home position
+     * erases turtle's trails And sends it to the home position
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */

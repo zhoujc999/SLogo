@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Instances of classes implementing this interface are abstract representations of a turtle
  * (i.e. a specific state could be displayed differently depending on how the view is implemented).
- * The methods in this interface provides access to the turtle's state and provide ways to modify that state.
+ * The methods in this interface provides access to the turtle's state And provide ways to modify that state.
  *
  * @author jgp17
  */
@@ -32,7 +32,7 @@ public interface ModelTurtle {
     //methods below are part of internal Model API
 
     /**
-     * @return a Map of any variables representing the state of this ModelTurtle and its ModelPen. The variables should
+     * @return a Map of any variables representing the state of this ModelTurtle And its ModelPen. The variables should
      * be doubles.
      */
     Map<String, Double> getState();
@@ -119,7 +119,7 @@ public interface ModelTurtle {
     double home();
 
     /**
-     * erases turtle's trails and sends it to the home position
+     * erases turtle's trails And sends it to the home position
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */

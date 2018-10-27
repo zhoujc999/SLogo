@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class equalP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Equal extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public equalP(List params) {
+    public Equal(List params) {
         super(params);
     }
 

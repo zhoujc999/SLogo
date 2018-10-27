@@ -8,7 +8,7 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SLogoFor extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class For extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int NUMLOOPITEMS = 4;
     private final static String ZERO = "0";
 
@@ -23,7 +23,7 @@ public class SLogoFor extends BinaryOperator implements SLogoAbstractExecutable,
 
 
 
-    public SLogoFor(List params) {
+    public For(List params) {
         super(params);
         commands = stripBrackets(param2);
         String[] loopList = breakLoopCommands(stripBrackets(param1));

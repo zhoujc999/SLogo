@@ -1,20 +1,20 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
-import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class back extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
-
-    public back(List params) {
+public class Cosine extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+    public Cosine(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.back(param1);
+        double angle = this.param1 * (Math.PI / 180);
+        this.result = Math.cos(angle);
     }
 
     public String returnValue() {
