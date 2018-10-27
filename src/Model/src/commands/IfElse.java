@@ -8,7 +8,7 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SLogoIfElse extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
 
     private double condition;
@@ -18,7 +18,7 @@ public class SLogoIfElse extends TernaryOperator implements SLogoAbstractExecuta
     private Consumer<Parse> c;
 
 
-    public SLogoIfElse(List params) {
+    public IfElse(List params) {
         super(params);
         try {
             condition = Double.parseDouble(super.param1);

@@ -6,23 +6,23 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class greaterP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class NotEqual extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public greaterP(List params) {
+    public NotEqual(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        if (param1 > param2) {
+        if (param1 != param2) {
             this.result = 1;
         }
         else {
             this.result = 0;
         }
     }
+
     public String returnValue() {
         return Double.toString(this.result);
     }
 }
-

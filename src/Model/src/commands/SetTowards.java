@@ -6,15 +6,16 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class yCor extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public yCor(List params) {
+    public SetTowards(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getY();
+
+        this.result = turtle.towards(param1, param2);
     }
 
     public String returnValue() {

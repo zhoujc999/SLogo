@@ -6,16 +6,15 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class sin extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Power extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public sin(List params) {
+    public Power(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        double angle = this.param1 * (Math.PI / 180);
-        this.result = Math.sin(angle);
+        this.result = Math.pow(param1, param2);
     }
 
     public String returnValue() {

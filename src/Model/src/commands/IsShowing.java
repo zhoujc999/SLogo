@@ -1,22 +1,21 @@
 package commands;
 
-
 import external.ModelTurtle;
 import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-// equivalent to command "pendown?"
-public class penDownP extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+// equivalent to command "showing?"
+public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public penDownP(List params) {
+    public IsShowing(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getPen().getPenDown();
+        this.result = turtle.getShowing();
     }
 
     public String returnValue() {

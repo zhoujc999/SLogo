@@ -1,20 +1,19 @@
 package commands;
 
 import external.ModelTurtle;
+import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
-import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class xCor extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
-
-    public xCor(List params) {
+public class NaturalLog extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+    public NaturalLog(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getX();
+        this.result = Math.log(this.param1);
     }
 
     public String returnValue() {

@@ -1,20 +1,22 @@
 package commands;
 
+
 import external.ModelTurtle;
-import external.SLogoMathExecutable;
 import external.SLogoStringReturnable;
+import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class tan extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
-    public tan(List params) {
+// equivalent to command "pendown?"
+public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+
+    public IsPenDown(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        double angle = this.param1 * (Math.PI / 180);
-        this.result = Math.tan(angle);
+        this.result = turtle.getPen().getPenDown();
     }
 
     public String returnValue() {

@@ -38,7 +38,7 @@ public interface ModelPen {
     int penDown();
 
     /**
-     * puts pen up such that when the turtle moves, it does not leave a trail
+     * puts pen up such that when the turtle moves, it does Not leave a trail
      *
      * @return 0
      */

@@ -6,14 +6,15 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class log extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
-    public log(List params) {
+public class Tangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+    public Tangent(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = Math.log(this.param1);
+        double angle = this.param1 * (Math.PI / 180);
+        this.result = Math.tan(angle);
     }
 
     public String returnValue() {

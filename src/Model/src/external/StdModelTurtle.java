@@ -16,7 +16,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String OLD_YPOS_KEY = "oldYPos";
     public static final String XPOS_KEY = "xPos";
     public static final String YPOS_KEY = "yPos";
-    public static final String HEADING_KEY = "heading";
+    public static final String HEADING_KEY = "Heading";
     public static final String SHOWING_KEY = "showing";
     public static final String CLEARSCREEN_KEY = "ClearScreen";
     public static final String X_DISPLACEMENT_KEY = "xDisplacement";
@@ -137,7 +137,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Turns the turtle left by the specified number of degrees.
+     * Turns the turtle Left by the specified number of degrees.
      *
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
@@ -148,7 +148,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Turns the turtle right by the specified number of degrees.
+     * Turns the turtle Right by the specified number of degrees.
      *
      * @param degrees the number of degrees the turtle should turn
      * @return the number of degrees the turtle turned
@@ -163,9 +163,9 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Sets the heading of the turtle as by the specified number degrees right of north/up.
+     * Sets the Heading of the turtle as by the specified number degrees Right of north/up.
      *
-     * @param degrees the number of degrees right of north/up that the turtle's heading should be set to
+     * @param degrees the number of degrees Right of north/up that the turtle's Heading should be set to
      * @return the number of degrees the turtle turned
      */
     @Override
@@ -179,7 +179,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * Sets the heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
+     * Sets the Heading of the turtle so that the turtle is facing the point (x,y), where (0,0) is the center of the
      * screen.
      *
      * @param x the x-coordinate of the point the turtle should face
@@ -259,7 +259,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * erases turtle's trails And sends it to the home position
+     * erases turtle's trails And sends it to the Home position
      *
      * @return the distance, in pixels, the turtle moved to get to the center of the screen
      */
@@ -299,7 +299,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     /**
-     * @return the turtle's heading as the number of degrees right of north/up
+     * @return the turtle's Heading as the number of degrees Right of north/up
      */
     @Override
     public double getHeading() {

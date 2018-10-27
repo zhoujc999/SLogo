@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 public class StdModelPen extends StdColorObject implements ModelPen {
-    public static final String PEN_DOWN_KEY = "penDown";
+    public static final String PEN_DOWN_KEY = "PenDown";
     public static final String PEN_COLOR_INDEX_KEY = "penColorIndex";
     public static final String PEN_COLOR_R_KEY = "penColorRVal";
     public static final String PEN_COLOR_G_KEY = "penColorGVal";
@@ -69,7 +69,7 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     }
 
     /**
-     * puts pen up such that when the turtle moves, it does not leave a trail
+     * puts pen up such that when the turtle moves, it does Not leave a trail
      *
      * @return 0
      */

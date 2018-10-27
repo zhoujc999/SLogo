@@ -8,7 +8,7 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SLogoIf extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
 
     private double condition;
@@ -17,7 +17,7 @@ public class SLogoIf extends BinaryOperator implements SLogoAbstractExecutable, 
     private Consumer<Parse> c;
 
 
-    public SLogoIf(List params) {
+    public If(List params) {
         super(params);
         try {
             condition = Double.parseDouble(super.param1);

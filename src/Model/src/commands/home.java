@@ -7,10 +7,10 @@ import external.SLogoTurtleExecutable;
 import java.util.List;
 
 
-public class home extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Home extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
 
-    public home(List params) {
+    public Home(List params) {
         super(params);
 
     }

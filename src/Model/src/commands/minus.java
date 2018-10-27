@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class minus extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Minus extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public minus(List params) {
+    public Minus(List params) {
         super(params);
     }
 

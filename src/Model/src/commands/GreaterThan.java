@@ -6,18 +6,23 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class Quotient extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class GreaterThan extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public Quotient(List params) {
+    public GreaterThan(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 / this.param2;
+        if (param1 > param2) {
+            this.result = 1;
+        }
+        else {
+            this.result = 0;
+        }
     }
-
     public String returnValue() {
         return Double.toString(this.result);
     }
 }
+

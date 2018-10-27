@@ -8,11 +8,11 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class make extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class MakeVariable extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
 
     private Consumer<Parse> c;
 
-    public make(List params) {
+    public MakeVariable(List params) {
         super(params);
     }
 

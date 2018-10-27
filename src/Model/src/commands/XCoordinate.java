@@ -1,19 +1,20 @@
 package commands;
 
+import external.ModelTurtle;
 import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
-import external.ModelTurtle;
+
 import java.util.List;
 
-public class goTo extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class XCoordinate extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public goTo(List params) {
+    public XCoordinate(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.goTo(param1, param2);
+        this.result = turtle.getX();
     }
 
     public String returnValue() {

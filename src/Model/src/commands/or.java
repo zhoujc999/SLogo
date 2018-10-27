@@ -6,9 +6,9 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class or extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Or extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public or(List params) {
+    public Or(List params) {
         super(params);
     }
 

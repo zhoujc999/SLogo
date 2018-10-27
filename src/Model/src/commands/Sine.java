@@ -6,20 +6,16 @@ import external.SLogoStringReturnable;
 
 import java.util.List;
 
-public class notEqualP extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Sine extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
 
-    public notEqualP(List params) {
+    public Sine(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        if (param1 != param2) {
-            this.result = 1;
-        }
-        else {
-            this.result = 0;
-        }
+        double angle = this.param1 * (Math.PI / 180);
+        this.result = Math.sin(angle);
     }
 
     public String returnValue() {
