@@ -30,6 +30,7 @@ public class Parser implements Observer, Parse {
 
     public void parseCommand(String cmd){
         commandTree = myBuilder.buildTree(cmd, myResources);
+        System.out.println("hello");
         myExecuter.executeTree(commandTree.getChildren().get(0), myResources);
     }
 

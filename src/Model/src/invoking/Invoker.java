@@ -29,11 +29,13 @@ public class Invoker extends Observable implements Invokable{
     public void acceptCommand(SLogoExecutable cmd) {
         cmd.execute(myTurt);
         if(cmd instanceof SLogoStringReturnable){
+            setChanged();
             notifyObservers(((SLogoStringReturnable) cmd).returnValue());
+            clearChanged();
         }
-        setChanged();
-        notifyObservers(((SLogoReturnable) cmd).returnValue());
-        clearChanged();
+//        setChanged();
+//        notifyObservers(((SLogoReturnable) cmd).returnValue());
+//        clearChanged();
 
     }
 }
