@@ -24,7 +24,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
             condition = Double.parseDouble(super.param1);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s Argument Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s Argument to Double Error", this.getClass().getSimpleName()));
         }
         trueCommands = stripBrackets(param2);
         falseCommands = stripBrackets(param3);
