@@ -16,7 +16,7 @@ public abstract class UnaryDoubleOperator extends UnaryOperator {
             param1 = Double.parseDouble(super.param1);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s Argument Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s Argument to Double Error", this.getClass().getSimpleName()));
         }
     }
 
