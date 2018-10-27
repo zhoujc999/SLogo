@@ -20,9 +20,6 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private String commands;
 
     //private
-    private String param1;
-    private String param2;
-    private double result;
     private Consumer<Parse> c;
 
 
@@ -58,7 +55,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
 
     private void loopFunction(Parse p) {
         p.setReplacementValue(ZERO);
-        for (int i = start; i < stop; i += increment) {
+        for (int i = start; i <= stop; i += increment) {
             p.addVariable(variable, Integer.toString(i));
             p.parseCommand(commands);
         }
