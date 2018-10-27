@@ -12,6 +12,7 @@ public abstract class UnaryDoubleOperator extends UnaryOperator {
     public UnaryDoubleOperator(List params) {
         super(params);
         try {
+            System.out.println(super.param1);
             param1 = Double.parseDouble(super.param1);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {

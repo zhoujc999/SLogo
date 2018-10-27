@@ -65,15 +65,14 @@ public class GraphicsWindow extends Pane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         var state = (Map<String, Double>) arg;
-
         double x = state.get("xPos");
         double y = state.get("yPos");
         double oldX = state.get("oldXPos");
         double oldY = state.get("oldYPos");
-        double heading = state.get("heading");
+        double heading = state.get("Heading");
         boolean visible = (state.get("showing") == 1);
-        boolean clearScreenFlag = (state.get("clearScreen") == 1);
-        boolean penDown = (state.get("penDown") == 1);
+        boolean clearScreenFlag = (state.get("ClearScreen") == 1);
+        boolean penDown = (state.get("PenDown") == 1);
         int penColorR = (int) (state.get("penColorRVal")/1);
         int penColorG = (int) (state.get("penColorGVal")/1);
         int penColorB = (int) (state.get("penColorBVal")/1);
