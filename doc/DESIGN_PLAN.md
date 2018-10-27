@@ -14,7 +14,7 @@ For our SLOGO program, we are using the Model-View model. The Model will have th
 
 In our case, we feel that a dedicated Controller was unnecessary to serve as the intermediary between the View and the Model. We instead decide to use features from java to handle the data transfer between the view and the model, such as implementing the Observer interfaces and Observable classes.
 
-The program starts in Main, which creates an instance of the controller. The controller instantiates the GUI, Model, and Parser and waits for user input. After the user enters a command into the command text field, that string is passed to the controller which then passes the string to the Parser. The parser calls the createCommand method of the Factory, passing in the parameters and receives the command object. The parser then puts the command object in the Invoker to which the controller has a reference. The Controller then executes the command object on the model. The change in the state of the model is conveyed to the UI and the UI renders the updated view after it has received the updated representation of the model.
+The program starts in main.Main, which creates an instance of the controller. The controller instantiates the GUI, Model, and Parser and waits for user input. After the user enters a command into the command text field, that string is passed to the controller which then passes the string to the Parser. The parser calls the createCommand method of the Factory, passing in the parameters and receives the command object. The parser then puts the command object in the Invoker to which the controller has a reference. The Controller then executes the command object on the model. The change in the state of the model is conveyed to the UI and the UI renders the updated view after it has received the updated representation of the model.
 
 Here are the four APIs:
 ## Model: internal API
@@ -99,7 +99,7 @@ This section describes each API introduced in the Overview in detail. Describe h
 # API Example Code
 
 ```java=
-//Here's how we have things set up for now according to the code below. Main.java instantiates a Model myModel which contains a Parser myParser, a commandFactory myCommandFactory, an Invoker myInvoker, and a ModelTurtle myModelTurtle, and Main.java also instanties a View myView which contains an instance of each interface in both View APIs.
+//Here's how we have things set up for now according to the code below. main.Main.java instantiates a Model myModel which contains a Parser myParser, a commandFactory myCommandFactory, an Invoker myInvoker, and a ModelTurtle myModelTurtle, and main.Main.java also instanties a View myView which contains an instance of each interface in both View APIs.
         
 String str = myView.myCommandWindow.getInput() //getInput() returns "fd 50"
 myView.myCommandHistory.saveCommand(str)
