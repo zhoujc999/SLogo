@@ -2,6 +2,7 @@ package internal;
 
 import gui.GUIList;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class CommandHistory extends ListView implements GUIList {
@@ -12,9 +13,17 @@ public class CommandHistory extends ListView implements GUIList {
      * @author Tahj Starr
      */
 
+    private Font myFont;
+
+    public CommandHistory(Font font) {
+        myFont = font;
+    }
+
     @Override
     public void save(String name, String value) {
-        getItems().add(new Text(name));
+        var text = new Text(name);
+        text.setFont(myFont);
+        getItems().add(text);
     }
 
     @Override

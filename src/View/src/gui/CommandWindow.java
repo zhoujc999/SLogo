@@ -3,6 +3,7 @@ package gui;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Font;
 
 public class CommandWindow extends TextArea {
     /**
@@ -13,15 +14,16 @@ public class CommandWindow extends TextArea {
      * @author Tahj Starr
      */
 
-    protected CommandWindow() {
-
+    protected CommandWindow(Font font, String promptText) {
+        setFont(font);
+        setPromptText(promptText);
     }
 
-    protected CommandWindow(Point2D location, Dimension2D size) {
-        setLayoutX(location.getX());
-        setLayoutY(location.getY());
-        setPrefSize(size.getWidth(), size.getHeight());
-    }
+//    protected CommandWindow(Point2D location, Dimension2D size) {
+//        setLayoutX(location.getX());
+//        setLayoutY(location.getY());
+//        setPrefSize(size.getWidth(), size.getHeight());
+//    }
 
     /**
      * Returns text input from user.

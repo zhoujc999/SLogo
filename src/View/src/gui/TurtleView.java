@@ -28,6 +28,25 @@ public class TurtleView extends ImageView {
         myPenColor = Color.BLACK;
     }
 
+    protected TurtleView(String url) {
+        super(url);
+        setFitWidth(SIZE);
+        setFitHeight(SIZE);
+        myPenColor = Color.BLACK;
+    }
+
+    protected void move(double dx, double dy) {
+        setPosition(getTurtleX() + dx, getTurtleY() + dy);
+    }
+
+    protected double getTurtleX() {
+        return getX() + SIZE/2;
+    }
+
+    protected double getTurtleY() {
+        return getY() + SIZE/2;
+    }
+
     protected void setPosition(double x, double y) {
         relocate(x - SIZE/2, y - SIZE/2);
     }
@@ -38,15 +57,6 @@ public class TurtleView extends ImageView {
 
     protected void setPenColor(Color color) {
         myPenColor = color;
-    }
-
-    /**
-     * Updates position of turtle's image.
-     */
-    public void update() {
-//        setPosition();
-//        setRotate();
-//        setVisible();
     }
 
 }
