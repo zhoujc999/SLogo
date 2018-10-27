@@ -52,11 +52,16 @@ public class Parser implements Observer, Parse {
         myResources.changeLanguage(lang);
     }
 
+    @Override
+    public void setReplacementValue(String s) {
+        myExecuter.setReplacementValue(s);
+    }
+
     public static void main(String args[]){
         Invoker i = new Invoker();
         CommandFactory c = new CommandFactory(i);
         Parser p = new Parser(c, "English");
-        p.parseCommand("fd 50");
+        p.parseCommand("fd fd 50");
     }
     
 }
