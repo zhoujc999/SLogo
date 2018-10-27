@@ -45,16 +45,9 @@ public interface ModelPen {
     int penUp();
 
     /**
-     * Set the pen color based on the specified int, returns that int.
-     * 0 black
-     *
-     * @return an int representing the pen color.
-     */
-    int setColor(int color);
-
-    /**
      * Sets the pen size based on the specified double number of pixels, returns that double.
      *
+     * @param pixels the desired size, in pixels
      * @return the specified size, in number of pixels.
      */
 
@@ -65,11 +58,6 @@ public interface ModelPen {
      * @return 1 if turtle's pen is down, 0 if it is up
      */
     int getPenDown();
-
-    /**
-     * @return an int representing the pen color.
-     */
-    int getColor();
 
     /**
      * @return the current pen size, in pixels.
