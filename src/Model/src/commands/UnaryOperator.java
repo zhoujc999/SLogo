@@ -16,7 +16,7 @@ public abstract class UnaryOperator {
             param1 = (String) params.get(0);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s Argument Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s Argument to String Error", this.getClass().getSimpleName()));
         }
     }
 
