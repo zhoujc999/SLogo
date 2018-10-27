@@ -25,20 +25,27 @@ public class GraphicsWindow extends Pane implements Observer {
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
-    private TurtleView myTurtle;
+
+    private List<TurtleView> myActiveTurtles;
     private List<Node> lineList = new ArrayList<>();
     private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
         myCornerRadii = cornerRadii;
         myInsets = insets;
-        setPrefSize(580, 470);
+        myActiveTurtles = new ArrayList<>();
+
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
+        setPrefSize(580, 540);
+        var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
+        activate(primaryTurtle);
+        addTurtle(primaryTurtle, getPrefWidth()/2, getPrefHeight()/2);
+
 //        Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(GREEN_TURTLE_FILENAME));
 //        var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
-        var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), getPrefWidth()/2, getPrefHeight()/2);
-        addTurtle(turtle);
-        myTurtle = turtle;
+//        var turtle = new TurtleView(GREEN_TURTLE_FILENAME, getPrefWidth()/2, getPrefHeight()/2);
+//        addTurtle(turtle);
+//        myTurtle = turtle;
     }
 
 //    protected GraphicsWindow(Point2D location, Dimension2D size, CornerRadii cornerRadii, Insets insets) {
@@ -84,26 +91,39 @@ public class GraphicsWindow extends Pane implements Observer {
         Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
 
         setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
-        setTurtlePosition(x, y);
-        myTurtle.setRotate(heading);
-        myTurtle.setVisible(visible);
+        for (TurtleView turtle: myActiveTurtles) {
+            setTurtlePosition(turtle, x, y);
+            //turtle.move(x, y);
+            turtle.setRotate(heading);
+            turtle.setVisible(visible);
+
+            if (penDown) {
+                draw(oldX, oldY, x, y, penSize, penColor);
+            }
+        }
         if (clearScreenFlag) {
             clearScreen();
-        }
-        else if (penDown) {
-            draw(oldX, oldY, x, y, penSize, penColor);
         }
     }
 
     private void clearScreen() {
         getChildren().removeAll(lineList);
         lineList.clear();
-        setTurtlePosition(0, 0);
+        //setTurtlePosition(0, 0);
     }
 
-    private void setTurtlePosition(double x, double y) {
-        myTurtle.setPosition(x + getWidth()/2, y + getHeight()/2);
+    private void setTurtlePosition(TurtleView turtle, double x, double y) {
+        turtle.setPosition(x + getWidth()/2, y + getHeight()/2);
     }
+
+//    private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
+//        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
+////        Line line = new Line(oldX, oldY, x, y); //is this preferred?
+//        line.setStrokeWidth(width);
+//        line.setStroke(color);
+//        lineList.add(line);
+//        getChildren().add(line);
+//    }
 
     private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
 //        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
@@ -116,15 +136,25 @@ public class GraphicsWindow extends Pane implements Observer {
         getChildren().add(line);
     }
 
-    protected void addTurtle(TurtleView turtle) {
+
+    protected void addTurtle(TurtleView turtle, double x, double y) {
+        turtle.setPosition(x, y);
         getChildren().add(turtle);
+    }
+
+    protected void activate(TurtleView turtle) {
+        myActiveTurtles.add(turtle);
+    }
+
+    protected void deactivate(TurtleView turtle) {
+        myActiveTurtles.remove(turtle);
     }
 
     /**
      * Accesses the current turtle that the user controls.
      */
-    TurtleView getTurtle() {
-        return myTurtle;
+    protected List<TurtleView> getTurtles() {
+        return Collections.unmodifiableList(myActiveTurtles);
     }
 
     protected void setBackground(Color color) {
