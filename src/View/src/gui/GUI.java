@@ -26,22 +26,19 @@ public class GUI extends SplitPane {
      * @author Tahj Starr
      */
 
-    private static final Point2D COMMAND_WINDOW_LOCATION = new Point2D(70, 530);
     private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(520, 60);
-    private static final Point2D GRAPHICS_WINDOW_LOCATION = new Point2D(10, 50);
-    private static final Dimension2D GRAPHICS_WINDOW_SIZE = new Dimension2D(580, 470);
     private static final Point2D RUN_BUTTON_LOCATION = new Point2D(10, 530);
     private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(50, 25);
     private static final Point2D CLEAR_BUTTON_LOCATION = new Point2D(10, 565);
     private static final Dimension2D CLEAR_BUTTON_SIZE = new Dimension2D(50, 25);
     private static final Point2D BUTTON_PANEL_LOCATION = new Point2D(600, 50);
     private static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(190, 200);
-    private static final Point2D PROJECT_WINDOW_LOCATION = new Point2D(600, 210);
-    private static final Dimension2D PROJECT_WINDOW_SIZE = new Dimension2D(190, 380);
+
+    private static final double HORIZONTAL_DIVIDER_POSITION = 0.9;
+    private static final double VERTICAL_DIVIDER_POSITION = 0.75;
 
     private static final double SPACING = 10;
     private static final double DEFINITION_LIST_COLUMN_WIDTH = 100;
-    private static final String DEFAULT_TURTLE = "GreenTurtle.png";
     private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
     private static final String TURTLE_IMAGES = "/gui/TurtleImages/";
     private static final List<String> RECOGNIZED_LANGUAGES = List.of(
@@ -98,9 +95,9 @@ public class GUI extends SplitPane {
         var sidePanel = new VBox(buttonPanel(), myProjectWindow);
         var mainPanel = new SplitPane(myGraphicsWindow, commandPanel);
 
-        mainPanel.setDividerPosition(0, 0.9);
+        mainPanel.setDividerPosition(0, HORIZONTAL_DIVIDER_POSITION);
         mainPanel.setOrientation(Orientation.VERTICAL);
-        setDividerPosition(0, 0.75);
+        setDividerPosition(0, VERTICAL_DIVIDER_POSITION);
         getItems().addAll(mainPanel, sidePanel);
     }
 
@@ -162,7 +159,7 @@ public class GUI extends SplitPane {
                 colorComboBox(backgroundPaletteSupplier)
         );
 
-        buttonPanel.add(referenceButton(), 0, 4, 2, 1);
+        buttonPanel.add(referenceButton(), 0, buttonPanel.getRowCount(), buttonPanel.getColumnCount(), 1);
         for (Node node: buttonPanel.getChildren()) {
             buttonPanel.setHalignment(node, HPos.CENTER);
         }
@@ -219,7 +216,7 @@ public class GUI extends SplitPane {
         Callback cellFactory = new Callback<ListView<Integer>, ListCell<Integer>>() {
             @Override
             public ListCell<Integer> call(ListView<Integer> param) {
-                final ListCell<Integer> cell = new ListCell<Integer>() {
+                return new ListCell<Integer>() {
                     { super.setPrefWidth(100); }
                     @Override
                     public void updateItem(Integer item,
@@ -233,7 +230,6 @@ public class GUI extends SplitPane {
                         }
                     }
                 };
-                return cell;
             }
         };
         return cellFactory;

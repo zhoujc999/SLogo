@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
@@ -22,7 +23,9 @@ public class GraphicsWindow extends Pane implements Observer {
      * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
      */
 
-    public static final String GREEN_TURTLE_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
+
+    private static final Dimension2D SIZE = new Dimension2D(580, 540);
+    public static final String DEFAULT_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
@@ -37,8 +40,8 @@ public class GraphicsWindow extends Pane implements Observer {
         myActiveTurtles = new ArrayList<>();
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-        setPrefSize(580, 540);
-        //var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
+        setPrefSize(SIZE.getWidth(), SIZE.getHeight());
+        //var primaryTurtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm());
         addTurtle(getPrefWidth()/2, getPrefHeight()/2);
 
     }
@@ -101,7 +104,7 @@ public class GraphicsWindow extends Pane implements Observer {
 
 
     protected void addTurtle(double x, double y) {
-        var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), x, y);
+        var turtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm(), x, y);
         //turtle.setPosition(x, y);
         getChildren().add(turtle);
         turtle.activate();
