@@ -5,12 +5,13 @@ import internal.CommandReference;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
@@ -39,9 +40,15 @@ public class GUI extends SplitPane {
     private static final double DEFINITION_LIST_COLUMN_WIDTH = 100;
     private static final String DEFAULT_TURTLE = "GreenTurtle.png";
     private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
+    private static final String TURTLE_IMAGES = "/gui/TurtleImages/";
+    private static final List<String> RECOGNIZED_LANGUAGES = List.of(
+            "English",
+            "Spanish"
+    );
 
-    private final Consumer<String> myParsingFunc;
+    private String myLanguage;
     private ResourceBundle myResources;
+    private final Consumer<String> myParsingFunc;
     private static final Font CODE_FONT = new Font("Courier New", 10);
 
     private CommandWindow myCommandWindow;
@@ -52,24 +59,16 @@ public class GUI extends SplitPane {
     private CommandHistory myCommandHistory;
     private CommandReference myCommandReference;
 
-//    public GUI() {
-//        setLayoutX(0);
-//        setLayoutY(0);
-//        myCommandWindow = new CommandWindow(COMMAND_WINDOW_LOCATION, COMMAND_WINDOW_SIZE);
-//        myGraphicsWindow = new GraphicsWindow(GRAPHICS_WINDOW_LOCATION, GRAPHICS_WINDOW_SIZE, new CornerRadii(0), new Insets(0));
-//        myVariables = new DefinitionList(PROJECT_WINDOW_LOCATION, PROJECT_WINDOW_SIZE);
-//        myVariables.saveVariable("length", "5");
-//        myProjectWindow = new TabPane(new Tab("Variables", new Rectangle(10, 10)), new Tab("Commands", new Rectangle(10, 10)));
-//        myProjectWindow.setLayoutX(PROJECT_WINDOW_LOCATION.getX());
-//        myProjectWindow.setLayoutY(PROJECT_WINDOW_LOCATION.getY());
-//        myCommandReference = new CommandReference();
-//        getChildren().addAll(myCommandWindow, myGraphicsWindow, myProjectWindow, runButton(), clearButton(), buttonPanel());
-//    }
-
     public GUI(String language, Consumer<String> parsingFunc) {
-        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language); //+ ".properties");
+        myLanguage = language;
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myParsingFunc = parsingFunc;
 
+        initializeComponents(language);
+        initializeLayout();
+    }
+
+    private void initializeComponents(String language) {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
@@ -81,7 +80,9 @@ public class GUI extends SplitPane {
         myCommandHistory = new CommandHistory(CODE_FONT);
         myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
         myProjectWindow.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+    }
 
+    private void initializeLayout() {
         var commandControl = new VBox(runButton(), clearButton());
         commandControl.setSpacing(SPACING);
         commandControl.setAlignment(Pos.CENTER);
@@ -160,20 +161,24 @@ public class GUI extends SplitPane {
     }
 
     private ComboBox turtlePicker() {
-        var picker = new ComboBox<Image>();
+        var picker = new ComboBox<String>();
+        var resource = ResourceBundle.getBundle(DEFAULT_RESOURCES + "Turtles" + myLanguage);
 
-        Image GreenTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/GreenTurtle.png").toExternalForm());
-        Image RedTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/RedTurtle.png").toExternalForm());
-        Image BlueTurtleImage = new Image(getClass().getResource("/gui/TurtleImages/BlueTurtle.png").toExternalForm());
+        var images = resource.getKeys();
+        while (images.hasMoreElements()) {
+            picker.getItems().add(images.nextElement());
+        }
 
-        picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
-        picker.setOnAction(e -> transformTurtles(picker.getValue()));
+        picker.setOnAction(e -> {
+            String filename = TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
+            transformTurtles(new ImageView(getClass().getResource(filename).toExternalForm()));
+        });
         return picker;
     }
 
-    private void transformTurtles(Image img) {
+    private void transformTurtles(ImageView img) {
         for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
-            turtle.setImage(img);
+            turtle.setImage(img.getImage());
         }
     }
 
@@ -192,8 +197,8 @@ public class GUI extends SplitPane {
 
     private ComboBox languagePicker() {
         var picker = new ComboBox<String>();
-        picker.getItems().add("English");
-        //picker.setStyle("-fx-color-label-visible: false ;");
+        picker.getItems().addAll(RECOGNIZED_LANGUAGES);
+        picker.setOnAction(e -> setLanguage(picker.getValue()));
         return picker;
     }
 
@@ -243,6 +248,11 @@ public class GUI extends SplitPane {
      */
     void setLanguage(String language) {
         myCommandReference.setLanguage(language);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myLanguage = language;
+        getItems().clear();
+        initializeComponents(language);
+        initializeLayout();
     }
 
 }

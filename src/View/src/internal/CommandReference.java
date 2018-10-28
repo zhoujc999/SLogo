@@ -40,7 +40,7 @@ public class CommandReference extends Stage {
         while (commandCategories.hasMoreElements()) {
             String category = commandCategories.nextElement();
 
-            var categoryText = new Text(category);
+            var categoryText = new Text(myCommandCategories.getString(category));
             categoryText.setFont(COMMAND_CATEGORIES_FONT);
             page.getChildren().add(categoryText);
 
