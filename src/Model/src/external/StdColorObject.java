@@ -35,18 +35,6 @@ public class StdColorObject implements ColorObject{
         return getState("");
     }
 
-
-
-    /**
-     * Returns the return value from the last method called on this ModelPen so that the Parser can parse any
-     * commands that require this return value.
-     *
-     * @return the return value from the last method called on this ModelPen.
-     */
-    public double getReturnVal() {
-        return returnVal;
-    }
-
     /**
      * Sets the color found at the specified index in the palette to a color with the specified rgb combination.
      *
