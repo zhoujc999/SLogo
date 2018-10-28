@@ -13,6 +13,7 @@ public class CommandTreeExecutor implements TreeExecutor {
 
     public static final String COMMAND_KEY = "Command";
     public static final String VARIABLE_KEY = "Variable";
+    public static final String LIST_KEY = "List";
 
     private CommandFactoryInterface myFactory;
     private ResourceContainer myResources;
@@ -36,12 +37,10 @@ public class CommandTreeExecutor implements TreeExecutor {
             List<? extends Node> children = nd.getChildren();
             ArrayList<String> parameters = new ArrayList<>();
             if(nd.getData().equals("MakeVariable")){
-                System.out.println("hello");
                 parameters.add(children.get(0).getData());
                 children.remove(children.get(0));
             }
             for(Node child: children) {
-                System.out.println("test");
                 executeSubTree(child);
                 parameters.add(child.getData());
             }

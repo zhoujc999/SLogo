@@ -47,19 +47,11 @@ public class CommandTreeBuilder implements TreeBuilder {
         else if(type.equals(COMMENT_KEY)){
             return createSubTree(buildingNode, commandNode);
         }
-//        else if(type.equals(LIST_START_KEY)){
-//            ArrayList<String> listParts = new ArrayList<>();
-//            listParts.add(currentWrd);
-//            String curType = type;
-//            while(commandNode.getData() != null && !curType.equals(LIST_END_KEY)){
-//                listParts.add(commandNode.getData());
-//                curType = myContainer.getType(commandNode.getData());
-//                commandNode = commandNode.getChild();
-//            }
-//            listParts.add(commandNode.getData());
-//            commandNode = commandNode.getChild();
-//            String.join("", listParts);
-//        }
+        else if(type.equals(LIST_START_KEY)){
+            Pair<String, ListNode> result = joinList("[", commandNode);
+            buildingNode.addChild(new TreeNode(result.getLeft()));
+            return result.getRight();
+        }
         return null;
     }
 
@@ -75,8 +67,14 @@ public class CommandTreeBuilder implements TreeBuilder {
         return commandNode;
     }
 
-    private String joinList(ListNode commandNode){
-        return null;
+    private Pair<String, ListNode> joinList(String curList, ListNode commandNode){
+        if(commandNode == null){
+            System.out.println("Error");
+        }
+        else if(myContainer.getType(commandNode.getData()).equals(LIST_END_KEY)){
+            return new Pair<String, ListNode>(curList + " " + commandNode.getData(), commandNode.getChild());
+        }
+        return joinList(curList + " " + commandNode.getData(), commandNode.getChild());
     }
 
     private ListNode buildList(List<String> lst){
