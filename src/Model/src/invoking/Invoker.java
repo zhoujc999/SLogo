@@ -34,14 +34,15 @@ public class Invoker extends Observable implements Invokable{
     @Override
     public void acceptCommand(SLogoExecutable cmd) {
         cmd.execute(myTurt);
-        if(cmd instanceof SLogoStringReturnable){
-            setChanged();
-            notifyObservers(((SLogoStringReturnable) cmd).returnValue());
-            clearChanged();
-        }
-//        setChanged();
-//        notifyObservers(((SLogoReturnable) cmd).returnValue());
-//        clearChanged();
+        setChanged();
+//        if(cmd instanceof SLogoStringReturnable){
+//            notifyObservers(((SLogoStringReturnable) cmd).returnValue());
+//        }
+//        else if (cmd instanceof SLogoConsumerReturnable){
+//
+//        }
+        notifyObservers(((SLogoReturnable) cmd).returnValue());
+        clearChanged();
 
     }
 }
