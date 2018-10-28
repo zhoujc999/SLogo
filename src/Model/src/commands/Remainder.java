@@ -20,4 +20,9 @@ public class Remainder extends BinaryDoubleOperator implements SLogoMathExecutab
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

@@ -65,7 +65,10 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
         return c;
     }
 
-
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 
 
 }

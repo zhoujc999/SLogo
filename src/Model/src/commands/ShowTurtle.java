@@ -20,4 +20,9 @@ public class ShowTurtle extends Operator implements SLogoTurtleExecutable, SLogo
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

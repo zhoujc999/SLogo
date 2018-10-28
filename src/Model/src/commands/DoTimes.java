@@ -64,4 +64,9 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
     public Consumer<Parse> returnValue() {
         return c;
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }
