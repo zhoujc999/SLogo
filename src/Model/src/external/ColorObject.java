@@ -16,14 +16,6 @@ public interface ColorObject {
     Map<String, Double> getState();
 
     /**
-     * Returns the return value from the last method called on this ModelPen so that the Parser can parse any
-     * commands that require this return value.
-     *
-     * @return the return value from the last method called on this ModelPen.
-     */
-    double getReturnVal();
-
-    /**
      * Sets the object color to the color in the palette at the specified int index, returns that int.
      *
      * @param colorIndex the index of the desired color in the palette
@@ -46,4 +38,6 @@ public interface ColorObject {
      * @return an int representing the pen color.
      */
     int getColor();
+
+    int[][] getPalette();
 }

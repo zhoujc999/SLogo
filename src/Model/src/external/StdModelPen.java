@@ -1,7 +1,6 @@
 package external;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The basic implementation of a ModelPen. Other implementations of ModelPen can extend this class to avoid
@@ -13,12 +12,7 @@ import java.util.Map;
 
 public class StdModelPen extends StdColorObject implements ModelPen {
     public static final String PEN_DOWN_KEY = "PenDown";
-    public static final String PEN_COLOR_INDEX_KEY = "penColorIndex";
-    public static final String PEN_COLOR_R_KEY = "penColorRVal";
-    public static final String PEN_COLOR_G_KEY = "penColorGVal";
-    public static final String PEN_COLOR_B_KEY = "penColorBVal";
     public static final String PEN_SIZE_KEY = "penSize";
-    private double returnVal;
     private int penDown;
     private double size;
 
@@ -45,17 +39,6 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     }
 
     /**
-     * Returns the return value from the last method called on this ModelPen so that the Parser can parse any
-     * commands that require this return value.
-     *
-     * @return the return value from the last method called on this ModelPen.
-     */
-    @Override
-    public double getReturnVal() {
-        return returnVal;
-    }
-
-    /**
      * puts pen down such that when the turtle moves, it leaves a trail
      *
      * @return 1
@@ -63,7 +46,6 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     @Override
     public int penDown() {
             penDown = 1;
-            returnVal = penDown;
             return penDown;
     }
 
@@ -75,7 +57,6 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     @Override
     public int penUp() {
         penDown = 0;
-        returnVal = penDown;
         return penDown;
     }
 
@@ -88,21 +69,7 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     @Override
     public double setSize(double pixels) {
         size = pixels;
-        returnVal = size;
         return size;
-    }
-
-    /**
-     * Set the pen color based on the specified int, returns that int.
-     *
-     * @param colorIndex
-     * @return an int representing the pen color.
-     */
-    @Override
-    public int setColor(int colorIndex) {
-        int index = super.setColor(colorIndex);
-        returnVal = index;
-        return index;
     }
 
     /**
@@ -110,7 +77,6 @@ public class StdModelPen extends StdColorObject implements ModelPen {
      */
     @Override
     public int getPenDown() {
-        returnVal = penDown;
         return penDown;
     }
 
@@ -119,14 +85,6 @@ public class StdModelPen extends StdColorObject implements ModelPen {
      */
     @Override
     public double getSize() {
-        returnVal = size;
         return size;
-    }
-
-    @Override
-    public int getColor() {
-        int index = super.getColor();
-        returnVal = index;
-        return index;
     }
 }
