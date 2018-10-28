@@ -20,12 +20,11 @@ public class StdModelPen extends StdColorObject implements ModelPen {
     public static final String PEN_SIZE_KEY = "penSize";
     private double returnVal;
     private int penDown;
-    private static int penColorIndex = 0;
-    private static double size = 10;
-    private static int bgColorIndex = 7;
+    private double size;
 
     public StdModelPen() {
         penDown = 1;
+        size = 5;
     }
 
 

@@ -16,13 +16,13 @@ public abstract class BinaryOperator {
             param1 = (String) params.get(0);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s 1st Argument Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s 1st Argument to String Error", this.getClass().getSimpleName()));
         }
         try {
             param2 = (String) params.get(1);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s 2nd Argument Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s 2nd Argument to String Error", this.getClass().getSimpleName()));
         }
     }
 
@@ -31,7 +31,7 @@ public abstract class BinaryOperator {
 
     protected void checkNumParams(List p) {
         if (p.size() != NUMPARAMS) {
-            throw new IllegalArgumentException("Argument Length Error");
+            throw new IllegalArgumentException(String.format("%s Argument Length Error", this.getClass().getSimpleName()));
         }
     }
 }
