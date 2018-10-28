@@ -10,9 +10,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class GUI extends SplitPane {
     /**
@@ -169,12 +171,52 @@ public class GUI extends SplitPane {
         picker.getItems().addAll(GreenTurtleImage, RedTurtleImage, BlueTurtleImage);
         picker.setOnAction(e -> transformTurtles(picker.getValue()));
         return picker;
+
     }
 
     private void transformTurtles(Image img) {
         for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
             turtle.setImage(img);
         }
+    }
+
+    private ComboBox colorComboBox(Supplier<int[][]> getPalette) {
+        var picker = new ComboBox<Integer>();
+        int[][] paletteAsRGB = getPalette.get();
+        int numColors = paletteAsRGB.length;
+        Color[] colorPalette = new Color[numColors];
+        for (int i = 0; i<paletteAsRGB.length; i++) {
+            int[] rgbArray = paletteAsRGB[i];
+            colorPalette[i] = Color.rgb(rgbArray[0], rgbArray[1], rgbArray[2]);
+            picker.getItems().add(i);
+        }
+//        picker.setValue(0);
+        picker.setCellFactory(getColorPickerCellFactory(colorPalette));
+        return picker;
+    }
+
+    private Callback<ListView<Integer>, ListCell<Integer>> getColorPickerCellFactory(Color[] colorPalette) {
+        Callback cellFactory = new Callback<ListView<Integer>, ListCell<Integer>>() {
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                final ListCell<Integer> cell = new ListCell<Integer>() {
+                    { super.setPrefWidth(100); }
+                    @Override
+                    public void updateItem(Integer item,
+                                           boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item + "");
+                            setTextFill(colorPalette[item]);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        return cellFactory;
     }
 
     private ColorPicker penPicker() {
