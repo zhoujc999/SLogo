@@ -48,7 +48,7 @@ public class GUI extends SplitPane {
             "English",
             "Spanish"
     );
-    
+
     private final Consumer<String> myParsingFunc;
     Supplier<int[][]> penPaletteSupplier;
     Supplier<int[][]> backgroundPaletteSupplier;
