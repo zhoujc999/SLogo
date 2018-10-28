@@ -21,4 +21,9 @@ public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutabl
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

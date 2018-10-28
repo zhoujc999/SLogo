@@ -26,5 +26,9 @@ public class And extends BinaryDoubleOperator implements SLogoMathExecutable, SL
         return Double.toString(this.result);
     }
 
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }
 

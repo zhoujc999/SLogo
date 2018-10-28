@@ -23,4 +23,9 @@ public class Home extends Operator implements SLogoTurtleExecutable, SLogoString
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

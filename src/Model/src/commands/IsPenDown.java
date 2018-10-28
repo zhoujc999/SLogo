@@ -22,4 +22,9 @@ public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoS
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

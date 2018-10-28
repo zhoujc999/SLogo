@@ -108,13 +108,16 @@ public class GUI extends SplitPane {
      * Handles what happens when the user presses the 'Run' button.
      */
     void run() {
-        try {
-            String input = myCommandWindow.getInput();
-            myCommandHistory.save(input, "");
-            myParsingFunc.accept(input);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+//        try {
+//            String input = myCommandWindow.getInput();
+//            myCommandHistory.save(input, "");
+//            myParsingFunc.accept(input);
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+        String input = myCommandWindow.getInput();
+        myCommandHistory.save(input, "");
+        myParsingFunc.accept(input);
     }
 
     private Button runButton() {

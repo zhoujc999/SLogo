@@ -21,4 +21,9 @@ public class ClearScreen extends Operator implements SLogoTurtleExecutable, SLog
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

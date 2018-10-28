@@ -54,4 +54,9 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
 //        p.addCommand(param1, commandContent);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }

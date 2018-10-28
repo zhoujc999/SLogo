@@ -52,4 +52,9 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     public Consumer<Parse> returnValue() {
         return c;
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }
