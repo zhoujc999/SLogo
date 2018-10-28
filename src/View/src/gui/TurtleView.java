@@ -32,7 +32,7 @@ public class TurtleView extends ImageView {
 
     private void toggleActivation() {
         var window = (GraphicsWindow) getParent();
-        if (window.getActiveTurtles().contains(this)) {
+        if (window.getTurtles().contains(this)) {
             System.out.println(getLayoutX());
             deactivate();
         } else {
@@ -54,13 +54,13 @@ public class TurtleView extends ImageView {
 
     protected void activate() {
         var window = (GraphicsWindow) getParent();
-        window.getActiveTurtles().add(this);
+        window.getTurtles().add(this);
         setNewSize(ACTIVE_SIZE);
     }
 
     protected void deactivate() {
         var window = (GraphicsWindow) getParent();
-        window.getActiveTurtles().remove(this);
+        window.getTurtles().remove(this);
         setNewSize(INACTIVE_SIZE);
     }
 

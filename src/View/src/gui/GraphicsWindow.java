@@ -27,15 +27,15 @@ public class GraphicsWindow extends Pane implements Observer {
     private CornerRadii myCornerRadii;
     private Insets myInsets;
 
-    private  List<TurtleView> myTurtles;
-    private List<TurtleView> myActiveTurtles;
+    private  Map<Integer, TurtleView> myTurtles;
+    //private List<TurtleView> myActiveTurtles;
     private List<Node> lineList = new ArrayList<>();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
         myCornerRadii = cornerRadii;
         myInsets = insets;
-        myTurtles = new ArrayList<>();
-        myActiveTurtles = new ArrayList<>();
+        myTurtles = new HashMap<>();
+        //myActiveTurtles = new ArrayList<>();
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(580, 540);
@@ -67,16 +67,14 @@ public class GraphicsWindow extends Pane implements Observer {
         int id = (int) (state.get("ID")/1);
 
         setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
-        for (TurtleView turtle: myActiveTurtles) {
-            setTurtlePosition(turtle, x, y);
-            //turtle.move(x, y);
-            turtle.setRotate(heading);
-            turtle.setVisible(visible);
-            if (clearScreenFlag) {
-                clearScreen();
-            } else if (penDown && !(oldX==x && oldY==y)) {
-                draw(oldX, oldY, x, y, penSize, penColor);
-            }
+        TurtleView turtle = myTurtles.get(id);
+        setTurtlePosition(turtle, x, y);
+        turtle.setRotate(heading);
+        turtle.setVisible(visible);
+        if (clearScreenFlag) {
+            clearScreen();
+        } else if (penDown && !(oldX==x && oldY==y)) {
+            draw(oldX, oldY, x, y, penSize, penColor);
         }
     }
 
@@ -115,8 +113,8 @@ public class GraphicsWindow extends Pane implements Observer {
     /**
      * Accesses the current turtle that the user controls.
      */
-    protected List<TurtleView> getActiveTurtles() {
-        return myActiveTurtles;
+    protected Map<Integer, TurtleView> getTurtles() {
+        return myTurtles;
     }
 
     protected void setBackground(Color color) {
