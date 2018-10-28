@@ -8,32 +8,32 @@ import external.SLogoConsumerReturnable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
-
-    private double condition;
+    private final static String VARIABLE = ":repcount";
+    private final static int START = 0;
+    private final static int INCREMENT = 1;
+    private int stop;
     private String commands;
 
     private Consumer<Parse> c;
 
-
-    public If(List params) {
+    public Repeat(List params) {
         super(params);
         try {
-            condition = Double.parseDouble(super.param1);
+            stop = (int) Double.parseDouble(super.param1);
         }
         catch (ClassCastException | NullPointerException | NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s Argument to Double Error", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("%s Argument Error", this.getClass().getSimpleName()));
         }
         commands = stripBrackets(param2);
     }
 
+
+
     @Override
     public void execute(ModelTurtle turtle) {
-        c = p -> p.setReplacementValue(ZERO);
-        if (condition != 0) {
-            c = p -> p.parseCommand(commands);
-        }
+        c = this::loopFunction;
     }
 
     private String stripBrackets(String s) {
@@ -43,8 +43,18 @@ public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogo
         return newS;
     }
 
+
+    private void loopFunction(Parse p) {
+        p.setReplacementValue(ZERO);
+        for (int i = START; i < stop; i += INCREMENT) {
+            p.addVariable(VARIABLE, Integer.toString(i));
+            p.parseCommand(commands);
+        }
+    }
+
     @Override
     public Consumer<Parse> returnValue() {
         return c;
     }
+
 }

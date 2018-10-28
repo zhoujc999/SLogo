@@ -31,7 +31,7 @@ public abstract class BinaryOperator {
 
     protected void checkNumParams(List p) {
         if (p.size() != NUMPARAMS) {
-            throw new IllegalArgumentException("Argument Length Error");
+            throw new IllegalArgumentException(String.format("%s Argument Length Error", this.getClass().getSimpleName()));
         }
     }
 }

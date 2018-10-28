@@ -2,7 +2,6 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
-import external.SLogoRandom;
 import external.SLogoStringReturnable;
 
 import java.util.List;
