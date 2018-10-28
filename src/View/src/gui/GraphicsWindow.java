@@ -38,37 +38,10 @@ public class GraphicsWindow extends Pane implements Observer {
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(580, 540);
-        var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
-        activate(primaryTurtle);
-        addTurtle(primaryTurtle, getPrefWidth()/2, getPrefHeight()/2);
+        //var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
+        addTurtle(getPrefWidth()/2, getPrefHeight()/2);
 
-//        Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(GREEN_TURTLE_FILENAME));
-//        var turtle = new TurtleView(turtleImage, getPrefWidth()/2, getPrefHeight()/2);
-//        var turtle = new TurtleView(GREEN_TURTLE_FILENAME, getPrefWidth()/2, getPrefHeight()/2);
-//        addTurtle(turtle);
-//        myTurtle = turtle;
     }
-
-//    protected GraphicsWindow(Point2D location, Dimension2D size, CornerRadii cornerRadii, Insets insets) {
-//        setLayoutX(location.getX());
-//        setLayoutY(location.getY());
-//        setPrefSize(size.getWidth(), size.getHeight());
-//        myCornerRadii = cornerRadii;
-//        myInsets = insets;
-//        setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-//
-//        TabPane tabPane = new TabPane();
-//        Tab tab = new Tab();
-//        tab.setText("new tab");
-//        tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
-//        Tab tab2 = new Tab();
-//        tab2.setText("newer tab");
-//        tab2.setContent(new Rectangle(200,200, Color.LIGHTGREEN));
-//        tabPane.getTabs().addAll(tab, tab2);
-//
-//        myTurtle = new TurtleView("TurtleImages/GreenTurtle.png", size.getWidth()/2, size.getHeight()/2);
-//        getChildren().addAll(myTurtle, tabPane);
-//    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -120,15 +93,6 @@ public class GraphicsWindow extends Pane implements Observer {
         turtle.setPosition(x + getWidth()/2, y + getHeight()/2);
     }
 
-//    private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
-//        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
-////        Line line = new Line(oldX, oldY, x, y); //is this preferred?
-//        line.setStrokeWidth(width);
-//        line.setStroke(color);
-//        lineList.add(line);
-//        getChildren().add(line);
-//    }
-
     private void draw(double oldX, double oldY, double x, double y, double width, Color color) {
 //        Line line = new Line(myTurtle.getX(), myTurtle.getY(), x, y);
         Line line = new Line(oldX + getWidth()/2, oldY + getHeight()/2,
@@ -141,24 +105,18 @@ public class GraphicsWindow extends Pane implements Observer {
     }
 
 
-    protected void addTurtle(TurtleView turtle, double x, double y) {
-        turtle.setPosition(x, y);
+    protected void addTurtle(double x, double y) {
+        var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), x, y);
+        //turtle.setPosition(x, y);
         getChildren().add(turtle);
-    }
-
-    protected void activate(TurtleView turtle) {
-        myActiveTurtles.add(turtle);
-    }
-
-    protected void deactivate(TurtleView turtle) {
-        myActiveTurtles.remove(turtle);
+        turtle.activate();
     }
 
     /**
      * Accesses the current turtle that the user controls.
      */
     protected List<TurtleView> getTurtles() {
-        return Collections.unmodifiableList(myActiveTurtles);
+        return myActiveTurtles;
     }
 
     protected void setBackground(Color color) {
