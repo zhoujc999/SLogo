@@ -23,12 +23,6 @@ public class DefinitionList extends ListView implements GUIList {
         myColumnWidth = columnWidth;
     }
 
-    protected DefinitionList(Point2D location, Dimension2D size) {
-        setLayoutX(location.getX());
-        setLayoutY(location.getY());
-        setPrefSize(size.getWidth(), size.getHeight());
-    }
-
     @Override
     public void save(String name, String value) {
         var nameText = new Text(name);
@@ -43,11 +37,6 @@ public class DefinitionList extends ListView implements GUIList {
     @Override
     public String load(String name) {
         return name;
-    }
-
-    @Override
-    public void setName(String name) {
-
     }
 
 }

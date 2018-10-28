@@ -12,9 +12,4 @@ public interface GUIList {
      */
     String load(String name);
 
-    /**
-     * Sets the name displayed by DefinitionList based on the language to which GUI is set.
-     */
-    void setName(String name);
-
 }

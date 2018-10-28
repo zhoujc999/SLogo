@@ -77,7 +77,7 @@ public class GUI extends SplitPane {
         myVariables.save("length", "5");
         myCommands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
         myCommands.save("length", "5");
-        myCommandHistory = new CommandHistory(CODE_FONT);
+        myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
         myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
         myProjectWindow.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
@@ -101,9 +101,13 @@ public class GUI extends SplitPane {
      * Handles what happens when the user presses the 'Run' button.
      */
     void run() {
-        String input = myCommandWindow.getInput();
-        myCommandHistory.save(input, "");
-        myParsingFunc.accept(input);
+        try {
+            String input = myCommandWindow.getInput();
+            myCommandHistory.save(input, "");
+            myParsingFunc.accept(input);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private Button runButton() {
