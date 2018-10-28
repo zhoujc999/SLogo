@@ -52,7 +52,9 @@ public class CommandTreeExecutor implements TreeExecutor {
         }
     }
 
+    @Override
     public void setReplacementValue(String s) {
         replacementValue = s;
     }
+
 }

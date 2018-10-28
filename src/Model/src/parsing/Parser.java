@@ -33,11 +33,6 @@ public class Parser implements Observer, Parse {
         myExecutor.executeTree(commandTree.getChildren().get(0), myResources);
     }
 
-    @Override
-    public void addVariable(String name, String value) {
-        myVars.addVariable(name, value);
-    }
-
     public void update(Observable o, Object arg){
         if(arg instanceof Consumer){
             ((Consumer) arg).accept(this);
@@ -52,10 +47,6 @@ public class Parser implements Observer, Parse {
         myResources.changeLanguage(lang);
     }
 
-    @Override
-    public void setReplacementValue(String s) {
-        myExecutor.setReplacementValue(s);
-    }
 
     public static void main(String args[]){
         Invoker i = new Invoker();
