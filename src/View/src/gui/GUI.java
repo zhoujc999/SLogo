@@ -181,7 +181,7 @@ public class GUI extends SplitPane {
     }
 
     private void transformTurtles(ImageView img) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
+        for (TurtleView turtle: myGraphicsWindow.getActiveTurtles()) {
             turtle.setImage(img.getImage());
         }
     }
@@ -194,7 +194,7 @@ public class GUI extends SplitPane {
     }
 
     private void setTurtlePens(Color color) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
+        for (TurtleView turtle: myGraphicsWindow.getActiveTurtles()) {
             turtle.setPenColor(color);
         }
     }
