@@ -2,7 +2,6 @@ package parsing;
 
 import external.*;
 
-import invoking.Invoker;
 import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 
@@ -19,8 +18,8 @@ public class Parser implements Observer, Parse {
 
     private Node commandTree;
 
-    public Parser(CommandFactoryInterface factory, String lang){
-        myFactory = factory;
+    public Parser(Invokable invoker, String lang){
+        myFactory = new CommandFactory(invoker);
         myResources = new ResourceHandler(lang);
         myVars = new VariableContainer();
         myBuilder = new CommandTreeBuilder();
@@ -46,15 +45,6 @@ public class Parser implements Observer, Parse {
     public void changeLanguage(String lang) {
         myResources.changeLanguage(lang);
     }
-
-
-    public static void main(String args[]){
-        Invoker i = new Invoker();
-        CommandFactory c = new CommandFactory(i);
-        Parser p = new Parser(c, "English");
-        p.parseCommand("fd fd 50");
-    }
-    
 }
 
 

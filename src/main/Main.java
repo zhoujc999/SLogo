@@ -27,8 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle(TITLE);
         Invokable invoker = new Invoker();
-        CommandFactoryInterface myFactory = new CommandFactory(invoker);
-        Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
+        Parser myParser = new Parser(invoker, DEFAULT_LANGUAGE);
         ( (Invoker) invoker ).setMyParse(myParser);
         Map<String, Supplier> supplierMap = Map.of("penPalette", ( (Invoker) invoker )::getPenPalette,
                 "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette);
