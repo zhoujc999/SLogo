@@ -1,13 +1,8 @@
 package gui;
 
-import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public class TurtleView extends ImageView {
     /**
@@ -17,21 +12,36 @@ public class TurtleView extends ImageView {
      * @author Tahj Starr
      */
 
-    private static final double SIZE = 50;
+    private static final double ACTIVE_SIZE = 50;
+    private static final double INACTIVE_SIZE = 25;
+    private double mySize;
     private Color myPenColor;
 
     protected TurtleView(String url, double x, double y) {
         super(url);
-        setFitWidth(SIZE);
-        setFitHeight(SIZE);
+        mySize = ACTIVE_SIZE;
+        setFitWidth(mySize);
+        setFitHeight(mySize);
         setPosition(x, y);
+        addEventHandler(MouseEvent.MOUSE_CLICKED, e -> toggleActivation());
         myPenColor = Color.BLACK;
+    }
+
+    private void toggleActivation() {
+        var window = (GraphicsWindow) getParent();
+        if (window.getTurtles().contains(this)) {
+            System.out.println(getLayoutX());
+            deactivate();
+        } else {
+            System.out.println(getLayoutX());
+            activate();
+        }
     }
 
     protected TurtleView(String url) {
         super(url);
-        setFitWidth(SIZE);
-        setFitHeight(SIZE);
+        setFitWidth(mySize);
+        setFitHeight(mySize);
         myPenColor = Color.BLACK;
     }
 
@@ -39,16 +49,37 @@ public class TurtleView extends ImageView {
         setPosition(getTurtleX() + dx, getTurtleY() + dy);
     }
 
+    protected void activate() {
+        var window = (GraphicsWindow) getParent();
+        window.getTurtles().add(this);
+        setNewSize(ACTIVE_SIZE);
+    }
+
+    protected void deactivate() {
+        var window = (GraphicsWindow) getParent();
+        window.getTurtles().remove(this);
+        setNewSize(INACTIVE_SIZE);
+    }
+
+    private void setNewSize(double size) {
+        double x = getTurtleX();
+        double y = getTurtleY();
+        mySize = size;
+        setFitWidth(size);
+        setFitHeight(size);
+        setPosition(x, y);
+    }
+
     protected double getTurtleX() {
-        return getX() + SIZE/2;
+        return getLayoutX() + mySize /2;
     }
 
     protected double getTurtleY() {
-        return getY() + SIZE/2;
+        return getLayoutY() + mySize /2;
     }
 
     protected void setPosition(double x, double y) {
-        relocate(x - SIZE/2, y - SIZE/2);
+        relocate(x - mySize /2, y - mySize /2);
     }
 
     protected Color getPenColor() {
