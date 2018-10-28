@@ -1,12 +1,13 @@
 package parsing;
 
+import external.LanguageInterface;
 import external.ResourceContainer;
 import javafx.scene.control.Alert;
 
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class ResourceHandler implements ResourceContainer {
+public class ResourceHandler implements ResourceContainer, LanguageInterface {
     public static final String PROPERTIES_PATH = "/languages/";
     public static final String SYNTAX_PATH = "/languages/Syntax";
     public static final String PARAMETER_COUNTS_PATH = "/languages/Command";
