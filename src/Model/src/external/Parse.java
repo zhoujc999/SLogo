@@ -29,12 +29,12 @@ public interface Parse extends Observer {
 
     public void update(Observable o, Object arg);
 
-    /**
-     * Changes receives the values of the change
-     * @param s
-     */
-
-    public void setReplacementValue(String s);
+//    /**
+//     * Changes receives the values of the change
+//     * @param s
+//     */
+//
+//    public void setReplacementValue(String s);
 
     /**
      * Changes the language that the Parser recognizes for commands
@@ -43,11 +43,11 @@ public interface Parse extends Observer {
 
     public void changeLanguage(String lang);
 
-    /**
-     * Adds a variable to the map of variables that the parser recognizes
-     * @param name The name of the variable being added
-     * @param value The value mapped to the variable
-     */
-    public void addVariable(String name, String value);
+//    /**
+//     * Adds a variable to the map of variables that the parser recognizes
+//     * @param name The name of the variable being added
+//     * @param value The value mapped to the variable
+//     */
+//    public void addVariable(String name, String value);
 
 }
