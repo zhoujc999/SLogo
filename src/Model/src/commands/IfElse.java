@@ -1,9 +1,7 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -15,7 +13,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     private String trueCommands;
     private String falseCommands;
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
 
 
     public IfElse(List params) {
@@ -32,12 +30,12 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = p -> p.setReplacementValue(ZERO);
+        c = (p, t, v, r) -> t.setReplacementValue(ZERO);
         if (condition != 0) {
-            c = p -> p.parseCommand(trueCommands);
+            c = (p, t, v, r) -> p.parseCommand(trueCommands);
         }
         else {
-            c = p -> p.parseCommand(falseCommands);
+            c = (p, t, v, r) -> p.parseCommand(falseCommands);
         }
     }
 
@@ -49,7 +47,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
         return c;
     }
 

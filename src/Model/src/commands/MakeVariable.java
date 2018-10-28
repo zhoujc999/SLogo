@@ -1,16 +1,14 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class MakeVariable extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
 
     public MakeVariable(List params) {
         super(params);
@@ -22,13 +20,13 @@ public class MakeVariable extends BinaryOperator implements SLogoAbstractExecuta
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
         return c;
     }
 
-    private void makeVariableFunction(Parse p) {
-        p.addVariable(param1, param2);
-        p.setReplacementValue(param2);
+    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+        v.addVariable(param1, param2);
+        t.setReplacementValue(param2);
     }
 
     @Override
