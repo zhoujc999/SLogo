@@ -2,7 +2,6 @@ package internal;
 
 import gui.CommandWindow;
 import gui.GUIList;
-import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
