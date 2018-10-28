@@ -24,7 +24,7 @@ public class Parser implements Observer, Parse {
         myResources = new ResourceHandler(lang);
         myVars = new VariableContainer();
         myBuilder = new CommandTreeBuilder();
-        myExecutor = new CommandTreeExecutor(myFactory);
+        myExecutor = new CommandTreeExecutor(myFactory, myVars);
 
     }
 
