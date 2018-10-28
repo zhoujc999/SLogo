@@ -65,6 +65,8 @@ public class GraphicsWindow extends Pane implements Observer {
         int bgColorB = (int) (state.get("bgColorBVal")/1);
         Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
         int id = (int) (state.get("ID")/1);
+        int active = (int) (state.get("active")/1);
+
 
         setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
         TurtleView turtle = myTurtles.get(id);

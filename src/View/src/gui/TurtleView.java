@@ -17,6 +17,7 @@ public class TurtleView extends ImageView {
 
     private double mySize;
     private int myID;
+    private boolean isActive;
     private Color myPenColor;
 
     protected TurtleView(String url, double x, double y, int id) {
@@ -26,6 +27,7 @@ public class TurtleView extends ImageView {
         setFitHeight(mySize);
         setPosition(x, y);
         myID = id;
+        isActive = true;
         addEventHandler(MouseEvent.MOUSE_CLICKED, e -> toggleActivation());
         myPenColor = Color.BLACK;
     }
@@ -55,12 +57,14 @@ public class TurtleView extends ImageView {
     protected void activate() {
         var window = (GraphicsWindow) getParent();
         window.getTurtles().add(this);
+        isActive = true;
         setNewSize(ACTIVE_SIZE);
     }
 
     protected void deactivate() {
         var window = (GraphicsWindow) getParent();
         window.getTurtles().remove(this);
+        isActive = 
         setNewSize(INACTIVE_SIZE);
     }
 
