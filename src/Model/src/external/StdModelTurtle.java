@@ -31,7 +31,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private double myHeading;
     private int showing;
     private int clearScreen;
-    private int active;
+    private boolean active;
     private ModelPen myPen;
 
     /**
@@ -48,7 +48,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myHeading = 0;
         showing = 1;
         clearScreen = 0;
-        active = 0;
+        active = false;
         myPen = new StdModelPen();
     }
 
@@ -87,10 +87,16 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         turtleState.put(HEADING_KEY, myHeading);
         turtleState.put(SHOWING_KEY, (double) showing);
         turtleState.put(CLEARSCREEN_KEY, (double) clearScreen);
-        turtleState.put(ACTIVE_KEY, (double) active);
+        turtleState.put(ACTIVE_KEY, getActiveAsDouble());
         turtleState.putAll(myPen.getState());
         turtleState.putAll(theBackground.getState());
         return turtleState;
+    }
+
+    private double getActiveAsDouble() {
+        if (active)
+            return 1.0;
+        return 0.0;
     }
 
     public void notifyOfState(HashMap<String, Double> dataMap) {
@@ -260,11 +266,11 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     public void activate() {
-        active = 1;
+        active = true;
     }
 
     public void deactivate() {
-        active = 0;
+        active = false;
     }
 
     /**
@@ -297,6 +303,16 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public int getShowing() {
         return showing;
+    }
+
+    /**
+     * For Invoker to check whether to execute command
+     *
+     * @return 1 if turtle is active, 0 if it is not
+     */
+    @Override
+    public boolean getActive() {
+        return active;
     }
 
     /**

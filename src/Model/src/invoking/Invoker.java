@@ -17,7 +17,7 @@ public class Invoker extends Observable implements Invokable{
 
     public void setMyParse(Parse myParse) {
         this.myParse = myParse;
-        this.addObserver(myParse);
+        this.addObserver(this.myParse);
     }
 
     /**

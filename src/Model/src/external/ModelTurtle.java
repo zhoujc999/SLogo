@@ -152,6 +152,13 @@ public interface ModelTurtle {
     int getShowing();
 
     /**
+     * For Invoker to check whether to execute command
+     *
+     * @return true if turtle is active, false if it is not
+     */
+    boolean getActive();
+
+    /**
      *
      * @return the ModelPen object associated with this ModelTurtle
      */
