@@ -15,6 +15,9 @@ public class CommandTreeBuilder implements TreeBuilder {
     public static final String VARIABLE_KEY = "Variable";
     public static final String LIST_START_KEY = "ListStart";
     public static final String LIST_END_KEY = "ListEnd";
+    public static final String DELIMITER_REGEX = "\\n+|\\s+";
+
+
     private ResourceContainer myContainer;
 
     public CommandTreeBuilder(){
@@ -23,7 +26,7 @@ public class CommandTreeBuilder implements TreeBuilder {
 
     public Node buildTree(String commands, ResourceContainer cont){
         myContainer = cont;
-        ArrayList<String> words = new ArrayList<>(Arrays.asList(commands.split(" ")));
+        ArrayList<String> words = new ArrayList<>(Arrays.asList(commands.split(DELIMITER_REGEX)));
         ListNode frst = buildList(words);
         TreeNode root = new TreeNode();
         createSubTree(root, frst);

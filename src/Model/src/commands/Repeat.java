@@ -38,8 +38,8 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replace("\\s*\\[\\s*", "");
-        newS = newS.replace("\\s*\\]\\s*", "");
+        newS = s.replaceAll("\\s*\\[\\s*", "");
+        newS = newS.replaceAll("\\s*\\]\\s*", "");
         return newS;
     }
 

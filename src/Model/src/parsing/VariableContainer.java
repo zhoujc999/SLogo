@@ -1,5 +1,6 @@
 package parsing;
 
+import commands.CommandTextWrapper;
 import external.VariableAccessor;
 import external.VariableManipulator;
 
@@ -8,9 +9,12 @@ import java.util.Map;
 
 public class VariableContainer implements VariableManipulator, VariableAccessor {
     private Map<String, String> variableMap;
+    private Map<String, String> commandMap;
+
 
     public VariableContainer(){
         variableMap = new HashMap<>();
+        commandMap = new HashMap<>();
     }
 
     @Override
@@ -30,6 +34,16 @@ public class VariableContainer implements VariableManipulator, VariableAccessor 
         if(variableMap.containsKey(var)){
             return variableMap.get(var);
         }
+        return null;
+    }
+
+    @Override
+    public void addCommand(String name, CommandTextWrapper command) {
+
+    }
+
+    @Override
+    public CommandTextWrapper getCommand(String key) {
         return null;
     }
 
