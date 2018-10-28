@@ -54,7 +54,6 @@ public class GUI extends SplitPane {
     Supplier<int[][]> backgroundPaletteSupplier;
     private String myLanguage;
     private ResourceBundle myResources;
-    private final Consumer<String> myParsingFunc;
     private static final Font CODE_FONT = new Font("Courier New", 10);
 
     private CommandWindow myCommandWindow;
@@ -67,6 +66,7 @@ public class GUI extends SplitPane {
 
     public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myLanguage = language;
         myParsingFunc = parsingFunc;
         penPaletteSupplier = supplierMap.get("penPalette");
         backgroundPaletteSupplier = supplierMap.get("backgroundPalette");
