@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -43,6 +44,8 @@ public class GUI extends SplitPane {
     private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
 
     private final Consumer<String> myParsingFunc;
+    Supplier<int[][]> penPaletteSupplier;
+    Supplier<int[][]> backgroundPaletteSupplier;
     private ResourceBundle myResources;
     private static final Font CODE_FONT = new Font("Courier New", 10);
 
@@ -68,10 +71,11 @@ public class GUI extends SplitPane {
 //        getChildren().addAll(myCommandWindow, myGraphicsWindow, myProjectWindow, runButton(), clearButton(), buttonPanel());
 //    }
 
-    public GUI(String language, Consumer<String> parsingFunc) {
+    public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language); //+ ".properties");
         myParsingFunc = parsingFunc;
-
+        penPaletteSupplier = supplierMap.get("penPalette");
+        backgroundPaletteSupplier = supplierMap.get("backgroundPalette");
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
@@ -144,7 +148,10 @@ public class GUI extends SplitPane {
                 backgroundPicker(),
                 turtlePicker(),
                 penPicker(),
-                languagePicker());
+                languagePicker(),
+                colorComboBox(penPaletteSupplier),
+                colorComboBox(backgroundPaletteSupplier)
+        );
 
         buttonPanel.add(referenceButton(), 0, 4, 2, 1);
         for (Node node: buttonPanel.getChildren()) {

@@ -13,7 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import parsing.Parser;
 
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Main extends Application {
 
@@ -28,7 +30,9 @@ public class Main extends Application {
         CommandFactoryInterface myFactory = new CommandFactory(invoker);
         Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
         ( (Invoker) invoker ).setMyParse(myParser);
-        GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand);
+        Map<String, Supplier> supplierMap = Map.of("penPalette", ( (Invoker) invoker )::getPenPalette,
+                "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette);
+        GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand, supplierMap);
         Consumer<StdModelTurtle> turtleObserverConsumer = (turt) -> turt.addObserver(gui.getGraphicsWindow());
         ( (Invoker) invoker ).setAddTurtleObserver(turtleObserverConsumer);
         Scene scene = new Scene(gui, SIZE.getWidth(), SIZE.getHeight());

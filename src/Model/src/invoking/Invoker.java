@@ -42,4 +42,12 @@ public class Invoker extends Observable implements Invokable{
         clearChanged();
 
     }
+
+    public int[][] getBackgroundPalette() {
+        return myTurt.getBackground().getPalette();
+    }
+
+    public int[][] getPenPalette() {
+        return myTurt.getPen().getPalette();
+    }
 }

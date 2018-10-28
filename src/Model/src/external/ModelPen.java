@@ -12,16 +12,7 @@ import java.util.function.Consumer;
  * @author jgp17
  */
 
-public interface ModelPen {
-    //methods below are part of external Model API
-
-    /**
-     * Returns the return value from the last method called on this ModelPen so that the Parser can parse any
-     * commands that require this return value.
-     *
-     * @return the return value from the last method called on this ModelPen.
-     */
-    double getReturnVal();
+public interface ModelPen extends ColorObject{
 
     //methods below are part of internal Model API
 
