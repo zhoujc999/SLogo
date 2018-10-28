@@ -10,10 +10,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
+import java.util.Map;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class GUI extends SplitPane {
     /**
@@ -45,10 +48,12 @@ public class GUI extends SplitPane {
             "English",
             "Spanish"
     );
-
+    
+    private final Consumer<String> myParsingFunc;
+    Supplier<int[][]> penPaletteSupplier;
+    Supplier<int[][]> backgroundPaletteSupplier;
     private String myLanguage;
     private ResourceBundle myResources;
-    private final Consumer<String> myParsingFunc;
     private static final Font CODE_FONT = new Font("Courier New", 10);
 
     private CommandWindow myCommandWindow;
@@ -59,10 +64,12 @@ public class GUI extends SplitPane {
     private CommandHistory myCommandHistory;
     private CommandReference myCommandReference;
 
-    public GUI(String language, Consumer<String> parsingFunc) {
-        myLanguage = language;
+    public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
+        myLanguage = language;
         myParsingFunc = parsingFunc;
+        penPaletteSupplier = supplierMap.get("penPalette");
+        backgroundPaletteSupplier = supplierMap.get("backgroundPalette");
 
         initializeComponents(language);
         initializeLayout();
@@ -150,7 +157,10 @@ public class GUI extends SplitPane {
                 backgroundPicker(),
                 turtlePicker(),
                 penPicker(),
-                languagePicker());
+                languagePicker(),
+                colorComboBox(penPaletteSupplier),
+                colorComboBox(backgroundPaletteSupplier)
+        );
 
         buttonPanel.add(referenceButton(), 0, 4, 2, 1);
         for (Node node: buttonPanel.getChildren()) {
@@ -181,12 +191,52 @@ public class GUI extends SplitPane {
             transformTurtles(new ImageView(getClass().getResource(filename).toExternalForm()));
         });
         return picker;
+
     }
 
     private void transformTurtles(ImageView img) {
         for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
             turtle.setImage(img.getImage());
         }
+    }
+
+    private ComboBox colorComboBox(Supplier<int[][]> getPalette) {
+        var picker = new ComboBox<Integer>();
+        int[][] paletteAsRGB = getPalette.get();
+        int numColors = paletteAsRGB.length;
+        Color[] colorPalette = new Color[numColors];
+        for (int i = 0; i<paletteAsRGB.length; i++) {
+            int[] rgbArray = paletteAsRGB[i];
+            colorPalette[i] = Color.rgb(rgbArray[0], rgbArray[1], rgbArray[2]);
+            picker.getItems().add(i);
+        }
+//        picker.setValue(0);
+        picker.setCellFactory(getColorPickerCellFactory(colorPalette));
+        return picker;
+    }
+
+    private Callback<ListView<Integer>, ListCell<Integer>> getColorPickerCellFactory(Color[] colorPalette) {
+        Callback cellFactory = new Callback<ListView<Integer>, ListCell<Integer>>() {
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                final ListCell<Integer> cell = new ListCell<Integer>() {
+                    { super.setPrefWidth(100); }
+                    @Override
+                    public void updateItem(Integer item,
+                                           boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item + "");
+                            setTextFill(colorPalette[item]);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        return cellFactory;
     }
 
     private ColorPicker penPicker() {

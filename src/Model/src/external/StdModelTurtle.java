@@ -33,7 +33,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private int clearScreen;
     private int active;
     private ModelPen myPen;
-    private double returnVal;
 
     /**
      * Creates a StdModelTurtle with the desired id
@@ -61,13 +60,9 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int getID() {
-        returnVal = TURTLE_ID;
         return TURTLE_ID;
     }
 
-    public double getReturnVal() {
-        return returnVal;
-    }
 
     private HashMap<String, Double> getOldXYMap() {
         HashMap<String, Double> map = new HashMap<>();
@@ -120,7 +115,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double yDist = pixels*Math.sin(Math.toRadians(myHeading - 90));
         myXPos += xDist;
         myYPos += yDist;
-        returnVal = pixels;
         notifyOfState(dataMap);
         return pixels;
     }
@@ -157,7 +151,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public double right(double degrees) {
         HashMap<String, Double> dataMap = getOldXYMap();
         myHeading += degrees;
-        returnVal = degrees;
         notifyOfState(dataMap);
         return degrees;
     }
@@ -173,7 +166,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         HashMap<String, Double> dataMap = getOldXYMap();
         double diff = degrees - myHeading;
         myHeading = degrees;
-        returnVal = diff;
         notifyOfState(dataMap);
         return diff;
     }
@@ -194,7 +186,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + 90;
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
-        returnVal = headingDiff;
         notifyOfState(dataMap);
         return headingDiff;
     }
@@ -215,7 +206,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         myXPos = x;
         myYPos = y;
         double dist = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
-        returnVal = dist;
         notifyOfState(dataMap);
         return dist;
     }
@@ -229,7 +219,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public int show() {
         HashMap<String, Double> dataMap = getOldXYMap();
         showing = 1;
-        returnVal = showing;
         notifyOfState(dataMap);
         return showing;
     }
@@ -243,7 +232,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public int hide() {
         HashMap<String, Double> dataMap = getOldXYMap();
         showing = 0;
-        returnVal = showing;
         notifyOfState(dataMap);
         return showing;
     }
@@ -268,7 +256,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         clearScreen = 1;
         double dist = home(); //observers receive state within this call
         clearScreen = 0;
-        returnVal = dist; //technically redundant
         return dist;
     }
 
@@ -285,7 +272,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double getX() {
-        returnVal = myXPos;
         return myXPos;
     }
 
@@ -294,7 +280,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double getY() {
-        returnVal = myYPos;
         return myYPos;
     }
 
@@ -303,7 +288,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public double getHeading() {
-        returnVal = myHeading;
         return myHeading;
     }
 
@@ -312,7 +296,6 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public int getShowing() {
-        returnVal = showing;
         return showing;
     }
 
@@ -325,7 +308,10 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     public int getNumTurtles() {
-        returnVal = numTurtles;
         return numTurtles;
+    }
+
+    public StdModelBackground getBackground() {
+        return theBackground;
     }
 }

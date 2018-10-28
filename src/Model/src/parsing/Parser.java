@@ -39,11 +39,11 @@ public class Parser implements Observer, Parse {
     }
 
     public void update(Observable o, Object arg){
-        if(arg instanceof Consumer){
-            ((Consumer) arg).accept(this);
+        if(((SLogoReturnable) arg).isStringReturnable()){
+            myExecutor.setReplacementValue((String) arg);
         }
         else{
-            myExecutor.setReplacementValue((String) arg);
+            ((Consumer) arg).accept(this);
         }
     }
 

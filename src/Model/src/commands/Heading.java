@@ -21,4 +21,9 @@ public class Heading extends Operator implements SLogoTurtleExecutable, SLogoStr
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

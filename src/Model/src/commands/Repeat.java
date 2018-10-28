@@ -57,4 +57,9 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
         return c;
     }
 
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
+
 }

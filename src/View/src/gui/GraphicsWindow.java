@@ -70,16 +70,11 @@ public class GraphicsWindow extends Pane implements Observer {
             //turtle.move(x, y);
             turtle.setRotate(heading);
             turtle.setVisible(visible);
-
-            if (penDown) {
+            if (clearScreenFlag) {
+                clearScreen();
+            } else if (penDown && !(oldX==x && oldY==y)) {
                 draw(oldX, oldY, x, y, penSize, penColor);
             }
-        }
-        if (clearScreenFlag) {
-            clearScreen();
-        }
-        else if (penDown  && !(oldX==x && oldY==y)) {
-            draw(oldX, oldY, x, y, penSize, penColor);
         }
     }
 

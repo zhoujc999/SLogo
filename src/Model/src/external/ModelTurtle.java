@@ -21,14 +21,6 @@ public interface ModelTurtle {
      */
     int getID();
 
-    /**
-     * Returns the return value from the last method called on this ModelTurtle so that the Parser can parse any
-     * commands that require this return value.
-     *
-     * @return the return value from the last method called on this ModelTurtle.
-     */
-    double getReturnVal();
-
     //methods below are part of internal Model API
 
     /**

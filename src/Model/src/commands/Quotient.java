@@ -20,4 +20,9 @@ public class Quotient extends BinaryDoubleOperator implements SLogoMathExecutabl
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

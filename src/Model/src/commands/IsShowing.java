@@ -21,4 +21,9 @@ public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoS
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

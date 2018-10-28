@@ -42,4 +42,9 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
         }
         p.parseCommand(commandText.getCommandText());
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }
