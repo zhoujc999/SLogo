@@ -5,7 +5,6 @@ import external.Parse;
 import external.SLogoAbstractExecutable;
 import external.SLogoConsumerReturnable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -16,7 +15,7 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     private String[] variableList;
     private String commandText;
 
-    private UserDefinedCommand commandContent;
+    private CommandTextWrapper commandContent;
     private Consumer<Parse> c;
 
 
@@ -52,7 +51,7 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     private void makeCommandFunction(Parse p) {
-        commandContent = new UserDefinedCommand(variableList, commandText);
+        commandContent = new CommandTextWrapper(commandName, variableList, commandText);
 //        p.addCommand(param1, commandContent);
     }
 }
