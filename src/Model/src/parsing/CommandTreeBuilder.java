@@ -40,40 +40,43 @@ public class CommandTreeBuilder implements TreeBuilder {
         if(type.equals(COMMAND_KEY)){
             return handleCommands(buildingNode, commandNode, currentWrd);
         }
-        else if(type.equals(CONSTANT_KEY)){
-            TreeNode nwNode = new TreeNode(currentWrd);
-            buildingNode.addChild(nwNode);
+        else if(type.equals(CONSTANT_KEY) || type.equals(VARIABLE_KEY)){
+            buildingNode.addChild(new TreeNode(currentWrd));
             return commandNode;
         }
         else if(type.equals(COMMENT_KEY)){
             return createSubTree(buildingNode, commandNode);
         }
-        else if(type.equals(VARIABLE_KEY)){
-            buildingNode.addChild(new TreeNode(currentWrd));
-        }
 //        else if(type.equals(LIST_START_KEY)){
 //            ArrayList<String> listParts = new ArrayList<>();
 //            listParts.add(currentWrd);
 //            String curType = type;
-//            while(!curType.equals(LIST_END_KEY)){
+//            while(commandNode.getData() != null && !curType.equals(LIST_END_KEY)){
 //                listParts.add(commandNode.getData());
-//                curType = getSymbol(mySyntax, commandNode.getData());
+//                curType = myContainer.getType(commandNode.getData());
 //                commandNode = commandNode.getChild();
 //            }
-//
+//            listParts.add(commandNode.getData());
+//            commandNode = commandNode.getChild();
+//            String.join("", listParts);
 //        }
         return null;
     }
 
     private ListNode handleCommands(Node buildingNode, ListNode commandNode, String currentWrd){
-        String translatedWrd = myContainer.getTranslation(currentWrd);
+        String translatedWrd = myContainer.getTranslation(currentWrd.toLowerCase());
         int parameterNumber = myContainer.getParameterCount(translatedWrd);
         TreeNode nwNode = new TreeNode(translatedWrd);
         buildingNode.addChild(nwNode);
         for(int i = 0; i < parameterNumber; i++){
             commandNode = createSubTree(nwNode,commandNode);
+
         }
         return commandNode;
+    }
+
+    private String joinList(ListNode commandNode){
+        return null;
     }
 
     private ListNode buildList(List<String> lst){

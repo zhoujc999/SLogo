@@ -4,6 +4,7 @@ import commandFactory.CommandFactoryInterface;
 import external.Node;
 import external.ResourceContainer;
 import external.TreeExecutor;
+import external.VariableAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,16 @@ import java.util.List;
 public class CommandTreeExecutor implements TreeExecutor {
 
     public static final String COMMAND_KEY = "Command";
+    public static final String VARIABLE_KEY = "Variable";
 
     private CommandFactoryInterface myFactory;
     private ResourceContainer myResources;
+    private VariableAccessor myVars;
     private String replacementValue;
 
-    public CommandTreeExecutor(CommandFactoryInterface factory){
+    public CommandTreeExecutor(CommandFactoryInterface factory, VariableAccessor var){
         myFactory = factory;
+        myVars = var;
     }
 
     @Override
@@ -32,15 +36,20 @@ public class CommandTreeExecutor implements TreeExecutor {
             List<? extends Node> children = nd.getChildren();
             ArrayList<String> parameters = new ArrayList<>();
             if(nd.getData().equals("MakeVariable")){
+                System.out.println("hello");
                 parameters.add(children.get(0).getData());
                 children.remove(children.get(0));
             }
             for(Node child: children) {
+                System.out.println("test");
                 executeSubTree(child);
                 parameters.add(child.getData());
             }
             myFactory.createCommand(nd.getData(), parameters);
             nd.setData(replacementValue);
+        }
+        if(type.equals(VARIABLE_KEY)){
+            nd.setData(myVars.getVariable(nd.getData()));
         }
     }
 
