@@ -1,4 +1,4 @@
-package external;
+package commands;
 
 
 import java.util.Random;

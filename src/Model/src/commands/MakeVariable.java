@@ -18,7 +18,7 @@ public class MakeVariable extends BinaryOperator implements SLogoAbstractExecuta
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = this::makeFunction;
+        c = this::makeVariableFunction;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class MakeVariable extends BinaryOperator implements SLogoAbstractExecuta
         return c;
     }
 
-    private void makeFunction(Parse p) {
+    private void makeVariableFunction(Parse p) {
         p.addVariable(param1, param2);
         p.setReplacementValue(param2);
     }

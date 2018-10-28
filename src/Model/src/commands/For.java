@@ -19,7 +19,6 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private int increment;
     private String commands;
 
-    //private
     private Consumer<Parse> c;
 
 
