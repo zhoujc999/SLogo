@@ -50,6 +50,7 @@ public class CommandTreeBuilder implements TreeBuilder {
         }
         else if(type.equals(VARIABLE_KEY)){
             buildingNode.addChild(new TreeNode(currentWrd));
+            return commandNode;
         }
 //        else if(type.equals(LIST_START_KEY)){
 //            ArrayList<String> listParts = new ArrayList<>();
@@ -66,12 +67,13 @@ public class CommandTreeBuilder implements TreeBuilder {
     }
 
     private ListNode handleCommands(Node buildingNode, ListNode commandNode, String currentWrd){
-        String translatedWrd = myContainer.getTranslation(currentWrd);
+        String translatedWrd = myContainer.getTranslation(currentWrd.toLowerCase());
         int parameterNumber = myContainer.getParameterCount(translatedWrd);
         TreeNode nwNode = new TreeNode(translatedWrd);
         buildingNode.addChild(nwNode);
         for(int i = 0; i < parameterNumber; i++){
             commandNode = createSubTree(nwNode,commandNode);
+
         }
         return commandNode;
     }
