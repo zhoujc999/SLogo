@@ -40,7 +40,7 @@ public class GraphicsWindow extends Pane implements Observer {
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(580, 540);
         //var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
-        addTurtle(0, getPrefWidth()/2, getPrefHeight()/2);
+        addTurtle(0);
 
     }
 
@@ -65,11 +65,15 @@ public class GraphicsWindow extends Pane implements Observer {
         int bgColorB = (int) (state.get("bgColorBVal")/1);
         Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
         int id = (int) (state.get("ID")/1);
-        int active = (int) (state.get("active")/1);
+        boolean active = (state.get("active") == 1);
 
 
         setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
+        if (!myTurtles.containsKey(id)) {
+            addTurtle(id);
+        }
         TurtleView turtle = myTurtles.get(id);
+        turtle.setActiveStatus(active);
         setTurtlePosition(turtle, x, y);
         turtle.setRotate(heading);
         turtle.setVisible(visible);
@@ -104,8 +108,8 @@ public class GraphicsWindow extends Pane implements Observer {
 
     protected void addTurtle(int id, double x, double y) {
         var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), x, y, id);
+        myTurtles.put(id, turtle);
         getChildren().add(turtle);
-        turtle.activate();
     }
 
     protected void addTurtle(int id) {

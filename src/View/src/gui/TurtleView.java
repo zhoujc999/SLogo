@@ -33,8 +33,7 @@ public class TurtleView extends ImageView {
     }
 
     private void toggleActivation() {
-        var window = (GraphicsWindow) getParent();
-        if (window.getTurtles().contains(this)) {
+        if (isActive) {
             System.out.println(getLayoutX());
             deactivate();
         } else {
@@ -50,21 +49,17 @@ public class TurtleView extends ImageView {
         myPenColor = Color.BLACK;
     }
 
-    protected void move(double dx, double dy) {
-        setPosition(getTurtleX() + dx, getTurtleY() + dy);
+    protected void setActiveStatus(boolean status) {
+        isActive = status;
     }
 
-    protected void activate() {
-        var window = (GraphicsWindow) getParent();
-        window.getTurtles().add(this);
+    private void activate() {
         isActive = true;
         setNewSize(ACTIVE_SIZE);
     }
 
-    protected void deactivate() {
-        var window = (GraphicsWindow) getParent();
-        window.getTurtles().remove(this);
-        isActive = 
+    private void deactivate() {
+        isActive = false;
         setNewSize(INACTIVE_SIZE);
     }
 
