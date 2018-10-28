@@ -30,4 +30,9 @@ public class MakeVariable extends BinaryOperator implements SLogoAbstractExecuta
         p.addVariable(param1, param2);
         p.setReplacementValue(param2);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }

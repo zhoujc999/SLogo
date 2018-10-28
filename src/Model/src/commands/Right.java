@@ -20,4 +20,9 @@ public class Right extends UnaryDoubleOperator implements SLogoTurtleExecutable,
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

@@ -20,4 +20,9 @@ public class Sum extends BinaryDoubleOperator implements SLogoMathExecutable, SL
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

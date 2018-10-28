@@ -21,4 +21,9 @@ public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecu
     public String returnValue() {
         return Double.toString(this.result);
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return true;
+    }
 }

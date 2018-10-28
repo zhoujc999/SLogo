@@ -47,4 +47,9 @@ public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogo
     public Consumer<Parse> returnValue() {
         return c;
     }
+
+    @Override
+    public boolean isStringReturnable() {
+        return false;
+    }
 }
