@@ -68,12 +68,12 @@ public class CommandTreeBuilder implements TreeBuilder {
         }
 //        else if(type.equals(GROUP_START_KEY)){
 //            String command = commandNode.getData();
-//            buildingNode.addChild(new TreeNode(command));
-//            buildingNode = buildingNode.getChildren().get(0);
+//            String translated = myContainer.getTranslation(command);
+//            Integer numParams = myContainer.getParameterCount(command);
 //            commandNode = commandNode.getChild();
 //            Pair<List<String>, ListNode> vals = accumulateGroup(commandNode);
-//            buildingNode.addChild(new TreeNode(result.getLeft().toString()));
-//            return result.getRight();
+//
+//            return vals.getRight();
 //        }
         return null;
     }
