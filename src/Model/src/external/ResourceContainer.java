@@ -16,11 +16,6 @@ public interface ResourceContainer {
      */
     public String getTranslation(String word);
 
-    /**
-     * Changes the language used for getting translations
-     * @param nwLang The name of the new language
-     */
-    public void changeLanguage(String nwLang);
 
     /**
      * Returns the number of parameters needed for the given command

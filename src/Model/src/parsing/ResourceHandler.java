@@ -1,12 +1,14 @@
 package parsing;
 
+import external.LanguageInterface;
+import external.ParameterChangeInterface;
 import external.ResourceContainer;
 import javafx.scene.control.Alert;
 
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class ResourceHandler implements ResourceContainer {
+public class ResourceHandler implements ResourceContainer, LanguageInterface, ParameterChangeInterface {
     public static final String PROPERTIES_PATH = "/languages/";
     public static final String SYNTAX_PATH = "/languages/Syntax";
     public static final String PARAMETER_COUNTS_PATH = "/languages/Command";
@@ -74,6 +76,11 @@ public class ResourceHandler implements ResourceContainer {
             return Integer.parseInt(paramMap.get(command));
         }
         return null;
+    }
+
+    @Override
+    public void addCommandParameter(String command, String num) {
+        paramMap.put(command, num);
     }
 
     private void createMap(Map<String, String> map, ResourceBundle bundle){

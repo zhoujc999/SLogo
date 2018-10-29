@@ -40,12 +40,10 @@ public class GUI extends SplitPane {
             "English",
             "Spanish"
     );
-    
-    private final Consumer<String> myParsingFunc;
-    private final ButtonPanel buttonPanel;
-    Supplier<int[][]> penPaletteSupplier;
-    Supplier<int[][]> backgroundPaletteSupplier;
     private String myLanguage;
+    private final Consumer<String> myParsingFunc;
+    private final Consumer<String> myModelLangFunc;
+
     private ResourceBundle myResources;
     private static final Font CODE_FONT = new Font("Courier New", 10);
 
@@ -54,13 +52,15 @@ public class GUI extends SplitPane {
     private TabPane myProjectWindow;
     private DefinitionList myVariables;
     private DefinitionList myCommands;
+    private final ButtonPanel buttonPanel;
     private CommandHistory myCommandHistory;
 
-    public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
+    public GUI(String language, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
-        myParsingFunc = parsingFunc;
-        buttonPanel = new ButtonPanel(language, myResources, parsingFunc, supplierMap);
+        myParsingFunc = stringConsumerMap.get("parsingFunc");
+        myModelLangFunc = stringConsumerMap.get("modelLangFunc");
+        buttonPanel = new ButtonPanel(language, myResources, myParsingFunc, supplierMap);
 
         initializeComponents(language);
         initializeLayout();
@@ -162,6 +162,7 @@ public class GUI extends SplitPane {
    public void setLanguage(String language) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
+        myModelLangFunc.accept(language);
         getItems().clear();
         initializeComponents(language);
         initializeLayout();

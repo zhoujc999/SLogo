@@ -1,9 +1,7 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,7 +17,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private int increment;
     private String commands;
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
@@ -52,16 +50,16 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p) {
-        p.setReplacementValue(ZERO);
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+        t.setReplacementValue(ZERO);
         for (int i = start; i <= stop; i += increment) {
-            p.addVariable(variable, Integer.toString(i));
+            v.addVariable(variable, Integer.toString(i));
             p.parseCommand(commands);
         }
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

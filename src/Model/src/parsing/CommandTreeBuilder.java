@@ -15,6 +15,8 @@ public class CommandTreeBuilder implements TreeBuilder {
     public static final String VARIABLE_KEY = "Variable";
     public static final String LIST_START_KEY = "ListStart";
     public static final String LIST_END_KEY = "ListEnd";
+    public static final String GROUP_START_KEY = "GroupStart";
+    public static final String GROUP_END_KEY = "GroupEnd";
     public static final String DELIMITER_REGEX = "\\n+|\\s+";
 
 
@@ -55,6 +57,15 @@ public class CommandTreeBuilder implements TreeBuilder {
             buildingNode.addChild(new TreeNode(result.getLeft()));
             return result.getRight();
         }
+        else if(type.equals(GROUP_START_KEY)){
+            String command = commandNode.getData();
+            buildingNode.addChild(new TreeNode(command));
+            buildingNode = buildingNode.getChildren().get(0);
+            commandNode = commandNode.getChild();
+            Pair<Double, ListNode> result = sumGroup(new Double(0), commandNode);
+            buildingNode.addChild(new TreeNode(result.getLeft().toString()));
+            return result.getRight();
+        }
         return null;
     }
 
@@ -75,10 +86,21 @@ public class CommandTreeBuilder implements TreeBuilder {
             System.out.println("Error");
         }
         else if(myContainer.getType(commandNode.getData()).equals(LIST_END_KEY)){
-            return new Pair<String, ListNode>(curList + " " + commandNode.getData(), commandNode.getChild());
+            return new Pair<>(curList + " " + commandNode.getData(), commandNode.getChild());
         }
         return joinList(curList + " " + commandNode.getData(), commandNode.getChild());
     }
+
+    private Pair<Double, ListNode> sumGroup(Double num, ListNode commandNode){
+        if(commandNode == null){
+            System.out.println("Error");
+        }
+        else if(myContainer.getType(commandNode.getData()).equals(GROUP_END_KEY)){
+            return new Pair<>(num, commandNode.getChild());
+        }
+        return sumGroup(Double.parseDouble(commandNode.getData()), commandNode.getChild());
+    }
+
 
     private ListNode buildList(List<String> lst){
         ListNode strt = new ListNode();

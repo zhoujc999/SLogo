@@ -1,9 +1,7 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -13,7 +11,7 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
     private CommandTextWrapper commandText;
     private final static String ZERO = "0";
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
     public GenericCommand(List params, CommandTextWrapper command) {
         if (params.size() != command.getNumVariables()) {
@@ -29,15 +27,15 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 
-    private void makeVariableFunction(Parse p) {
-        p.setReplacementValue(ZERO);
+    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+        t.setReplacementValue(ZERO);
         int index = 0;
         for (String name : commandText.getVariableNamesList()) {
-            p.addVariable(name, paramsList.get(index));
+            v.addVariable(name, paramsList.get(index));
             index++;
         }
         p.parseCommand(commandText.getCommandText());
