@@ -51,4 +51,13 @@ public class VariableContainer implements VariableManipulator, VariableAccessor 
     public Iterable<Map.Entry<String, String>> viewVariables() {
         return variableMap.entrySet();
     }
+
+    @Override
+    public Iterable<Map.Entry<String, String>> viewCommands() {
+        HashMap<String, String> ret = new HashMap<>();
+        for(Map.Entry<String, CommandTextWrapper> ent: commandMap.entrySet()){
+            ret.put(ent.getKey(), ent.getValue().getCommandText());
+        }
+        return ret.entrySet();
+    }
 }
