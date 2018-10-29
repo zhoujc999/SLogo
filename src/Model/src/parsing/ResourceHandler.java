@@ -45,7 +45,7 @@ public class ResourceHandler implements ResourceContainer, LanguageInterface, Pa
         if(langMap.containsKey(word)){
             return langMap.get(word);
         }
-        return null;
+        return word;
     }
 
     @Override
