@@ -2,12 +2,11 @@ package commands;
 
 
 import external.*;
-import invoking.Invoker;
 import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static int NUMLOOPITEMS = 2;
     private final static String ZERO = "0";
     private final static int START = 1;
@@ -16,12 +15,6 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
     private String variable;
     private int stop;
     private String commands;
-
-    //private
-
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
-
-
 
     public DoTimes(List params) {
         super(params);
@@ -39,12 +32,6 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
         c = this::loopFunction;
     }
 
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
 
     private String[] breakLoopCommands(String s) {
         return s.split("\\s");
@@ -56,15 +43,5 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
             v.addVariable(variable, Integer.toString(i));
             p.parseCommand(commands);
         }
-    }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
     }
 }

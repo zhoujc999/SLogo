@@ -1,13 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 
-public class ClearScreen extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class ClearScreen extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public ClearScreen(List params) {
         super(params);
@@ -15,15 +15,8 @@ public class ClearScreen extends Operator implements SLogoTurtleExecutable, SLog
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.clearScreen();
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.clearScreen()));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
 
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

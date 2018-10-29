@@ -8,11 +8,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoConsumerReturnable {
+public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 
     private List<String> turtlesIDList;
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
     public Tell(List params) {
         super(params);
@@ -22,13 +21,6 @@ public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoCo
     @Override
     public void execute(ModelTurtle turtle) {
         c = this::tellFunction;
-    }
-
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
     }
 
     private String[] breakIDList(String s) {
@@ -42,17 +34,5 @@ public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoCo
             t.setReplacementValue(turtlesIDList.get(turtlesIDList.size() - 1));
         }
     }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
-    }
-
-
 
 }

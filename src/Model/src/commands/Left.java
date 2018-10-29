@@ -1,28 +1,20 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class Left extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Left extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public Left(List params) {
         super(params);
     }
 
+
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.left(param1);
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.left(param1)));
     }
 }

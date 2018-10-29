@@ -1,14 +1,14 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 import java.util.List;
 
 /**
  * @author jgp17
  */
-public class SetBackground extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class SetBackground extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetBackground(List params) {
         super(params);
@@ -16,19 +16,8 @@ public class SetBackground extends UnaryDoubleOperator implements SLogoTurtleExe
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getBackground().setColor((int) param1);
+        int result = turtle.getBackground().setColor((int) param1);
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(String.valueOf(result));
     }
 
-    /**
-     * Returns the command that from the execution of the command object
-     */
-    @Override
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

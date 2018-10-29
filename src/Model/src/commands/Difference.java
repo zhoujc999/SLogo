@@ -2,11 +2,11 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 
 import java.util.List;
 
-public class Difference extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Difference extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Difference(List params) {
         super(params);
@@ -14,15 +14,8 @@ public class Difference extends BinaryDoubleOperator implements SLogoMathExecuta
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = this.param1 - this.param2;
+        Double result = this.param1 - this.param2;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(result));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

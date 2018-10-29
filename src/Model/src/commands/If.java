@@ -5,13 +5,11 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 
     private double condition;
     private String commands;
-
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
     public If(List params) {
@@ -32,22 +30,5 @@ public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogo
                 c = (p, t, v, pci, inv) -> p.parseCommand(commands);
             }
 
-    }
-
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
     }
 }

@@ -35,12 +35,7 @@ public class Parser implements Observer, Parse {
 
     @Override
     public void update(Observable o, Object arg){
-        if(arg instanceof PentaConsumer){
-            ((PentaConsumer) arg).accept(this, myExecutor,  myVars, myResources, myInvoker);
-        }
-        else{
-            myExecutor.setReplacementValue((String) arg);
-        }
+        ((PentaConsumer) arg).accept(this, myExecutor,  myVars, myResources, myInvoker);
     }
 
     @Override

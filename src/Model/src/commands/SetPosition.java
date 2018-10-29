@@ -1,11 +1,11 @@
 package commands;
 
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 import external.ModelTurtle;
 import java.util.List;
 
-public class SetPosition extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class SetPosition extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetPosition(List params) {
         super(params);
@@ -13,15 +13,6 @@ public class SetPosition extends BinaryDoubleOperator implements SLogoTurtleExec
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.goTo(param1, param2);
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.goTo(param1, param2)));
     }
 }

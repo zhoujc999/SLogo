@@ -1,12 +1,11 @@
 package commands;
 
-import external.ModelTurtle;
-import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.*;
+import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class ArcTangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class ArcTangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public ArcTangent(List params) {
         super(params);
     }
@@ -14,14 +13,6 @@ public class ArcTangent extends UnaryDoubleOperator implements SLogoMathExecutab
     @Override
     public void execute(ModelTurtle turtle) {
         double angle = this.param1 * (Math.PI / 180);
-        this.result = Math.atan(angle);
-    }
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(Math.atan(angle)));
     }
 }

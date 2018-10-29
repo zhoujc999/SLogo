@@ -1,13 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 
-public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public Forward(List params) {
         super(params);
@@ -15,15 +15,7 @@ public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutabl
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.forward(param1);
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.forward(param1)));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }
