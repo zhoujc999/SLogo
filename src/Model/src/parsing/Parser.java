@@ -6,7 +6,6 @@ import commandFactory.CommandFactory;
 import commandFactory.CommandFactoryInterface;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class Parser implements Observer, Parse {
     private CommandFactoryInterface myFactory;
@@ -16,7 +15,7 @@ public class Parser implements Observer, Parse {
     private VariableContainer myVars;
     private ResourceHandler myResources;
 
-    private Node commandTree;
+    private ArrayList<Node> commandTrees;
 
     public Parser(Invokable invoker, String lang){
         myVars = new VariableContainer();
@@ -28,8 +27,8 @@ public class Parser implements Observer, Parse {
 
     @Override
     public void parseCommand(String cmd){
-        commandTree = myBuilder.buildTree(cmd, myResources);
-        myExecutor.executeTree(commandTree.getChildren().get(0), myResources);
+        commandTrees = myBuilder.buildTrees(cmd, myResources);
+        myExecutor.executeTrees(commandTrees, myResources);
     }
 
     @Override

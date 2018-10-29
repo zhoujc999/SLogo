@@ -27,9 +27,11 @@ public class CommandTreeExecutor implements TreeExecutor {
     }
 
     @Override
-    public void executeTree(Node nd, ResourceContainer container) {
+    public void executeTrees(ArrayList<Node> nds, ResourceContainer container) {
         myResources = container;
-        executeSubTree(nd);
+        for(Node nd: nds){
+            executeSubTree(nd);
+        }
     }
 
     private void executeSubTree(Node nd){

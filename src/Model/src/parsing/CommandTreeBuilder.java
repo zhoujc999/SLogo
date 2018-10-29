@@ -27,13 +27,17 @@ public class CommandTreeBuilder implements TreeBuilder {
 
     }
 
-    public Node buildTree(String commands, ResourceContainer cont){
+    public ArrayList<Node> buildTrees(String commands, ResourceContainer cont){
         myContainer = cont;
         ArrayList<String> words = new ArrayList<>(Arrays.asList(commands.split(DELIMITER_REGEX)));
+        ArrayList<Node> ans = new ArrayList<>();
         ListNode frst = buildList(words);
-        TreeNode root = new TreeNode();
-        createSubTree(root, frst);
-        return root;
+        while(frst != null){
+            TreeNode root = new TreeNode();
+            frst = createSubTree(root, frst);
+            ans.add(root.getChildren().get(0));
+        }
+        return ans;
     }
 
     private ListNode createSubTree(Node buildingNode, ListNode commandNode){

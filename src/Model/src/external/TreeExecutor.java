@@ -1,8 +1,10 @@
 package external;
 
+import java.util.ArrayList;
+
 public interface TreeExecutor {
 
-    public void executeTree(Node nd, ResourceContainer container);
+    public void executeTrees(ArrayList<Node> nd, ResourceContainer container);
 
 
     /**
