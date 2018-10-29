@@ -1,12 +1,13 @@
 package commands;
 
-import external.ModelTurtle;
-import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.*;
+import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class And extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class And extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
+    private final static String ZERO = "0";
+    private final static String ONE = "1";
 
     public And(List params) {
         super(params);
@@ -15,20 +16,12 @@ public class And extends BinaryDoubleOperator implements SLogoMathExecutable, SL
     @Override
     public void execute(ModelTurtle turtle) {
         if (param1 != 0 && param2 != 0) {
-            this.result = 1;
+            this.c = (p, t, v, pci, inv) -> t.setReplacementValue(ONE);
         }
         else {
-            this.result = 0;
+            this.c = (p, t, v, pci, inv) -> t.setReplacementValue(ZERO);
         }
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }
 

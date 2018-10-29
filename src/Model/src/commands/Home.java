@@ -1,13 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 
-public class Home extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Home extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
 
     public Home(List params) {
@@ -17,15 +17,6 @@ public class Home extends Operator implements SLogoTurtleExecutable, SLogoString
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.home();
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.home()));
     }
 }

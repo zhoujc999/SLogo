@@ -1,12 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class PenUp extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class PenUp extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
 
     public PenUp(List params) {
@@ -15,15 +15,6 @@ public class PenUp extends Operator implements SLogoTurtleExecutable, SLogoStrin
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getPen().penUp();
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.getPen().penUp()));
     }
 }

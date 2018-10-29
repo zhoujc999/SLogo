@@ -2,26 +2,19 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 
 import java.util.List;
 
-public class NaturalLog extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class NaturalLog extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public NaturalLog(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = Math.log(this.param1);
+        Double result = Math.log(this.param1);
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(result));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

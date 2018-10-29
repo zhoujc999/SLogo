@@ -2,11 +2,13 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 
 import java.util.List;
 
-public class LessThan extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class LessThan extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
+    private final static String ZERO = "0";
+    private final static String ONE = "1";
 
     public LessThan(List params) {
         super(params);
@@ -15,19 +17,10 @@ public class LessThan extends BinaryDoubleOperator implements SLogoMathExecutabl
     @Override
     public void execute(ModelTurtle turtle) {
         if (param1 < param2) {
-            this.result = 1;
+            this.c = (p, t, v, pci, inv) -> t.setReplacementValue(ONE);
         }
         else {
-            this.result = 0;
+            this.c = (p, t, v, pci, inv) -> t.setReplacementValue(ZERO);
         }
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
     }
 }

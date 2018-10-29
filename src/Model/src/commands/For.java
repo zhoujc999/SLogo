@@ -5,7 +5,7 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class For extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class For extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static int NUMLOOPITEMS = 4;
     private final static String ZERO = "0";
 
@@ -15,10 +15,6 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private int stop;
     private int increment;
     private String commands;
-
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
-
-
 
     public For(List params) {
         super(params);
@@ -38,13 +34,6 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
         c = this::loopFunction;
     }
 
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
-
     private String[] breakLoopCommands(String s) {
         return s.split("\\s");
     }
@@ -56,17 +45,5 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
             p.parseCommand(commands);
         }
     }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
-    }
-
-
 }
 

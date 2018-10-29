@@ -7,7 +7,6 @@ import java.util.List;
 public abstract class UnaryDoubleOperator extends UnaryOperator {
 
     protected double param1;
-    protected double result;
 
     public UnaryDoubleOperator(List params) {
         super(params);

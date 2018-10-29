@@ -2,13 +2,13 @@ package commands;
 
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 // equivalent to command "pendown?"
-public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public IsPenDown(List params) {
         super(params);
@@ -16,15 +16,7 @@ public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoS
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getPen().getPenDown();
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.getPen().getPenDown()));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

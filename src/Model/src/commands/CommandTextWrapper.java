@@ -11,7 +11,7 @@ public class CommandTextWrapper {
     private List<String> variables;
     private String commandText;
 
-    public CommandTextWrapper(String name, String[] variableNamesList, String command) {
+    CommandTextWrapper(String name, String[] variableNamesList, String command) {
         commandName = name;
         variables = new ArrayList(Arrays.asList(variableNamesList));
         commandText = command;

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoConsumerReturnable {
+public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 
     private List<String> turtlesIDList;
@@ -29,13 +29,6 @@ public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoCo
         c = this::askFunction;
     }
 
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
-
     private String[] breakIDList(String s) {
         return s.split("\\s");
     }
@@ -47,18 +40,5 @@ public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoCo
         p.parseCommand(commands);
         inv.resetActiveState();
     }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
-    }
-
-
-
 
 }

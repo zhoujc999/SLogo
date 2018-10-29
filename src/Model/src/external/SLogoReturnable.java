@@ -1,13 +1,10 @@
 package external;
 
-import java.util.Objects;
+import parsing.PentaConsumer;
 
-public interface SLogoReturnable <T extends Object> {
-
+public interface SLogoReturnable {
     /**
      * Returns the command that from the execution of the command object
      */
-    public T returnValue();
-
-    public boolean isStringReturnable();
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue();
 }

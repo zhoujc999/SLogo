@@ -5,7 +5,7 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
     private final static String VARIABLE = ":repcount";
     private final static int START = 0;
@@ -13,7 +13,6 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     private int stop;
     private String commands;
 
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
     public Repeat(List params) {
         super(params);
@@ -26,18 +25,9 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
         commands = stripBrackets(param2);
     }
 
-
-
     @Override
     public void execute(ModelTurtle turtle) {
         c = this::loopFunction;
-    }
-
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
     }
 
     private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
@@ -47,15 +37,4 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
             p.parseCommand(commands);
         }
     }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
-    }
-
 }

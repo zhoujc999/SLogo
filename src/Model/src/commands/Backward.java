@@ -1,13 +1,12 @@
 package commands;
 
-import external.ModelTurtle;
-import external.SLogoStringReturnable;
-import external.SLogoTurtleExecutable;
+import external.*;
+import parsing.PentaConsumer;
 
 import java.util.List;
 
 
-public class Backward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class Backward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public Backward(List params) {
         super(params);
@@ -15,15 +14,7 @@ public class Backward extends UnaryDoubleOperator implements SLogoTurtleExecutab
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.back(param1);
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.back(param1)));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }
