@@ -17,8 +17,11 @@ public class StdColorObject implements ColorObject{
     private static final int rIndex = 0;
     private static final int gIndex = 1;
     private static final int bIndex = 2;
-    private double returnVal;
     private int colorIndex;
+
+    public StdColorObject() {
+        colorIndex = 0;
+    }
 
     @Override
     public Map<String, Double> getState(String prefix) {
@@ -49,7 +52,6 @@ public class StdColorObject implements ColorObject{
         colorPalette[index][rIndex] = r;
         colorPalette[index][gIndex] = g;
         colorPalette[index][bIndex] = b;
-        returnVal = index;
         return index;
     }
 
@@ -62,7 +64,6 @@ public class StdColorObject implements ColorObject{
     @Override
     public int setColor(int colorIndex) {
         this.colorIndex = colorIndex;
-        returnVal = colorIndex;
         return this.colorIndex;
 
     }
@@ -72,12 +73,11 @@ public class StdColorObject implements ColorObject{
      */
     @Override
     public int getColor() {
-        returnVal = this.colorIndex;
         return this.colorIndex;
     }
 
     public int[][] getPalette() {
-        return colorPalette;
+        return colorPalette.clone();
     }
 
 

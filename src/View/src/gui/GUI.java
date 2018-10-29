@@ -70,9 +70,9 @@ public class GUI extends SplitPane {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
-        var variables = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        var variables = new VariableList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         variables.save("length", "5");
-        var commands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        var commands = new CommandList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         commands.save("length", "5");
         myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
         myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), variables), new Tab(myResources.getString("CommandTab"), commands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
