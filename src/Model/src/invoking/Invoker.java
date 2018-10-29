@@ -37,6 +37,7 @@ public class Invoker extends Observable implements Invokable{
     }
 
     private void makeTurtle(Integer id){
+        System.out.println("HEllo");
         StdModelTurtle turt = new StdModelTurtle(id);
         myTurtles.put(id, turt);
         activeTurtles.add(id);
@@ -55,6 +56,7 @@ public class Invoker extends Observable implements Invokable{
 
     @Override
     public void activateTurtles(List<String> ids) {
+        System.out.println("helloworld");
         for(Integer oldid: activeTurtles){
             myTurtles.get(oldid).deactivate();
         }
