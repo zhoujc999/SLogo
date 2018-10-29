@@ -1,16 +1,11 @@
 package gui;
 
+import internal.ButtonPanel;
 import internal.CommandHistory;
-import internal.CommandReference;
 import javafx.geometry.*;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 import java.util.Map;
 import java.util.List;
@@ -31,22 +26,23 @@ public class GUI extends SplitPane {
     private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(50, 25);
     private static final Point2D CLEAR_BUTTON_LOCATION = new Point2D(10, 565);
     private static final Dimension2D CLEAR_BUTTON_SIZE = new Dimension2D(50, 25);
-    private static final Point2D BUTTON_PANEL_LOCATION = new Point2D(600, 50);
-    private static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(190, 200);
+    public static final Point2D BUTTON_PANEL_LOCATION = new Point2D(600, 50);
+    public static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(190, 200);
 
     private static final double HORIZONTAL_DIVIDER_POSITION = 0.9;
     private static final double VERTICAL_DIVIDER_POSITION = 0.75;
 
-    private static final double SPACING = 10;
+    public static final double SPACING = 10;
     private static final double DEFINITION_LIST_COLUMN_WIDTH = 100;
-    private static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
-    private static final String TURTLE_IMAGES = "/gui/TurtleImages/";
-    private static final List<String> RECOGNIZED_LANGUAGES = List.of(
+    public static final String DEFAULT_RESOURCES = "/gui/GUIProperties/GUI";
+    public static final String TURTLE_IMAGES = "/gui/TurtleImages/";
+    public static final List<String> RECOGNIZED_LANGUAGES = List.of(
             "English",
             "Spanish"
     );
     
     private final Consumer<String> myParsingFunc;
+    private final ButtonPanel buttonPanel;
     Supplier<int[][]> penPaletteSupplier;
     Supplier<int[][]> backgroundPaletteSupplier;
     private String myLanguage;
@@ -59,14 +55,12 @@ public class GUI extends SplitPane {
     private DefinitionList myVariables;
     private DefinitionList myCommands;
     private CommandHistory myCommandHistory;
-    private CommandReference myCommandReference;
 
     public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
         myParsingFunc = parsingFunc;
-        penPaletteSupplier = supplierMap.get("penPalette");
-        backgroundPaletteSupplier = supplierMap.get("backgroundPalette");
+        buttonPanel = new ButtonPanel(language, myResources, parsingFunc, supplierMap);
 
         initializeComponents(language);
         initializeLayout();
@@ -76,7 +70,6 @@ public class GUI extends SplitPane {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
-        myCommandReference = new CommandReference(language);
         myVariables = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
         myVariables.save("length", "5");
         myCommands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
@@ -92,7 +85,7 @@ public class GUI extends SplitPane {
         commandControl.setAlignment(Pos.CENTER);
         var commandPanel = new HBox(commandControl, myCommandWindow);
         commandPanel.setSpacing(SPACING);
-        var sidePanel = new VBox(buttonPanel(), myProjectWindow);
+        var sidePanel = new VBox(buttonPanel, myProjectWindow);
         var mainPanel = new SplitPane(myGraphicsWindow, commandPanel);
 
         mainPanel.setDividerPosition(0, HORIZONTAL_DIVIDER_POSITION);
@@ -135,144 +128,11 @@ public class GUI extends SplitPane {
         return button;
     }
 
-    private GridPane buttonPanel() {
-        var buttonPanel = new GridPane();
-        buttonPanel.setLayoutX(BUTTON_PANEL_LOCATION.getX());
-        buttonPanel.setLayoutY(BUTTON_PANEL_LOCATION.getY());
-        buttonPanel.setPrefSize(BUTTON_PANEL_SIZE.getWidth(), BUTTON_PANEL_SIZE.getHeight());
-        buttonPanel.setHgap(SPACING);
-        buttonPanel.setVgap(SPACING);
-        buttonPanel.setPadding(new Insets(SPACING));
-
-        buttonPanel.addColumn(0,
-                new Text(myResources.getString("BackgroundPicker")),
-                new Text(myResources.getString("TurtlePicker")),
-                new Text(myResources.getString("PenPicker")),
-                new Text(myResources.getString("LanguagePicker")));
-
-        buttonPanel.addColumn(1,
-                backgroundPicker(),
-                turtlePicker(),
-                penPicker(),
-                languagePicker(),
-                colorComboBox(penPaletteSupplier),
-                colorComboBox(backgroundPaletteSupplier)
-        );
-
-        buttonPanel.add(referenceButton(), 0, buttonPanel.getRowCount(), buttonPanel.getColumnCount(), 1);
-        for (Node node: buttonPanel.getChildren()) {
-            buttonPanel.setHalignment(node, HPos.CENTER);
-        }
-
-        return buttonPanel;
-    }
-
-    private ColorPicker backgroundPicker() {
-        var picker = new ColorPicker(Color.WHITE);
-        picker.setStyle("-fx-color-label-visible: false");
-        picker.setOnAction(e -> myGraphicsWindow.setBackground(picker.getValue()));
-        return picker;
-    }
-
-    private ComboBox turtlePicker() {
-        var picker = new ComboBox<String>();
-        var resource = ResourceBundle.getBundle(DEFAULT_RESOURCES + "Turtles" + myLanguage);
-
-        var images = resource.getKeys();
-        while (images.hasMoreElements()) {
-            picker.getItems().add(images.nextElement());
-        }
-
-        picker.setOnAction(e -> {
-            String filename = TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
-            transformTurtles(new ImageView(getClass().getResource(filename).toExternalForm()));
-        });
-        return picker;
-
-    }
-
-    private void transformTurtles(ImageView img) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
-            turtle.setImage(img.getImage());
-        }
-    }
-
-    private ComboBox colorComboBox(Supplier<int[][]> getPalette) {
-        var picker = new ComboBox<Integer>();
-        int[][] paletteAsRGB = getPalette.get();
-        int numColors = paletteAsRGB.length;
-        Color[] colorPalette = new Color[numColors];
-        for (int i = 0; i<paletteAsRGB.length; i++) {
-            int[] rgbArray = paletteAsRGB[i];
-            colorPalette[i] = Color.rgb(rgbArray[0], rgbArray[1], rgbArray[2]);
-            picker.getItems().add(i);
-        }
-//        picker.setValue(0);
-        picker.setCellFactory(getColorPickerCellFactory(colorPalette));
-        return picker;
-    }
-
-    private Callback<ListView<Integer>, ListCell<Integer>> getColorPickerCellFactory(Color[] colorPalette) {
-        Callback cellFactory = new Callback<ListView<Integer>, ListCell<Integer>>() {
-            @Override
-            public ListCell<Integer> call(ListView<Integer> param) {
-                return new ListCell<Integer>() {
-                    { super.setPrefWidth(100); }
-                    @Override
-                    public void updateItem(Integer item,
-                                           boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(item + "");
-                            setTextFill(colorPalette[item]);
-                        } else {
-                            setText(null);
-                        }
-                    }
-                };
-            }
-        };
-        return cellFactory;
-    }
-
-    private ColorPicker penPicker() {
-        var picker = new ColorPicker(Color.BLACK);
-        picker.setStyle("-fx-color-label-visible: false ;");
-        picker.setOnAction(e -> setTurtlePens(picker.getValue()));
-        return picker;
-    }
-
-    private void setTurtlePens(Color color) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
-            turtle.setPenColor(color);
-        }
-    }
-
-    private ComboBox languagePicker() {
-        var picker = new ComboBox<String>();
-        picker.getItems().addAll(RECOGNIZED_LANGUAGES);
-        picker.setOnAction(e -> setLanguage(picker.getValue()));
-        return picker;
-    }
-
-    private Button referenceButton() {
-        var button = new Button(myResources.getString("ReferenceButton"));
-        button.setOnAction(e -> myCommandReference.show());
-        return button;
-    }
-
     /**
      * Access GUI's CommandHistory.
      */
     public CommandHistory getCommandHistory() {
         return myCommandHistory;
-    }
-
-    /**
-     * Access GUI's CommandReference.
-     */
-    public CommandReference getCommandReference() {
-        return myCommandReference;
     }
 
     /**
@@ -299,13 +159,11 @@ public class GUI extends SplitPane {
     /**
      * Sets the language of the text in CommandReference.
      */
-    void setLanguage(String language) {
-        myCommandReference.setLanguage(language);
+   public void setLanguage(String language) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
         getItems().clear();
         initializeComponents(language);
         initializeLayout();
     }
-
 }

@@ -23,6 +23,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
     private static final String ID_KEY = "ID";
     private static final String ACTIVE_KEY = "active";
+    public static final int NINETY_DEGREES = 90;
     private static int numTurtles;
     private static StdModelBackground theBackground = new StdModelBackground();
     private int TURTLE_ID;
@@ -80,7 +81,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
      */
     @Override
     public HashMap<String, Double> getState() {
-        HashMap<String, Double> turtleState = new HashMap<String, Double>();
+        HashMap<String, Double> turtleState = new HashMap<>();
         turtleState.put(ID_KEY, (double) TURTLE_ID);
         turtleState.put(XPOS_KEY, myXPos);
         turtleState.put(YPOS_KEY, myYPos);
@@ -94,8 +95,9 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     }
 
     private double getActiveAsDouble() {
-        if (active)
+        if (active) {
             return 1.0;
+        }
         return 0.0;
     }
 
@@ -117,8 +119,8 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public double forward(double pixels) {
         HashMap<String, Double> dataMap = getOldXYMap();
-        double xDist = pixels*Math.cos(Math.toRadians(myHeading - 90));
-        double yDist = pixels*Math.sin(Math.toRadians(myHeading - 90));
+        double xDist = pixels*Math.cos(Math.toRadians(myHeading - NINETY_DEGREES));
+        double yDist = pixels*Math.sin(Math.toRadians(myHeading - NINETY_DEGREES));
         myXPos += xDist;
         myYPos += yDist;
         notifyOfState(dataMap);
@@ -189,7 +191,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         HashMap<String, Double> dataMap = getOldXYMap();
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
-        double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + 90;
+        double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + NINETY_DEGREES;
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         notifyOfState(dataMap);
