@@ -1,7 +1,9 @@
 package external;
 
+import java.util.ArrayList;
+
 public interface TreeBuilder {
 
-    public Node buildTree(String commands, ResourceContainer cont);
+    public ArrayList<Node> buildTrees(String commands, ResourceContainer cont);
 
 }
