@@ -26,9 +26,11 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     private String stripBrackets(String s) {
-        return s.substring(1, s.length() - 1);
+        String newS;
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
+        return newS;
     }
-
     private String[] breakLoopCommands(String s) {
         return s.split("\\s");
     }
