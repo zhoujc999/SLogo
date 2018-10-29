@@ -16,19 +16,20 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public static final String OLD_YPOS_KEY = "oldYPos";
     public static final String XPOS_KEY = "xPos";
     public static final String YPOS_KEY = "yPos";
+    public static final String SHAPE_INDEX_KEY = "shapeIndex";
     public static final String HEADING_KEY = "Heading";
     public static final String SHOWING_KEY = "showing";
     public static final String CLEARSCREEN_KEY = "ClearScreen";
     public static final String X_DISPLACEMENT_KEY = "xDisplacement";
     public static final String Y_DISPLACEMENT_KEY = "yDisplacement";
-    private static final String ID_KEY = "ID";
-    private static final String ACTIVE_KEY = "active";
+    public static final String ID_KEY = "ID";
+    public static final String ACTIVE_KEY = "active";
     public static final int NINETY_DEGREES = 90;
-    private static final String[] POSSIBLE_SHAPE_NAMES = {"Black","Blue","Brown","Empty","Gray", "Green", "Indigo",
-            "LightBlue", "LightGreen", "Orange", "Pink","Purple", "Red", "White", "Yellow"};
+
     private static int numTurtles;
     private static StdModelBackground theBackground = new StdModelBackground();
     private int TURTLE_ID;
+    private int shapeIndex;
     private double myXPos;
     private double myYPos;
     private double myHeading;
@@ -46,6 +47,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     public StdModelTurtle(int id) {
         numTurtles++;
         TURTLE_ID = id;
+        shapeIndex = 0;
         myXPos = 0;
         myYPos = 0;
         myHeading = 0;
@@ -87,6 +89,7 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         turtleState.put(ID_KEY, (double) TURTLE_ID);
         turtleState.put(XPOS_KEY, myXPos);
         turtleState.put(YPOS_KEY, myYPos);
+        turtleState.put(SHAPE_INDEX_KEY, (double) shapeIndex);
         turtleState.put(HEADING_KEY, myHeading);
         turtleState.put(SHOWING_KEY, (double) showing);
         turtleState.put(CLEARSCREEN_KEY, (double) clearScreen);
@@ -269,6 +272,18 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         return dist;
     }
 
+    /**
+     * sets the index at which
+     *
+     * @param index the index at which the desired shape can be found in the list of possible shapes
+     * @return the given index
+     */
+    @Override
+    public int setShapeIndex(int index) {
+        shapeIndex = index;
+        return shapeIndex;
+    }
+
     public void activate() {
         active = true;
     }
@@ -307,6 +322,17 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     @Override
     public int getShowing() {
         return showing;
+    }
+
+    /**
+     * return the index at which the turtle's shape can be found in the list of possible shapes.
+     * This list is a constant in the GUI.
+     *
+     * @return the index at which the turtle's shape can be found in the list of possible shapes
+     */
+    @Override
+    public int getShapeIndex() {
+        return shapeIndex;
     }
 
     /**
