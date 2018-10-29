@@ -1,12 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetTowards(List params) {
         super(params);
@@ -14,16 +14,7 @@ public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecu
 
     @Override
     public void execute(ModelTurtle turtle) {
-
-        this.result = turtle.towards(param1, param2);
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.towards(param1, param2)));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

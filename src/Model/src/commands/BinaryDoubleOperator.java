@@ -8,7 +8,6 @@ public abstract class BinaryDoubleOperator extends BinaryOperator {
 
     protected double param1;
     protected double param2;
-    protected double result;
 
     public BinaryDoubleOperator(List params) {
         super(params);

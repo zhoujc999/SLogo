@@ -1,13 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 // equivalent to command "showing?"
-public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public IsShowing(List params) {
         super(params);
@@ -15,15 +15,6 @@ public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoS
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getShowing();
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.getShowing()));
     }
 }

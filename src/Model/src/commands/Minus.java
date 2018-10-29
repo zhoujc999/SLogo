@@ -2,11 +2,11 @@ package commands;
 
 import external.ModelTurtle;
 import external.SLogoMathExecutable;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 
 import java.util.List;
 
-public class Minus extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoStringReturnable {
+public class Minus extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Minus(List params) {
         super(params);
@@ -14,15 +14,8 @@ public class Minus extends UnaryDoubleOperator implements SLogoMathExecutable, S
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = -this.param1;
+        Double result = -this.param1;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(result));
     }
 
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
-    }
 }

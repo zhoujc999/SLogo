@@ -5,12 +5,13 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerReturnable {
-    private List<String> paramsList;
-    private CommandTextWrapper commandText;
+public class GenericCommand implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
+    private List<String> paramsList;
+    private CommandTextWrapper commandText;
+
+    protected PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
     public GenericCommand(List params, CommandTextWrapper command) {
         if (params.size() != command.getNumVariables()) {
@@ -25,11 +26,6 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
         c = this::makeVariableFunction;
     }
 
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
     private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         int index = 0;
@@ -38,10 +34,12 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
             index++;
         }
         p.parseCommand(commandText.getCommandText());
+        for (String name : commandText.getVariableNamesList()) {
+            v.removeVariable(name);
+        }
     }
 
-    @Override
-    public boolean isStringReturnable() {
-        return false;
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
+        return c;
     }
 }

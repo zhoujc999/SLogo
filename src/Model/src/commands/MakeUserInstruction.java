@@ -5,16 +5,15 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class MakeUserInstruction extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class MakeUserInstruction extends TernaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
+    private final static String ONE = "1";
 
     private String commandName;
     private String[] variableList;
     private String commandText;
 
     private CommandTextWrapper commandContent;
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
-
 
 
     public MakeUserInstruction(List params) {
@@ -25,12 +24,6 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
 
     }
 
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
     private String[] breakLoopCommands(String s) {
         return s.split("\\s");
     }
@@ -40,19 +33,12 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
         c = this::makeCommandFunction;
     }
 
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
 
     private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
+        t.setReplacementValue(ZERO);
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
         v.addCommand(param1, commandContent);
         pci.addCommandParameter(param1, String.valueOf(commandContent.getNumVariables()));
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
+        t.setReplacementValue(ONE);
     }
 }

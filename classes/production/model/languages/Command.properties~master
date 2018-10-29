@@ -1,0 +1,5 @@
+0 = PenDown|PenUp|ShowTurtle|HideTurtle|Home|ClearScreen|XCoordinate|YCoordinate|Heading|IsPenDown|IsShowing|Pi|GetPenColor|GetShape|ID|Turtles
+1 = Forward|Backward|Left|Right|SetHeading|Random|Sine|Cosine|Tangent|ArcTangent|NaturalLog|Not|SetBackground|SetPenColor|SetPenSize|SetShape|Tell
+2 = SetTowards|SetPosition|Sum|Difference|Product|Quotient|Remainder|Minus|Power|LessThan|GreaterThan|Equal|NotEqual|And|Or|MakeVariable|Repeat|DoTimes|For|If|Ask|AskWith
+3 = IfElse|MakeUserInstruction
+

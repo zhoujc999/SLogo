@@ -5,15 +5,12 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
-public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
+public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 
     private double condition;
     private String trueCommands;
     private String falseCommands;
-
-    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
-
 
     public IfElse(List params) {
         super(params);
@@ -36,22 +33,5 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
         else {
             c = (p, t, v, pci, inv) -> p.parseCommand(falseCommands);
         }
-    }
-
-    private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
-    }
-
-    @Override
-    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
-        return c;
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return false;
     }
 }

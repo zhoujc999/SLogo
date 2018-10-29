@@ -1,12 +1,12 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-public class YCoordinate extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class YCoordinate extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public YCoordinate(List params) {
         super(params);
@@ -14,15 +14,6 @@ public class YCoordinate extends Operator implements SLogoTurtleExecutable, SLog
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getY();
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.getY()));
     }
 }

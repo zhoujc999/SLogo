@@ -1,13 +1,13 @@
 package commands;
 
 import external.ModelTurtle;
-import external.SLogoStringReturnable;
+import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
 
-public class HideTurtle extends Operator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class HideTurtle extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public HideTurtle(List params) {
         super(params);
@@ -16,15 +16,6 @@ public class HideTurtle extends Operator implements SLogoTurtleExecutable, SLogo
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.hide();
-    }
-
-    public String returnValue() {
-        return Double.toString(this.result);
-    }
-
-    @Override
-    public boolean isStringReturnable() {
-        return true;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(turtle.hide()));
     }
 }
