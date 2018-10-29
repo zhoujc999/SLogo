@@ -15,6 +15,8 @@ public class CommandTreeBuilder implements TreeBuilder {
     public static final String VARIABLE_KEY = "Variable";
     public static final String LIST_START_KEY = "ListStart";
     public static final String LIST_END_KEY = "ListEnd";
+    public static final String GROUP_START_KEY = "GroupStart";
+    public static final String GROUP_END_KEY = "GroupEnd";
     public static final String DELIMITER_REGEX = "\\n+|\\s+";
 
 
@@ -54,6 +56,9 @@ public class CommandTreeBuilder implements TreeBuilder {
             Pair<String, ListNode> result = joinList("[", commandNode);
             buildingNode.addChild(new TreeNode(result.getLeft()));
             return result.getRight();
+        }
+        else if(type.equals(GROUP_START_KEY)){
+
         }
         return null;
     }
