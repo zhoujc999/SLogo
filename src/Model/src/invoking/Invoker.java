@@ -11,6 +11,7 @@ public class Invoker extends Observable implements Invokable{
     private Parse myParse;
     private Map<Integer, StdModelTurtle> myTurtles;
     private List<Integer> activeTurtles;
+    private List<Integer> savedTurtles;
 
     public Invoker(){
         activeTurtles = new ArrayList<>();
@@ -73,6 +74,16 @@ public class Invoker extends Observable implements Invokable{
     @Override
     public String getNumTurtles() {
         return String.valueOf(myTurtles.entrySet().size());
+    }
+
+    @Override
+    public void saveActiveState() {
+        savedTurtles = new ArrayList<>(activeTurtles);
+    }
+
+    @Override
+    public void resetActiveState() {
+        activeTurtles = new ArrayList<>(savedTurtles);
     }
 
     public int[][] getBackgroundPalette() {

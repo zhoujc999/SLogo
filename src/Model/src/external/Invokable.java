@@ -27,4 +27,14 @@ public interface Invokable {
      */
     public String getNumTurtles();
 
+    /**
+     * Saves the current active turtles
+     */
+    public void saveActiveState();
+
+    /**
+     * Resets the currently active turtles
+     */
+    public void resetActiveState();
+
 }

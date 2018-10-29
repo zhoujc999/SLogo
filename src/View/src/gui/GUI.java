@@ -41,6 +41,8 @@ public class GUI extends SplitPane {
             "English",
             "Spanish"
     );
+    public static final String[] POSSIBLE_SHAPE_NAMES = {"Black","Blue","Brown","Empty","Gray", "Green", "Indigo",
+            "LightBlue", "LightGreen", "Orange", "Pink","Purple", "Red", "White", "Yellow"};
     private String myLanguage;
 
     private final Map<String, Consumer<String>> myConsumers;

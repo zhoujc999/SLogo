@@ -22,6 +22,7 @@ public class Equal extends BinaryDoubleOperator implements SLogoMathExecutable, 
         }
     }
 
+    
     public String returnValue() {
         return Double.toString(this.result);
     }
