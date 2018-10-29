@@ -79,7 +79,9 @@ public class GUI extends SplitPane {
     private void initializeComponents(String language) {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
-        myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
+        if (myGraphicsWindow == null) {
+            myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
+        }
         myVariables = new VariableList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         myCommands = new CommandList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
