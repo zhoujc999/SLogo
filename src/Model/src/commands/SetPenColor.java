@@ -3,20 +3,18 @@ package commands;
 import external.ModelTurtle;
 import external.SLogoStringReturnable;
 import external.SLogoTurtleExecutable;
+
 import java.util.List;
 
-/**
- * @author jgp17
- */
-public class SetBackground extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
+public class SetPenColor extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoStringReturnable {
 
-    public SetBackground(List params) {
+    public SetPenColor(List params) {
         super(params);
     }
 
     @Override
     public void execute(ModelTurtle turtle) {
-        this.result = turtle.getBackground().setColor((int) param1);
+        this.result = turtle.getPen().setColor((int) param1);
     }
 
     /**
