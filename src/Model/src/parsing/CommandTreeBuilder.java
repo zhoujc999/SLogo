@@ -18,7 +18,10 @@ public class CommandTreeBuilder implements TreeBuilder {
     public static final String LIST_END_KEY = "ListEnd";
     public static final String GROUP_START_KEY = "GroupStart";
     public static final String GROUP_END_KEY = "GroupEnd";
-    public static final String DELIMITER_REGEX = "\\n+|\\s+";
+    public static final String WHITESPACE_KEY = "Whitespace";
+    public static final String NEW_LINE_KEY = "Newline";
+    public static final String DELIMITER_REGEX = "(\\n|\\s)+|(\\s|\\n)+";
+    public static final String EMPTY_KEY = "";
 
 
     private ResourceContainer myContainer;
@@ -34,6 +37,7 @@ public class CommandTreeBuilder implements TreeBuilder {
         ListNode frst = buildList(words);
         while(frst != null){
             TreeNode root = new TreeNode();
+            System.out.println(frst.getData());
             frst = createSubTree(root, frst);
             ans.add(root.getChildren().get(0));
         }
@@ -54,11 +58,11 @@ public class CommandTreeBuilder implements TreeBuilder {
             buildingNode.addChild(new TreeNode(currentWrd));
             return commandNode;
         }
-        else if(type.equals(COMMENT_KEY)){
+        else if(type.equals(COMMENT_KEY) || type.equals(NEW_LINE_KEY) || type.equals(WHITESPACE_KEY)){
             return createSubTree(buildingNode, commandNode);
         }
         else if(type.equals(LIST_START_KEY)){
-            Pair<String, ListNode> result = joinList("[", commandNode);
+            Pair<String, ListNode> result = joinList("[", commandNode, 1);
             buildingNode.addChild(new TreeNode(result.getLeft()));
             return result.getRight();
         }
@@ -95,14 +99,20 @@ public class CommandTreeBuilder implements TreeBuilder {
         return commandNode;
     }
 
-    private Pair<String, ListNode> joinList(String curList, ListNode commandNode){
+    private Pair<String, ListNode> joinList(String curList, ListNode commandNode, int numOpen){
         if(commandNode == null){
             System.out.println("Error");
         }
-        else if(myContainer.getType(commandNode.getData()).equals(LIST_END_KEY)){
+        else if(myContainer.getType(commandNode.getData()).equals(LIST_END_KEY) && numOpen == 1){
             return new Pair<>(curList + " " + commandNode.getData(), commandNode.getChild());
         }
-        return joinList(curList + " " + commandNode.getData(), commandNode.getChild());
+        else if(myContainer.getType(commandNode.getData()).equals(LIST_END_KEY) && numOpen != 1){
+            return joinList(curList + " " + commandNode.getData(), commandNode.getChild(), numOpen - 1);
+        }
+        else if(myContainer.getType(commandNode.getData()).equals(LIST_START_KEY)){
+            return joinList(curList + " " + commandNode.getData(), commandNode.getChild(), numOpen + 1);
+        }
+        return joinList(curList + " " + commandNode.getData(), commandNode.getChild(), numOpen);
     }
 
     private Pair<Double, ListNode> sumGroup(Double num, ListNode commandNode){
@@ -121,8 +131,10 @@ public class CommandTreeBuilder implements TreeBuilder {
         ListNode iter = strt;
 
         for(String str: lst){
-            iter.setChild(new ListNode(str));
-            iter = iter.getChild();
+            if(!str.equals(EMPTY_KEY)){
+                iter.setChild(new ListNode(str));
+                iter = iter.getChild();
+            }
         }
         return strt.getChild();
     }
