@@ -36,16 +36,16 @@ public class ButtonPanel extends GridPane {
         this.setPadding(new Insets(gui.GUI.SPACING));
         this.addColumn(0,
                 new Text(myResources.getString("BackgroundPicker")),
-                new Text(myResources.getString("TurtlePicker")),
+//                new Text(myResources.getString("TurtlePicker")),
                 new Text(myResources.getString("PenPicker")),
                 new Text(myResources.getString("LanguagePicker")));
         this.addColumn(1,
                 backgroundPicker(),
-                turtlePicker(),
+//                turtlePicker(),
                 penPicker(),
                 languagePicker(),
-                colorComboBox(supplierMap.get("penPalette")),
-                colorComboBox(supplierMap.get("backgroundPalette"))
+                colorComboBox(supplierMap.get("penPalette"), "SetPenColor"),
+                colorComboBox(supplierMap.get("backgroundPalette"), "SetBackground")
         );
         this.add(referenceButton(), 0, this.getRowCount(), this.getColumnCount(), 1);
         for (Node node : this.getChildren()) {
@@ -59,28 +59,27 @@ public class ButtonPanel extends GridPane {
         return picker;
     }
 
-    ComboBox turtlePicker() {
-        var picker = new ComboBox<String>();
-        var resource = ResourceBundle.getBundle(gui.GUI.DEFAULT_RESOURCES + "Turtles" + myLanguage);
+//    ComboBox turtlePicker() {
+//        var picker = new ComboBox<String>();
+//        var resource = ResourceBundle.getBundle(gui.GUI.DEFAULT_RESOURCES + "Turtles" + myLanguage);
+//
+//        var images = resource.getKeys();
+//        while (images.hasMoreElements()) {
+//            picker.getItems().add(images.nextElement());
+//        }
+//
+//        picker.setOnAction(e -> {
+//            String filename = gui.GUI.TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
+//            transformTurtles(new ImageView(this.getClass().getResource(filename).toExternalForm()));
+//        });
+//        return picker;
+//
+//    }
+//
+//    void transformTurtles(ImageView img) {
+//    }
 
-        var images = resource.getKeys();
-        while (images.hasMoreElements()) {
-            picker.getItems().add(images.nextElement());
-        }
-
-        picker.setOnAction(e -> {
-            String filename = gui.GUI.TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
-            transformTurtles(new ImageView(this.getClass().getResource(filename).toExternalForm()));
-        });
-        return picker;
-
-    }
-
-    void transformTurtles(ImageView img) {
-//implement shape
-    }
-
-    ComboBox colorComboBox(Supplier<int[][]> getPalette) {
+    ComboBox colorComboBox(Supplier<int[][]> getPalette, String colorObjectRef) {
         var picker = new ComboBox<Integer>();
         int[][] paletteAsRGB = getPalette.get();
         int numColors = paletteAsRGB.length;
@@ -92,6 +91,7 @@ public class ButtonPanel extends GridPane {
         }
 //        picker.setValue(0);
         picker.setCellFactory(getColorPickerCellFactory(colorPalette));
+        picker.setOnAction(e -> myParsingFunc.accept(colorObjectRef +picker.getValue()));
         return picker;
     }
 
@@ -105,8 +105,7 @@ public class ButtonPanel extends GridPane {
                     }
 
                     @Override
-                    public void updateItem(Integer item,
-                                           boolean empty) {
+                    public void updateItem(Integer item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
                             setText(item + "");
@@ -124,7 +123,7 @@ public class ButtonPanel extends GridPane {
     ColorPicker penPicker() {
         var picker = new ColorPicker(Color.BLACK);
         picker.setStyle("-fx-color-label-visible: false ;");
-//        picker.setOnAction(e -> myParsingFunc.accept("" +picker.getValue()));
+//        picker.setOnAction(e -> myParsingFunc.accept("pc " +picker.getValue()));
         return picker;
     }
 

@@ -24,6 +24,8 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
     private static final String ID_KEY = "ID";
     private static final String ACTIVE_KEY = "active";
     public static final int NINETY_DEGREES = 90;
+    private static final String[] POSSIBLE_SHAPE_NAMES = {"Black","Blue","Brown","Empty","Gray", "Green", "Indigo",
+            "LightBlue", "LightGreen", "Orange", "Pink","Purple", "Red", "White", "Yellow"};
     private static int numTurtles;
     private static StdModelBackground theBackground = new StdModelBackground();
     private int TURTLE_ID;
