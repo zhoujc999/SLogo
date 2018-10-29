@@ -30,7 +30,8 @@ public class Main extends Application {
         Parser myParser = new Parser(invoker, DEFAULT_LANGUAGE);
         ( (Invoker) invoker ).setMyParse(myParser);
         Map<String, Supplier> supplierMap = Map.of("penPalette", ( (Invoker) invoker )::getPenPalette,
-                "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette);
+                "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette,
+                "variableSupplier", () -> myParser.getVariableAccessor().viewVariables());
         Map<String, Consumer<String>> stringConsumerMap = Map.of("parsingFunc", myParser::parseCommand,
                 "modelLangFunc", lang -> myParser.getLanguageInterface().changeLanguage(lang));
         GUI gui = new GUI(DEFAULT_LANGUAGE, stringConsumerMap, supplierMap);
