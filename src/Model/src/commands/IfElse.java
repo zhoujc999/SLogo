@@ -1,10 +1,9 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
@@ -13,7 +12,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     private String trueCommands;
     private String falseCommands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
     public IfElse(List params) {
@@ -30,24 +29,24 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = (p, t, v, r) -> t.setReplacementValue(ZERO);
+        c = (p, t, v, pci, inv) -> t.setReplacementValue(ZERO);
         if (condition != 0) {
-            c = (p, t, v, r) -> p.parseCommand(trueCommands);
+            c = (p, t, v, pci, inv) -> p.parseCommand(trueCommands);
         }
         else {
-            c = (p, t, v, r) -> p.parseCommand(falseCommands);
+            c = (p, t, v, pci, inv) -> p.parseCommand(falseCommands);
         }
     }
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("\\s*\\[\\s*", "");
-        newS = newS.replaceAll("\\s*\\]\\s*", "");
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
         return newS;
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 

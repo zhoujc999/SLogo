@@ -1,5 +1,6 @@
 package gui;
 
+import internal.TurtleView;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -44,7 +45,7 @@ public class GraphicsWindow extends Pane implements Observer {
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(SIZE.getWidth(), SIZE.getHeight());
         //var primaryTurtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm());
-        addTurtle(0);
+        addTurtle(1);
     }
 
     @Override
@@ -114,7 +115,7 @@ public class GraphicsWindow extends Pane implements Observer {
     /**
      * Accesses the current turtle that the user controls.
      */
-    protected Map<Integer, TurtleView> getTurtles() {
+    public Map<Integer, TurtleView> getTurtles() {
         return myTurtles;
     }
 

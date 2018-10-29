@@ -1,12 +1,10 @@
 package external;
 
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
-import java.util.function.Consumer;
-
-public interface SLogoConsumerReturnable extends SLogoReturnable<QuaConsumer> {
+public interface SLogoConsumerReturnable extends SLogoReturnable<PentaConsumer> {
     /**
      * Returns the command that from the execution of the command object
      */
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue();
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue();
 }

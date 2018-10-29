@@ -1,5 +1,6 @@
 package internal;
 
+import gui.GraphicsWindow;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -18,13 +19,15 @@ import java.util.function.Supplier;
 public class ButtonPanel extends GridPane {
     String myLanguage;
     ResourceBundle myResources;
+    GraphicsWindow myGraphicsWindow;
     Consumer<String> myParsingFunc;
     Consumer<String> mySetLangFunc;
     private CommandReference myCommandReference;
 
-    public ButtonPanel(String language, ResourceBundle resources, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
+    public ButtonPanel(String language, ResourceBundle resources, GraphicsWindow graphicsWindow, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
         myLanguage = language;
         myResources = resources;
+        myGraphicsWindow = graphicsWindow;
         myParsingFunc = stringConsumerMap.get("parsingFunc");
         mySetLangFunc = stringConsumerMap.get("setLangFunc");
         myCommandReference = new CommandReference(myLanguage);
@@ -36,16 +39,14 @@ public class ButtonPanel extends GridPane {
         this.setPadding(new Insets(gui.GUI.SPACING));
         this.addColumn(0,
                 new Text(myResources.getString("BackgroundPicker")),
-//                new Text(myResources.getString("TurtlePicker")),
+                new Text(myResources.getString("TurtlePicker")),
                 new Text(myResources.getString("PenPicker")),
                 new Text(myResources.getString("LanguagePicker")));
         this.addColumn(1,
-                backgroundPicker(),
-//                turtlePicker(),
-                penPicker(),
-                languagePicker(),
+                colorComboBox(supplierMap.get("backgroundPalette"), "SetBackground"),
+                turtlePicker(),
                 colorComboBox(supplierMap.get("penPalette"), "SetPenColor"),
-                colorComboBox(supplierMap.get("backgroundPalette"), "SetBackground")
+                languagePicker()
         );
         this.add(referenceButton(), 0, this.getRowCount(), this.getColumnCount(), 1);
         for (Node node : this.getChildren()) {
@@ -59,25 +60,27 @@ public class ButtonPanel extends GridPane {
         return picker;
     }
 
-//    ComboBox turtlePicker() {
-//        var picker = new ComboBox<String>();
-//        var resource = ResourceBundle.getBundle(gui.GUI.DEFAULT_RESOURCES + "Turtles" + myLanguage);
-//
-//        var images = resource.getKeys();
-//        while (images.hasMoreElements()) {
-//            picker.getItems().add(images.nextElement());
-//        }
-//
-//        picker.setOnAction(e -> {
-//            String filename = gui.GUI.TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
-//            transformTurtles(new ImageView(this.getClass().getResource(filename).toExternalForm()));
-//        });
-//        return picker;
-//
-//    }
-//
-//    void transformTurtles(ImageView img) {
-//    }
+    ComboBox turtlePicker() {
+        var picker = new ComboBox<String>();
+        var resource = ResourceBundle.getBundle(gui.GUI.DEFAULT_RESOURCES + "Turtles" + myLanguage);
+
+        var images = resource.getKeys();
+        while (images.hasMoreElements()) {
+            picker.getItems().add(images.nextElement());
+        }
+
+        picker.setOnAction(e -> {
+            String filename = gui.GUI.TURTLE_IMAGES + resource.getString(picker.getValue()) + ".png";
+            transformTurtles(new ImageView(this.getClass().getResource(filename).toExternalForm()));
+        });
+        return picker;
+    }
+
+    void transformTurtles(ImageView img) {
+        for (TurtleView turtle: myGraphicsWindow.getTurtles().values()) {
+            turtle.setImage(img.getImage());
+        }
+    }
 
     ComboBox colorComboBox(Supplier<int[][]> getPalette, String colorObjectRef) {
         var picker = new ComboBox<Integer>();

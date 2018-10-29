@@ -30,7 +30,7 @@ public class CommandTreeBuilder implements TreeBuilder {
 
     }
 
-    public ArrayList<Node> buildTrees(String commands, ResourceContainer cont){
+    public List<Node> buildTrees(String commands, ResourceContainer cont){
         myContainer = cont;
         ArrayList<String> words = new ArrayList<>(Arrays.asList(commands.split(DELIMITER_REGEX)));
         ArrayList<Node> ans = new ArrayList<>();
@@ -68,12 +68,14 @@ public class CommandTreeBuilder implements TreeBuilder {
         }
         else if(type.equals(GROUP_START_KEY)){
             String command = commandNode.getData();
-            buildingNode.addChild(new TreeNode(command));
+            buildingNode.addChild(new TreeNode(myContainer.getTranslation(command)));
             buildingNode = buildingNode.getChildren().get(0);
             commandNode = commandNode.getChild();
-            Pair<Double, ListNode> result = sumGroup(new Double(0), commandNode);
-            buildingNode.addChild(new TreeNode(result.getLeft().toString()));
-            return result.getRight();
+            Pair<List<String>, ListNode> vals = accumulateGroup(commandNode);
+            for(String val: vals.getLeft()){
+                buildingNode.addChild(new TreeNode(val));
+            }
+            return vals.getRight();
         }
         return null;
     }
@@ -115,14 +117,14 @@ public class CommandTreeBuilder implements TreeBuilder {
         return joinList(curList + " " + commandNode.getData(), commandNode.getChild(), numOpen);
     }
 
-    private Pair<Double, ListNode> sumGroup(Double num, ListNode commandNode){
-        if(commandNode == null){
-            System.out.println("Error");
+    private Pair<List<String>, ListNode> accumulateGroup(ListNode commandNode){
+        ArrayList<String> ret = new ArrayList<>();
+        while(myContainer.getType(commandNode.getData()).equals(GROUP_END_KEY)){
+            ret.add(commandNode.getData());
+            commandNode = commandNode.getChild();
         }
-        else if(myContainer.getType(commandNode.getData()).equals(GROUP_END_KEY)){
-            return new Pair<>(num, commandNode.getChild());
-        }
-        return sumGroup(Double.parseDouble(commandNode.getData()), commandNode.getChild());
+        commandNode = commandNode.getChild();
+        return new Pair<List<String>, ListNode>(ret, commandNode);
     }
 
 

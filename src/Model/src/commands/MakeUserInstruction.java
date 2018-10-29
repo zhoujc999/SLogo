@@ -1,10 +1,9 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class MakeUserInstruction extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
@@ -14,7 +13,7 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     private String commandText;
 
     private CommandTextWrapper commandContent;
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
 
@@ -28,11 +27,10 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("\\s*\\[\\s*", "");
-        newS = newS.replaceAll("\\s*\\]\\s*", "");
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
         return newS;
     }
-
     private String[] breakLoopCommands(String s) {
         return s.split("\\s");
     }
@@ -43,11 +41,11 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 
-    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
         v.addCommand(param1, commandContent);
         pci.addCommandParameter(param1, String.valueOf(commandContent.getNumVariables()));

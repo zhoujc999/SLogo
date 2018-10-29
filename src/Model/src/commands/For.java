@@ -1,10 +1,9 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class For extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int NUMLOOPITEMS = 4;
@@ -17,7 +16,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private int increment;
     private String commands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
 
@@ -41,8 +40,8 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("\\s*\\[\\s*", "");
-        newS = newS.replaceAll("\\s*\\]\\s*", "");
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
         return newS;
     }
 
@@ -50,7 +49,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         for (int i = start; i <= stop; i += increment) {
             v.addVariable(variable, Integer.toString(i));
@@ -59,7 +58,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 

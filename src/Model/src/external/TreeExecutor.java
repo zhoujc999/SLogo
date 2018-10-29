@@ -1,17 +1,21 @@
 package external;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TreeExecutor {
 
-    public void executeTrees(ArrayList<Node> nd, ResourceContainer container);
+    /**
+     * Executes the provided command trees by calling a command factory
+     * @param nd The list of command trees
+     * @param container The class that holds behaviors related to translation and syntax
+     */
+    public void executeTrees(List<Node> nd, ResourceContainer container);
 
 
     /**
      * Changes receives the values of the change
-     * @param s
+     * @param s The replacement value
      */
-
     public void setReplacementValue(String s);
 
 }
