@@ -48,7 +48,7 @@ public class GUI extends SplitPane {
             "English",
             "Spanish"
     );
-    
+
     private final Consumer<String> myParsingFunc;
     Supplier<int[][]> penPaletteSupplier;
     Supplier<int[][]> backgroundPaletteSupplier;
@@ -80,9 +80,9 @@ public class GUI extends SplitPane {
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
         myCommandReference = new CommandReference(language);
-        myVariables = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        myVariables = new VariableList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         myVariables.save("length", "5");
-        myCommands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        myCommands = new CommandList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         myCommands.save("length", "5");
         myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
         myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
@@ -195,7 +195,7 @@ public class GUI extends SplitPane {
     }
 
     private void transformTurtles(ImageView img) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
+        for (TurtleView turtle: myGraphicsWindow.getTurtles().values()) {
             turtle.setImage(img.getImage());
         }
     }
@@ -247,7 +247,7 @@ public class GUI extends SplitPane {
     }
 
     private void setTurtlePens(Color color) {
-        for (TurtleView turtle: myGraphicsWindow.getTurtles()) {
+        for (TurtleView turtle: myGraphicsWindow.getTurtles().values()) {
             turtle.setPenColor(color);
         }
     }
