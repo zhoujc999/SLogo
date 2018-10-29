@@ -15,8 +15,9 @@ public class Invoker extends Observable implements Invokable{
     public Invoker(){
         activeTurtles = new ArrayList<>();
         myTurtles = new HashMap<>();
-        makeTurtle(1);
-
+        StdModelTurtle turt = new StdModelTurtle(1);
+        myTurtles.put(1, turt);
+        activeTurtles.add(1);
     }
 
     public void setMyParse(Parse myParse) {
@@ -32,6 +33,7 @@ public class Invoker extends Observable implements Invokable{
      */
     public void setAddTurtleObserver(Consumer<StdModelTurtle> addTurtleObserver) {
         this.addTurtleObserver = addTurtleObserver;
+        addTurtleObserver.accept(myTurtles.get(1));
     }
 
     private void makeTurtle(Integer id){
