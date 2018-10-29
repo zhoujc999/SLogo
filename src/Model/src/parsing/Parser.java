@@ -19,12 +19,11 @@ public class Parser implements Observer, Parse {
     private Node commandTree;
 
     public Parser(Invokable invoker, String lang){
-        myFactory = new CommandFactory(invoker, myVars);
         myResources = new ResourceHandler(lang);
         myVars = new VariableContainer();
         myBuilder = new CommandTreeBuilder();
         myExecutor = new CommandTreeExecutor(myFactory, myVars);
-
+        myFactory = new CommandFactory(invoker, myVars);
     }
 
     @Override
