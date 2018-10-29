@@ -18,7 +18,6 @@ public class TurtleView extends ImageView {
     private double mySize;
     private int myID;
     private boolean isActive;
-    private Color myPenColor;
 
     public TurtleView(String url, double x, double y, int id) {
         super(url);
@@ -29,7 +28,6 @@ public class TurtleView extends ImageView {
         myID = id;
         isActive = true;
         addEventHandler(MouseEvent.MOUSE_CLICKED, e -> toggleActivation());
-        myPenColor = Color.BLACK;
     }
 
     private void toggleActivation() {
@@ -75,14 +73,6 @@ public class TurtleView extends ImageView {
 
     public void setPosition(double x, double y) {
         relocate(x - mySize /2, y - mySize /2);
-    }
-
-    protected Color getPenColor() {
-        return myPenColor;
-    }
-
-    public void setPenColor(Color color) {
-        myPenColor = color;
     }
 
 }
