@@ -32,7 +32,11 @@ public class CommandFactory implements CommandFactoryInterface {
         System.out.println(params);
 
         SLogoExecutable command = null;
+        if (variableAccessor == null) {
+            System.out.println("sdvvs");
+        }
         CommandTextWrapper commandTextWrapper = variableAccessor.getCommand(cmd);
+
         if (commandTextWrapper != null) {
             command = new GenericCommand(params, commandTextWrapper);
         }
