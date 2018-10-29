@@ -15,16 +15,12 @@ public class Turtles extends Operator implements SLogoMultiExecutable, SLogoCons
 
     @Override
     public void execute(ModelTurtle turtle) {
-        c = this::getNumTurtlesFunction;
+        c = (p, t, v, pci, inv) -> t.setReplacementValue(String.valueOf(turtle.getNumTurtles()));
     }
 
     @Override
     public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
-    }
-
-    private void getNumTurtlesFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
-        t.setReplacementValue(inv.getNumTurtles());
     }
 
     @Override
