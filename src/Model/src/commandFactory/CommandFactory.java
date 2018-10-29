@@ -32,46 +32,45 @@ public class CommandFactory implements CommandFactoryInterface {
         System.out.println(params);
 
         SLogoExecutable command = null;
-        if (variableAccessor == null) {
-            System.out.println("sdvvs");
-        }
         CommandTextWrapper commandTextWrapper = variableAccessor.getCommand(cmd);
 
         if (commandTextWrapper != null) {
             command = new GenericCommand(params, commandTextWrapper);
         }
+        else {
+            String commandName = "commands." + cmd;
+            Class<?> commandClass = null;
+            try {
+                commandClass = Class.forName(commandName);
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-        String commandName = "commands." + cmd;
-        Class<?> commandClass = null;
-        try {
-            commandClass = Class.forName(commandName);
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Constructor<?> constructor = commandClass.getConstructors()[0];
+
+            try {
+                command = (SLogoExecutable) constructor.newInstance(params);
+            }
+
+            catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
-        Constructor<?> constructor = commandClass.getConstructors()[0];
-
-        try {
-            command = (SLogoExecutable) constructor.newInstance(params);
-        }
-
-        catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         if (command == null) {
             throw new NullPointerException("Command Object is null");
         }
