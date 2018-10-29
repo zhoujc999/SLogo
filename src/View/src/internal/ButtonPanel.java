@@ -1,7 +1,5 @@
 package internal;
 
-import gui.GUI;
-import gui.TurtleView;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -20,11 +18,15 @@ import java.util.function.Supplier;
 public class ButtonPanel extends GridPane {
     String myLanguage;
     ResourceBundle myResources;
+    Consumer<String> myParsingFunc;
+    Consumer<String> mySetLangFunc;
     private CommandReference myCommandReference;
 
-    public ButtonPanel(String language, ResourceBundle resources, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
+    public ButtonPanel(String language, ResourceBundle resources, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
         myLanguage = language;
         myResources = resources;
+        myParsingFunc = stringConsumerMap.get("parsingFunc");
+        mySetLangFunc = stringConsumerMap.get("setLangFunc");
         myCommandReference = new CommandReference(myLanguage);
         this.setLayoutX(gui.GUI.BUTTON_PANEL_LOCATION.getX());
         this.setLayoutY(gui.GUI.BUTTON_PANEL_LOCATION.getY());
@@ -122,14 +124,14 @@ public class ButtonPanel extends GridPane {
     ColorPicker penPicker() {
         var picker = new ColorPicker(Color.BLACK);
         picker.setStyle("-fx-color-label-visible: false ;");
-        picker.setOnAction(e -> picker.getValue());
+//        picker.setOnAction(e -> myParsingFunc.accept("" +picker.getValue()));
         return picker;
     }
 
     ComboBox languagePicker() {
         var picker = new ComboBox<String>();
         picker.getItems().addAll(gui.GUI.RECOGNIZED_LANGUAGES);
-//        picker.setOnAction(e -> GUI.setLanguage(picker.getValue()));
+        picker.setOnAction(e -> {mySetLangFunc.accept(picker.getValue()); myCommandReference.setLanguage(picker.getValue());});
         return picker;
     }
 

@@ -60,7 +60,9 @@ public class GUI extends SplitPane {
         myLanguage = language;
         myParsingFunc = stringConsumerMap.get("parsingFunc");
         myModelLangFunc = stringConsumerMap.get("modelLangFunc");
-        buttonPanel = new ButtonPanel(language, myResources, myParsingFunc, supplierMap);
+        Map<String, Consumer<String>> stringConsumerMapForBundle = Map.of("parsingFunc",myParsingFunc,
+                "setLangFunc", this::setLanguage);
+        buttonPanel = new ButtonPanel(language, myResources, stringConsumerMapForBundle, supplierMap);
 
         initializeComponents(language);
         initializeLayout();
