@@ -27,14 +27,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle(TITLE);
         Invokable invoker = new Invoker();
-        CommandFactoryInterface myFactory = new CommandFactory(invoker);
-        Parser myParser = new Parser(myFactory, DEFAULT_LANGUAGE);
+        Parser myParser = new Parser(invoker, DEFAULT_LANGUAGE);
         ( (Invoker) invoker ).setMyParse(myParser);
         Map<String, Supplier> supplierMap = Map.of("penPalette", ( (Invoker) invoker )::getPenPalette,
                 "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette);
-        GUI gui = new GUI(DEFAULT_LANGUAGE, myParser::parseCommand, supplierMap);
-        gui.get
-        Consumer<StdModelTurtle> turtleObserverConsumer = (turt) -> turt.addObserver(gui.getGraphicsWindow());
+        Map<String, Consumer<String>> stringConsumerMap = Map.of("parsingFunc", myParser::parseCommand,
+                "modelLangFunc", lang -> myParser.getLanguageInterface().changeLanguage(lang));
+        GUI gui = new GUI(DEFAULT_LANGUAGE, stringConsumerMap, supplierMap);
+        Consumer<StdModelTurtle> turtleObserverConsumer = turt -> turt.addObserver(gui.getGraphicsWindow());
         ( (Invoker) invoker ).setAddTurtleObserver(turtleObserverConsumer);
         Scene scene = new Scene(gui, SIZE.getWidth(), SIZE.getHeight());
         scene.setOnKeyPressed(event -> handleKeyInput(event.getCode(), myParser::parseCommand));

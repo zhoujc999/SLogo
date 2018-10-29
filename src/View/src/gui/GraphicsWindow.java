@@ -1,6 +1,7 @@
 package gui;
 
 import internal.TurtleView;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
@@ -23,7 +24,9 @@ public class GraphicsWindow extends Pane implements Observer {
      * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
      */
 
-    public static final String GREEN_TURTLE_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
+
+    private static final Dimension2D SIZE = new Dimension2D(580, 540);
+    public static final String DEFAULT_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
 
     private CornerRadii myCornerRadii;
     private Insets myInsets;
@@ -39,10 +42,9 @@ public class GraphicsWindow extends Pane implements Observer {
         //myActiveTurtles = new ArrayList<>();
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
-        setPrefSize(580, 540);
-        //var primaryTurtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm());
+        setPrefSize(SIZE.getWidth(), SIZE.getHeight());
+        //var primaryTurtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm());
         addTurtle(0);
-
     }
 
     @Override
@@ -52,37 +54,28 @@ public class GraphicsWindow extends Pane implements Observer {
         double y = state.get("yPos");
         double oldX = state.get("oldXPos");
         double oldY = state.get("oldYPos");
-        double heading = state.get("Heading");
-        boolean visible = (state.get("showing") == 1);
-        boolean clearScreenFlag = (state.get("ClearScreen") == 1);
-        boolean penDown = (state.get("PenDown") == 1);
-        int penColorR = (int) (state.get("penColorRVal")/1);
-        int penColorG = (int) (state.get("penColorGVal")/1);
-        int penColorB = (int) (state.get("penColorBVal")/1);
-        Color penColor = Color.rgb(penColorR, penColorG, penColorB);
-        double penSize = state.get("penSize");
-        int bgColorR = (int) (state.get("bgColorRVal")/1);
-        int bgColorG = (int) (state.get("bgColorGVal")/1);
-        int bgColorB = (int) (state.get("bgColorBVal")/1);
-        Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
         int id = (int) (state.get("ID")/1);
-        boolean active = (state.get("active") == 1);
-
-
-        setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
+        setBackground(new Background(new BackgroundFill(getColor(state, "bg"), myCornerRadii, myInsets)));
         if (!myTurtles.containsKey(id)) {
             addTurtle(id);
         }
         TurtleView turtle = myTurtles.get(id);
-        turtle.setActiveStatus(active);
+        turtle.setActiveStatus(state.get("active") == 1);
         setTurtlePosition(turtle, x, y);
-        turtle.setRotate(heading);
-        turtle.setVisible(visible);
-        if (clearScreenFlag) {
+        turtle.setRotate(state.get("Heading"));
+        turtle.setVisible(state.get("showing") == 1);
+        if ((state.get("ClearScreen") == 1)) {
             clearScreen();
-        } else if (penDown && !(oldX==x && oldY==y)) {
-            draw(oldX, oldY, x, y, penSize, penColor);
+        } else if (state.get("PenDown") == 1 && !(oldX==x && oldY==y)) {
+            draw(oldX, oldY, x, y, state.get("penSize"), getColor(state, "pen"));
         }
+    }
+
+    private Color getColor(Map<String, Double> state, String objType) {
+        int bgColorR = (int) (state.get(objType+"ColorRVal")/1);
+        int bgColorG = (int) (state.get(objType+"ColorGVal")/1);
+        int bgColorB = (int) (state.get(objType+"ColorBVal")/1);
+        return Color.rgb(bgColorR, bgColorG, bgColorB);
     }
 
     private void clearScreen() {
@@ -106,9 +99,8 @@ public class GraphicsWindow extends Pane implements Observer {
         getChildren().add(line);
     }
 
-
     protected void addTurtle(int id, double x, double y) {
-        var turtle = new TurtleView(getClass().getResource(GREEN_TURTLE_FILENAME).toExternalForm(), x, y, id);
+        var turtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm(), x, y, id);
         myTurtles.put(id, turtle);
         getChildren().add(turtle);
     }

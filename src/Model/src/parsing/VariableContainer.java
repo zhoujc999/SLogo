@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class VariableContainer implements VariableManipulator, VariableAccessor {
     private Map<String, String> variableMap;
-    private Map<String, String> commandMap;
+    private Map<String, CommandTextWrapper> commandMap;
 
 
     public VariableContainer(){
@@ -39,12 +39,16 @@ public class VariableContainer implements VariableManipulator, VariableAccessor 
 
     @Override
     public void addCommand(String name, CommandTextWrapper command) {
-
+        commandMap.put(name, command);
     }
 
     @Override
     public CommandTextWrapper getCommand(String key) {
-        return null;
+        return commandMap.get(key);
     }
 
+    @Override
+    public Iterable<Map.Entry<String, String>> viewVariables() {
+        return variableMap.entrySet();
+    }
 }
