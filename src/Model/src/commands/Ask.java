@@ -42,11 +42,10 @@ public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoCo
 
     private void askFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
-        inv.
+        inv.saveActiveState();
         inv.activateTurtles(Collections.unmodifiableList(turtlesIDList));
-        if (!turtlesIDList.isEmpty()) {
-            t.setReplacementValue(turtlesIDList.get(turtlesIDList.size() - 1));
-        }
+        p.parseCommand(commands);
+        inv.resetActiveState();
     }
 
     @Override
