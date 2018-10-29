@@ -36,5 +36,6 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
             v.addVariable(VARIABLE, Integer.toString(i));
             p.parseCommand(commands);
         }
+        v.removeVariable(VARIABLE);
     }
 }

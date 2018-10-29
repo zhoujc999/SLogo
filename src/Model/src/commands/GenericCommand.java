@@ -34,6 +34,9 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoReturnable 
             index++;
         }
         p.parseCommand(commandText.getCommandText());
+        for (String name : commandText.getVariableNamesList()) {
+            v.removeVariable(name);
+        }
     }
 
     public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
