@@ -1,7 +1,5 @@
 package gui;
 
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;

@@ -13,7 +13,8 @@ public class CommandTreeExecutor implements TreeExecutor {
 
     public static final String COMMAND_KEY = "Command";
     public static final String VARIABLE_KEY = "Variable";
-    public static final String LIST_KEY = "List";
+    public static final String MAKE_KEY = "MakeVariable";
+    public static final String TO_KEY = "MakeUserInstruction";
 
     private CommandFactoryInterface myFactory;
     private ResourceContainer myResources;
@@ -26,9 +27,11 @@ public class CommandTreeExecutor implements TreeExecutor {
     }
 
     @Override
-    public void executeTree(Node nd, ResourceContainer container) {
+    public void executeTrees(ArrayList<Node> nds, ResourceContainer container) {
         myResources = container;
-        executeSubTree(nd);
+        for(Node nd: nds){
+            executeSubTree(nd);
+        }
     }
 
     private void executeSubTree(Node nd){
@@ -36,7 +39,7 @@ public class CommandTreeExecutor implements TreeExecutor {
         if(type.equals(COMMAND_KEY)){
             List<? extends Node> children = nd.getChildren();
             ArrayList<String> parameters = new ArrayList<>();
-            if(nd.getData().equals("MakeVariable")){
+            if(nd.getData().equals(MAKE_KEY) || nd.getData().equals(TO_KEY)){
                 parameters.add(children.get(0).getData());
                 children.remove(children.get(0));
             }
@@ -52,7 +55,9 @@ public class CommandTreeExecutor implements TreeExecutor {
         }
     }
 
+    @Override
     public void setReplacementValue(String s) {
         replacementValue = s;
     }
+
 }

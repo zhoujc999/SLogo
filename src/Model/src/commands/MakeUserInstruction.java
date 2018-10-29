@@ -1,9 +1,7 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -16,13 +14,12 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     private String commandText;
 
     private CommandTextWrapper commandContent;
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
     public MakeUserInstruction(List params) {
         super(params);
-
         commandName = super.param1;
         variableList = breakLoopCommands(stripBrackets(param2));
         commandText = stripBrackets(param3);
@@ -46,13 +43,14 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 
-    private void makeCommandFunction(Parse p) {
+    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
-//        p.addCommand(param1, commandContent);
+        v.addCommand(param1, commandContent);
+        pci.addCommandParameter(param1, String.valueOf(commandContent.getNumVariables()));
     }
 
     @Override

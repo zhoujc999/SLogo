@@ -1,13 +1,12 @@
 package internal;
 
-import javafx.scene.Node;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.util.ResourceBundle;
@@ -21,6 +20,7 @@ public class CommandReference extends Stage {
      * @author Tahj Starr
      */
 
+    private static final Dimension2D PAGE_SIZE = new Dimension2D(600, 800);
     private static final Font COMMAND_CATEGORIES_FONT = new Font("Agency FB", 30);
     private static final Font DESCRIPTIONS_FONT = new Font(10);
 
@@ -31,7 +31,7 @@ public class CommandReference extends Stage {
     public CommandReference(String language) {
         myLanguage = language;
         myCommandCategories = ResourceBundle.getBundle(DEFAULT_RESOURCES + language + ".CommandCategories");
-        setScene(new Scene(writePage(), 600, 800));
+        setScene(new Scene(writePage(), PAGE_SIZE.getWidth(), PAGE_SIZE.getHeight()));
     }
 
     private Parent writePage() {

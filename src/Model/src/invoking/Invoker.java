@@ -2,6 +2,7 @@ package invoking;
 
 import external.*;
 
+import java.util.Map;
 import java.util.Observable;
 import java.util.function.Consumer;
 
@@ -10,6 +11,7 @@ public class Invoker extends Observable implements Invokable{
     private StdModelTurtle myTurt;
     private Consumer<StdModelTurtle> addTurtleObserver;
     private Parse myParse;
+    private Map<Integer, StdModelTurtle> myTurtles;
 
     public Invoker(){
         myTurt = new StdModelTurtle(0);
@@ -35,12 +37,6 @@ public class Invoker extends Observable implements Invokable{
     public void acceptCommand(SLogoExecutable cmd) {
         cmd.execute(myTurt);
         setChanged();
-//        if(cmd instanceof SLogoStringReturnable){
-//            notifyObservers(((SLogoStringReturnable) cmd).returnValue());
-//        }
-//        else if (cmd instanceof SLogoConsumerReturnable){
-//
-//        }
         notifyObservers(((SLogoReturnable) cmd).returnValue());
         clearChanged();
 
