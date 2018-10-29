@@ -32,9 +32,9 @@ public class Main extends Application {
         Map<String, Supplier> supplierMap = Map.of("penPalette", ( (Invoker) invoker )::getPenPalette,
                 "backgroundPalette", ( (Invoker) invoker )::getBackgroundPalette);
         Map<String, Consumer<String>> stringConsumerMap = Map.of("parsingFunc", myParser::parseCommand,
-                "modelLangFunc", (lang) -> myParser.getLanguageInterface().changeLanguage(lang));
+                "modelLangFunc", lang -> myParser.getLanguageInterface().changeLanguage(lang));
         GUI gui = new GUI(DEFAULT_LANGUAGE, stringConsumerMap, supplierMap);
-        Consumer<StdModelTurtle> turtleObserverConsumer = (turt) -> turt.addObserver(gui.getGraphicsWindow());
+        Consumer<StdModelTurtle> turtleObserverConsumer = turt -> turt.addObserver(gui.getGraphicsWindow());
         ( (Invoker) invoker ).setAddTurtleObserver(turtleObserverConsumer);
         Scene scene = new Scene(gui, SIZE.getWidth(), SIZE.getHeight());
         scene.setOnKeyPressed(event -> handleKeyInput(event.getCode(), myParser::parseCommand));

@@ -53,37 +53,28 @@ public class GraphicsWindow extends Pane implements Observer {
         double y = state.get("yPos");
         double oldX = state.get("oldXPos");
         double oldY = state.get("oldYPos");
-        double heading = state.get("Heading");
-        boolean visible = (state.get("showing") == 1);
-        boolean clearScreenFlag = (state.get("ClearScreen") == 1);
-        boolean penDown = (state.get("PenDown") == 1);
-        int penColorR = (int) (state.get("penColorRVal")/1);
-        int penColorG = (int) (state.get("penColorGVal")/1);
-        int penColorB = (int) (state.get("penColorBVal")/1);
-        Color penColor = Color.rgb(penColorR, penColorG, penColorB);
-        double penSize = state.get("penSize");
-        int bgColorR = (int) (state.get("bgColorRVal")/1);
-        int bgColorG = (int) (state.get("bgColorGVal")/1);
-        int bgColorB = (int) (state.get("bgColorBVal")/1);
-        Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
         int id = (int) (state.get("ID")/1);
-        boolean active = (state.get("active") == 1);
-
-
-        setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
+        setBackground(new Background(new BackgroundFill(getColor(state, "bg"), myCornerRadii, myInsets)));
         if (!myTurtles.containsKey(id)) {
             addTurtle(id);
         }
         TurtleView turtle = myTurtles.get(id);
-        turtle.setActiveStatus(active);
+        turtle.setActiveStatus(state.get("active") == 1);
         setTurtlePosition(turtle, x, y);
-        turtle.setRotate(heading);
-        turtle.setVisible(visible);
-        if (clearScreenFlag) {
+        turtle.setRotate(state.get("Heading"));
+        turtle.setVisible(state.get("showing") == 1);
+        if ((state.get("ClearScreen") == 1)) {
             clearScreen();
-        } else if (penDown && !(oldX==x && oldY==y)) {
-            draw(oldX, oldY, x, y, penSize, penColor);
+        } else if (state.get("PenDown") == 1 && !(oldX==x && oldY==y)) {
+            draw(oldX, oldY, x, y, state.get("penSize"), getColor(state, "pen"));
         }
+    }
+
+    private Color getColor(Map<String, Double> state, String objType) {
+        int bgColorR = (int) (state.get(objType+"ColorRVal")/1);
+        int bgColorG = (int) (state.get(objType+"ColorGVal")/1);
+        int bgColorB = (int) (state.get(objType+"ColorBVal")/1);
+        return Color.rgb(bgColorR, bgColorG, bgColorB);
     }
 
     private void clearScreen() {
