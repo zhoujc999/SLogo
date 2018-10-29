@@ -47,6 +47,7 @@ public class GUI extends SplitPane {
     );
     
     private final Consumer<String> myParsingFunc;
+    private final Consumer<String> myModelLangFunc;
     Supplier<int[][]> penPaletteSupplier;
     Supplier<int[][]> backgroundPaletteSupplier;
     private String myLanguage;
@@ -61,10 +62,11 @@ public class GUI extends SplitPane {
     private CommandHistory myCommandHistory;
     private CommandReference myCommandReference;
 
-    public GUI(String language, Consumer<String> parsingFunc, Map<String, Supplier> supplierMap) {
+    public GUI(String language, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
-        myParsingFunc = parsingFunc;
+        myParsingFunc = stringConsumerMap.get("parsingFunc");
+        myModelLangFunc = stringConsumerMap.get("modelLangFunc");
         penPaletteSupplier = supplierMap.get("penPalette");
         backgroundPaletteSupplier = supplierMap.get("backgroundPalette");
 
@@ -303,7 +305,8 @@ public class GUI extends SplitPane {
         myCommandReference.setLanguage(language);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
-        getItems().clear();
+        myModelLangFunc.accept(language);
+//        getItems().clear();
         initializeComponents(language);
         initializeLayout();
     }
