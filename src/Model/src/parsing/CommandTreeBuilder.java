@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommandTreeBuilder implements TreeBuilder {
+    public static final String TO_KEY = "MakeUserInstruction";
     public static final String COMMAND_KEY = "Command";
     public static final String CONSTANT_KEY = "Constant";
     public static final String COMMENT_KEY = "Comment";
@@ -74,10 +75,19 @@ public class CommandTreeBuilder implements TreeBuilder {
         int parameterNumber = myContainer.getParameterCount(translatedWrd);
         TreeNode nwNode = new TreeNode(translatedWrd);
         buildingNode.addChild(nwNode);
-        for(int i = 0; i < parameterNumber; i++){
-            commandNode = createSubTree(nwNode,commandNode);
-
+        if(translatedWrd.equals(TO_KEY)){
+            nwNode.addChild(new TreeNode(commandNode.getData()));
+            commandNode = commandNode.getChild();
+            for(int i = 0; i < parameterNumber - 1; i++){
+                commandNode = createSubTree(nwNode,commandNode);
+            }
         }
+        else {
+            for(int i = 0; i < parameterNumber; i++){
+                commandNode = createSubTree(nwNode,commandNode);
+            }
+        }
+
         return commandNode;
     }
 
