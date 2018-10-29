@@ -12,4 +12,5 @@ public interface Invokable {
      */
     public void acceptCommand(SLogoExecutable cmd);
 
+
 }
