@@ -10,6 +10,6 @@ public interface GUIList {
     /**
      * Loads the value of a variable already defined in the variables window.
      */
-    String load(String name);
+    void load(String name);
 
 }
