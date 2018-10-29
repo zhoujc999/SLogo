@@ -2,10 +2,10 @@ package commands;
 
 
 import external.*;
-import parsing.QuaConsumer;
+import invoking.Invoker;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static int NUMLOOPITEMS = 2;
@@ -19,7 +19,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
 
     //private
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
 
@@ -47,7 +47,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         for (int i = START; i <= stop; i += INCREMENT) {
             v.addVariable(variable, Integer.toString(i));
@@ -56,7 +56,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 

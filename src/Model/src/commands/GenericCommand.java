@@ -1,17 +1,16 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private List<String> paramsList;
     private CommandTextWrapper commandText;
     private final static String ZERO = "0";
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
     public GenericCommand(List params, CommandTextWrapper command) {
         if (params.size() != command.getNumVariables()) {
@@ -27,11 +26,11 @@ public class GenericCommand implements SLogoAbstractExecutable, SLogoConsumerRet
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 
-    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         int index = 0;
         for (String name : commandText.getVariableNamesList()) {

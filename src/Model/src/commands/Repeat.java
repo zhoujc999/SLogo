@@ -1,10 +1,9 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
@@ -14,7 +13,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     private int stop;
     private String commands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
     public Repeat(List params) {
         super(params);
@@ -39,7 +38,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     }
 
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         for (int i = START; i < stop; i += INCREMENT) {
             v.addVariable(VARIABLE, Integer.toString(i));
@@ -48,7 +47,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 

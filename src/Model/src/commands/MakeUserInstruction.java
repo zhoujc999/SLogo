@@ -1,10 +1,9 @@
 package commands;
 
 import external.*;
-import parsing.QuaConsumer;
+import parsing.PentaConsumer;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class MakeUserInstruction extends TernaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
     private final static String ZERO = "0";
@@ -14,7 +13,7 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     private String commandText;
 
     private CommandTextWrapper commandContent;
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
+    private PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
 
 
 
@@ -40,11 +39,11 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
+    public PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> returnValue() {
         return c;
     }
 
-    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
         v.addCommand(param1, commandContent);
         pci.addCommandParameter(param1, String.valueOf(commandContent.getNumVariables()));
