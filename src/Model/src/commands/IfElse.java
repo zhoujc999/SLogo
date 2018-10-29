@@ -40,8 +40,8 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("\\s*\\[\\s*", "");
-        newS = newS.replaceAll("\\s*\\]\\s*", "");
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
         return newS;
     }
 
