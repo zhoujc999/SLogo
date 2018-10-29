@@ -96,7 +96,6 @@ public class GUI extends SplitPane {
         Map<String, Consumer<String>> stringConsumerMapForBundle = Map.of("parsingFunc",myParsingFunc,
                 "setLangFunc", this::setLanguage);
         var buttonPanel = new ButtonPanel(myLanguage, myResources, myGraphicsWindow, stringConsumerMapForBundle, mySuppliers);
-        buttonPanel.add(newWorkspaceButton(), 0, buttonPanel.getRowCount(), buttonPanel.getColumnCount(), 1);
         var sidePanel = new VBox(buttonPanel, myProjectWindow);
         var mainPanel = new SplitPane(myGraphicsWindow, commandPanel);
 
@@ -155,17 +154,17 @@ public class GUI extends SplitPane {
         return button;
     }
 
-    private Button newWorkspaceButton() {
-        var button = new Button(myResources.getString("WorkspaceButton"));
-        button.setOnAction(e -> {
-            var stage = new Stage();
-            var gui = new GUI(myLanguage, myConsumers, mySuppliers);
-            var scene = new Scene(gui, getWidth(), getHeight());
-            stage.setScene(scene);
-            stage.show();
-        });
-        return button;
-    }
+//    private Button newWorkspaceButton() {
+//        var button = new Button(myResources.getString("WorkspaceButton"));
+//        button.setOnAction(e -> {
+//            var stage = new Stage();
+//            var gui = new GUI(myLanguage, myConsumers, mySuppliers);
+//            var scene = new Scene(gui, getWidth(), getHeight());
+//            stage.setScene(scene);
+//            stage.show();
+//        });
+//        return button;
+//    }
 
     /**
      * Access GUI's CommandWindow.
