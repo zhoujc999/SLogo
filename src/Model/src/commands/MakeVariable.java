@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class MakeVariable extends BinaryOperator implements SLogoAbstractExecutable, SLogoConsumerReturnable {
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
     public MakeVariable(List params) {
         super(params);
@@ -20,11 +20,11 @@ public class MakeVariable extends BinaryOperator implements SLogoAbstractExecuta
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 
-    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+    private void makeVariableFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         v.addVariable(param1, param2);
         t.setReplacementValue(param2);
     }

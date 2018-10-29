@@ -14,7 +14,7 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     private String commandText;
 
     private CommandTextWrapper commandContent;
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
@@ -43,15 +43,14 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 
-    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+    private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);
         v.addCommand(param1, commandContent);
-//        r.addCommand(param1, commandvariablelisnumber (String));
-        
+        pci.addCommandParameter(param1, String.valueOf(commandContent.getNumVariables()));
     }
 
     @Override

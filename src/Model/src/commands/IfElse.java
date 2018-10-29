@@ -13,7 +13,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     private String trueCommands;
     private String falseCommands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
     public IfElse(List params) {
@@ -47,7 +47,7 @@ public class IfElse extends TernaryOperator implements SLogoAbstractExecutable, 
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

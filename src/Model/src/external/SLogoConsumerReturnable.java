@@ -8,5 +8,5 @@ public interface SLogoConsumerReturnable extends SLogoReturnable<QuaConsumer> {
     /**
      * Returns the command that from the execution of the command object
      */
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue();
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue();
 }

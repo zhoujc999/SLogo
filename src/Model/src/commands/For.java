@@ -17,7 +17,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     private int increment;
     private String commands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
@@ -50,7 +50,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         t.setReplacementValue(ZERO);
         for (int i = start; i <= stop; i += increment) {
             v.addVariable(variable, Integer.toString(i));
@@ -59,7 +59,7 @@ public class For extends BinaryOperator implements SLogoAbstractExecutable, SLog
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

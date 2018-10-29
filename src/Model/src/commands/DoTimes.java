@@ -19,7 +19,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
 
     //private
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
@@ -50,7 +50,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         t.setReplacementValue(ZERO);
         for (int i = START; i <= stop; i += INCREMENT) {
             v.addVariable(variable, Integer.toString(i));
@@ -59,7 +59,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

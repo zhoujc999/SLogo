@@ -14,7 +14,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     private int stop;
     private String commands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
     public Repeat(List params) {
         super(params);
@@ -42,7 +42,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     }
 
 
-    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ResourceContainer r) {
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
         t.setReplacementValue(ZERO);
         for (int i = START; i < stop; i += INCREMENT) {
             v.addVariable(VARIABLE, Integer.toString(i));
@@ -51,7 +51,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

@@ -12,7 +12,7 @@ public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogo
     private double condition;
     private String commands;
 
-    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
     public If(List params) {
@@ -43,7 +43,7 @@ public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogo
     }
 
     @Override
-    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ResourceContainer> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 
