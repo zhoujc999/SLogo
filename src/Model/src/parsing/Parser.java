@@ -15,7 +15,7 @@ public class Parser implements Observer, Parse {
     private VariableContainer myVars;
     private ResourceHandler myResources;
 
-    private ArrayList<Node> commandTrees;
+    private List<Node> commandTrees;
 
     public Parser(Invokable invoker, String lang){
         myVars = new VariableContainer();
