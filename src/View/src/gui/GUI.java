@@ -1,9 +1,6 @@
 package gui;
 
-import internal.ButtonPanel;
-import internal.CommandHistory;
-import internal.CommandList;
-import internal.VariableList;
+import internal.*;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -99,7 +96,6 @@ public class GUI extends SplitPane {
         Map<String, Consumer<String>> stringConsumerMapForBundle = Map.of("parsingFunc",myParsingFunc,
                 "setLangFunc", this::setLanguage);
         var buttonPanel = new ButtonPanel(myLanguage, myResources, myGraphicsWindow, stringConsumerMapForBundle, mySuppliers);
-        buttonPanel.add(newWorkspaceButton(), 0, buttonPanel.getRowCount(), buttonPanel.getColumnCount(), 1);
         var sidePanel = new VBox(buttonPanel, myProjectWindow);
         var mainPanel = new SplitPane(myGraphicsWindow, commandPanel);
 
@@ -113,29 +109,21 @@ public class GUI extends SplitPane {
      * Handles what happens when the user presses the 'Run' button.
      */
     void run() {
-//        try {
-//            String input = myCommandWindow.getInput();
-//            myCommandHistory.save(input, "");
-//            myParsingFunc.accept(input);
-//        } catch (Exception e) {
-//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-//        }
-        Iterable<Map.Entry <String, String>> varsIterable = myVarSavingFunc.get();
-        myVariables.getItems().clear();
+        try {
+            String input = myCommandWindow.getInput();
+            myCommandHistory.save(input, "");
+            myParsingFunc.accept(input);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void updateList(DefinitionList list, Supplier<Iterable<Map.Entry<String, String>>> savingFunc) {
+        Iterable<Map.Entry <String, String>> varsIterable = savingFunc.get();
+        list.getItems().clear();
         for (Map.Entry<String, String> variable: varsIterable) {
-            myVariables.save(variable.getKey(), variable.getValue());
+            list.save(variable.getKey(), variable.getValue());
         }
-
-        Iterable<Map.Entry <String, String>> comsIterable = myComSavingFunc.get();
-        myCommands.getItems().clear();
-        for (Map.Entry<String, String> command: comsIterable) {
-            myCommands.save(command.getKey(), command.getValue());
-        }
-
-        String input = myCommandWindow.getInput();
-        myCommandHistory.save(input, "");
-
-        myParsingFunc.accept(input);
     }
 
     private Button runButton() {
@@ -143,7 +131,11 @@ public class GUI extends SplitPane {
         button.setLayoutX(RUN_BUTTON_LOCATION.getX());
         button.setLayoutY(RUN_BUTTON_LOCATION.getY());
         button.setPrefSize(RUN_BUTTON_SIZE.getWidth(), RUN_BUTTON_SIZE.getHeight());
-        button.setOnAction(e -> run());
+        button.setOnAction(e -> {
+            run();
+            updateList(myVariables, myVarSavingFunc);
+            updateList(myCommands, myComSavingFunc);
+        });
         return button;
     }
 
@@ -156,17 +148,17 @@ public class GUI extends SplitPane {
         return button;
     }
 
-    private Button newWorkspaceButton() {
-        var button = new Button(myResources.getString("WorkspaceButton"));
-        button.setOnAction(e -> {
-            var stage = new Stage();
-            var gui = new GUI(myLanguage, myConsumers, mySuppliers);
-            var scene = new Scene(gui, getWidth(), getHeight());
-            stage.setScene(scene);
-            stage.show();
-        });
-        return button;
-    }
+//    private Button newWorkspaceButton() {
+//        var button = new Button(myResources.getString("WorkspaceButton"));
+//        button.setOnAction(e -> {
+//            var stage = new Stage();
+//            var gui = new GUI(myLanguage, myConsumers, mySuppliers);
+//            var scene = new Scene(gui, getWidth(), getHeight());
+//            stage.setScene(scene);
+//            stage.show();
+//        });
+//        return button;
+//    }
 
     /**
      * Access GUI's CommandWindow.
