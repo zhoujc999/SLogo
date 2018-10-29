@@ -50,8 +50,6 @@ public class GUI extends SplitPane {
     private CommandWindow myCommandWindow;
     private GraphicsWindow myGraphicsWindow;
     private TabPane myProjectWindow;
-    private DefinitionList myVariables;
-    private DefinitionList myCommands;
     private final ButtonPanel buttonPanel;
     private CommandHistory myCommandHistory;
 
@@ -72,12 +70,12 @@ public class GUI extends SplitPane {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
-        myVariables = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
-        myVariables.save("length", "5");
-        myCommands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
-        myCommands.save("length", "5");
+        var variables = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        variables.save("length", "5");
+        var commands = new DefinitionList(CODE_FONT, DEFINITION_LIST_COLUMN_WIDTH);
+        commands.save("length", "5");
         myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
-        myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
+        myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), variables), new Tab(myResources.getString("CommandTab"), commands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
         myProjectWindow.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
@@ -131,13 +129,6 @@ public class GUI extends SplitPane {
     }
 
     /**
-     * Access GUI's CommandHistory.
-     */
-    public CommandHistory getCommandHistory() {
-        return myCommandHistory;
-    }
-
-    /**
      * Access GUI's CommandWindow.
      */
     public CommandWindow getCommandWindow() {
@@ -147,8 +138,8 @@ public class GUI extends SplitPane {
     /**
      * Access GUI's DefinitionList.
      */
-    public DefinitionList getVariableWindow() {
-        return myVariables;
+    public TabPane getProjectWindow() {
+        return myProjectWindow;
     }
 
     /**
