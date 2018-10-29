@@ -15,8 +15,16 @@ public interface Invokable {
      */
     public void acceptCommand(SLogoExecutable cmd);
 
+    /**
+     * Creates and or activates the turtles with the provided ids
+     * @param ids A list of ids
+     */
     public void activateTurtles(List<String> ids);
 
+    /**
+     * Returns the number of turtles created
+     * @return the number of turtles created thus far
+     */
     public int getNumTurtles();
 
 }

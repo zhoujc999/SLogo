@@ -30,7 +30,7 @@ public class CommandTreeBuilder implements TreeBuilder {
 
     }
 
-    public ArrayList<Node> buildTrees(String commands, ResourceContainer cont){
+    public List<Node> buildTrees(String commands, ResourceContainer cont){
         myContainer = cont;
         ArrayList<String> words = new ArrayList<>(Arrays.asList(commands.split(DELIMITER_REGEX)));
         ArrayList<Node> ans = new ArrayList<>();
