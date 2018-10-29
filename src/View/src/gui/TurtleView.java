@@ -14,22 +14,26 @@ public class TurtleView extends ImageView {
 
     private static final double ACTIVE_SIZE = 50;
     private static final double INACTIVE_SIZE = 25;
+
     private double mySize;
+    private int myID;
+    private boolean isActive;
     private Color myPenColor;
 
-    protected TurtleView(String url, double x, double y) {
+    protected TurtleView(String url, double x, double y, int id) {
         super(url);
         mySize = ACTIVE_SIZE;
         setFitWidth(mySize);
         setFitHeight(mySize);
         setPosition(x, y);
+        myID = id;
+        isActive = true;
         addEventHandler(MouseEvent.MOUSE_CLICKED, e -> toggleActivation());
         myPenColor = Color.BLACK;
     }
 
     private void toggleActivation() {
-        var window = (GraphicsWindow) getParent();
-        if (window.getTurtles().contains(this)) {
+        if (isActive) {
             System.out.println(getLayoutX());
             deactivate();
         } else {
@@ -45,19 +49,17 @@ public class TurtleView extends ImageView {
         myPenColor = Color.BLACK;
     }
 
-    protected void move(double dx, double dy) {
-        setPosition(getTurtleX() + dx, getTurtleY() + dy);
+    protected void setActiveStatus(boolean status) {
+        isActive = status;
     }
 
-    protected void activate() {
-        var window = (GraphicsWindow) getParent();
-        window.getTurtles().add(this);
+    private void activate() {
+        isActive = true;
         setNewSize(ACTIVE_SIZE);
     }
 
-    protected void deactivate() {
-        var window = (GraphicsWindow) getParent();
-        window.getTurtles().remove(this);
+    private void deactivate() {
+        isActive = false;
         setNewSize(INACTIVE_SIZE);
     }
 

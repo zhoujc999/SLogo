@@ -30,20 +30,20 @@ public class GraphicsWindow extends Pane implements Observer {
     private CornerRadii myCornerRadii;
     private Insets myInsets;
 
-    private List<TurtleView> myActiveTurtles;
+    private  Map<Integer, TurtleView> myTurtles;
+    //private List<TurtleView> myActiveTurtles;
     private List<Node> lineList = new ArrayList<>();
-    private static final List<TurtleView> TURTLES = List.of();
 
     protected GraphicsWindow(CornerRadii cornerRadii, Insets insets) {
         myCornerRadii = cornerRadii;
         myInsets = insets;
-        myActiveTurtles = new ArrayList<>();
+        myTurtles = new HashMap<>();
+        //myActiveTurtles = new ArrayList<>();
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, myCornerRadii, myInsets)));
         setPrefSize(SIZE.getWidth(), SIZE.getHeight());
         //var primaryTurtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm());
-        addTurtle(getPrefWidth()/2, getPrefHeight()/2);
-
+        addTurtle(0);
     }
 
     @Override
@@ -66,18 +66,23 @@ public class GraphicsWindow extends Pane implements Observer {
         int bgColorG = (int) (state.get("bgColorGVal")/1);
         int bgColorB = (int) (state.get("bgColorBVal")/1);
         Color bgColor = Color.rgb(bgColorR, bgColorG, bgColorB);
+        int id = (int) (state.get("ID")/1);
+        boolean active = (state.get("active") == 1);
+
 
         setBackground(new Background(new BackgroundFill(bgColor, myCornerRadii, myInsets)));
-        for (TurtleView turtle: myActiveTurtles) {
-            setTurtlePosition(turtle, x, y);
-            //turtle.move(x, y);
-            turtle.setRotate(heading);
-            turtle.setVisible(visible);
-            if (clearScreenFlag) {
-                clearScreen();
-            } else if (penDown && !(oldX==x && oldY==y)) {
-                draw(oldX, oldY, x, y, penSize, penColor);
-            }
+        if (!myTurtles.containsKey(id)) {
+            addTurtle(id);
+        }
+        TurtleView turtle = myTurtles.get(id);
+        turtle.setActiveStatus(active);
+        setTurtlePosition(turtle, x, y);
+        turtle.setRotate(heading);
+        turtle.setVisible(visible);
+        if (clearScreenFlag) {
+            clearScreen();
+        } else if (penDown && !(oldX==x && oldY==y)) {
+            draw(oldX, oldY, x, y, penSize, penColor);
         }
     }
 
@@ -102,19 +107,21 @@ public class GraphicsWindow extends Pane implements Observer {
         getChildren().add(line);
     }
 
-
-    protected void addTurtle(double x, double y) {
-        var turtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm(), x, y);
-        //turtle.setPosition(x, y);
+    protected void addTurtle(int id, double x, double y) {
+        var turtle = new TurtleView(getClass().getResource(DEFAULT_FILENAME).toExternalForm(), x, y, id);
+        myTurtles.put(id, turtle);
         getChildren().add(turtle);
-        turtle.activate();
+    }
+
+    protected void addTurtle(int id) {
+        addTurtle(id, getPrefWidth()/2, getPrefHeight()/2);
     }
 
     /**
      * Accesses the current turtle that the user controls.
      */
-    protected List<TurtleView> getTurtles() {
-        return myActiveTurtles;
+    protected Map<Integer, TurtleView> getTurtles() {
+        return myTurtles;
     }
 
     protected void setBackground(Color color) {
