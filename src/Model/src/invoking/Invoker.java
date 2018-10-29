@@ -2,10 +2,7 @@ package invoking;
 
 import external.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
+import java.util.*;
 import java.util.function.Consumer;
 
 
@@ -17,6 +14,7 @@ public class Invoker extends Observable implements Invokable{
 
     public Invoker(){
         activeTurtles = new ArrayList<>();
+        myTurtles = new HashMap<>();
         makeTurtle(1);
 
     }
