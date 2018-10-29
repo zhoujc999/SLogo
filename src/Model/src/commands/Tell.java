@@ -21,7 +21,7 @@ public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoCo
 
     @Override
     public void execute(ModelTurtle turtle) {
-
+        c = this::tellFunction;
     }
 
     private String stripBrackets(String s) {
