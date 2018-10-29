@@ -91,7 +91,7 @@ public class ButtonPanel extends GridPane {
         }
 //        picker.setValue(0);
         picker.setCellFactory(getColorPickerCellFactory(colorPalette));
-        picker.setOnAction(e -> myParsingFunc.accept(colorObjectRef +picker.getValue()));
+        picker.setOnAction(e -> myParsingFunc.accept(colorObjectRef + " " + picker.getValue()));
         return picker;
     }
 
