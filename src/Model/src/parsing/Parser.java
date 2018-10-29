@@ -35,7 +35,7 @@ public class Parser implements Observer, Parse {
 
     @Override
     public void update(Observable o, Object arg){
-        if(arg instanceof Consumer){
+        if(arg instanceof QuaConsumer){
             ((QuaConsumer) arg).accept(this, myExecutor,  myVars, myResources);
         }
         else{
