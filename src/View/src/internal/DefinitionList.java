@@ -1,14 +1,10 @@
-package gui;
+package internal;
 
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Point2D;
+import gui.CommandWindow;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import java.util.ResourceBundle;
 
 public abstract class DefinitionList extends ListView implements GUIList {
     /**

@@ -1,5 +1,6 @@
 package gui;
 
+import internal.TurtleView;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;

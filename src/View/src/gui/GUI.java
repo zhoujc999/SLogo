@@ -1,7 +1,6 @@
 package gui;
 
-import internal.CommandHistory;
-import internal.CommandReference;
+import internal.*;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.*;
