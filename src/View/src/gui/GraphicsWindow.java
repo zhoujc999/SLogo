@@ -60,8 +60,8 @@ public class GraphicsWindow extends Pane implements Observer {
             addTurtle(id);
         }
         TurtleView turtle = myTurtles.get(id);
-        turtle.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream(gui.GUI.TURTLE_IMAGES
-                + GUI.POSSIBLE_SHAPE_NAMES[(int) (state.get("shapeIndex")/1)] + "Turtle.png")));
+        String shapePath = gui.GUI.TURTLE_IMAGES + GUI.POSSIBLE_SHAPE_NAMES[(int) (state.get("shapeIndex")/1)] + "Turtle.png";
+//        turtle.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream(shapePath)));
         turtle.setActiveStatus(state.get("active") == 1);
         setTurtlePosition(turtle, x, y);
         turtle.setRotate(state.get("Heading"));
