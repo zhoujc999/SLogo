@@ -2,10 +2,7 @@ package invoking;
 
 import external.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
+import java.util.*;
 import java.util.function.Consumer;
 
 
@@ -17,8 +14,10 @@ public class Invoker extends Observable implements Invokable{
 
     public Invoker(){
         activeTurtles = new ArrayList<>();
-        makeTurtle(1);
-
+        myTurtles = new HashMap<>();
+        StdModelTurtle turt = new StdModelTurtle(1);
+        myTurtles.put(1, turt);
+        activeTurtles.add(1);
     }
 
     public void setMyParse(Parse myParse) {
@@ -34,6 +33,7 @@ public class Invoker extends Observable implements Invokable{
      */
     public void setAddTurtleObserver(Consumer<StdModelTurtle> addTurtleObserver) {
         this.addTurtleObserver = addTurtleObserver;
+        addTurtleObserver.accept(myTurtles.get(1));
     }
 
     private void makeTurtle(Integer id){
@@ -71,8 +71,8 @@ public class Invoker extends Observable implements Invokable{
     }
 
     @Override
-    public int getNumTurtles() {
-        return 0;
+    public String getNumTurtles() {
+        return String.valueOf(myTurtles.entrySet().size());
     }
 
     public int[][] getBackgroundPalette() {

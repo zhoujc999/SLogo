@@ -25,6 +25,6 @@ public interface Invokable {
      * Returns the number of turtles created
      * @return the number of turtles created thus far
      */
-    public int getNumTurtles();
+    public String getNumTurtles();
 
 }
