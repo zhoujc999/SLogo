@@ -71,8 +71,8 @@ public class Invoker extends Observable implements Invokable{
     }
 
     @Override
-    public int getNumTurtles() {
-        return 0;
+    public String getNumTurtles() {
+        return String.valueOf(myTurtles.entrySet().size());
     }
 
     public int[][] getBackgroundPalette() {

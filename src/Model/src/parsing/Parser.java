@@ -14,10 +14,12 @@ public class Parser implements Observer, Parse {
     private TreeExecutor myExecutor;
     private VariableContainer myVars;
     private ResourceHandler myResources;
+    private Invokable myInvoker;
 
     private List<Node> commandTrees;
 
     public Parser(Invokable invoker, String lang){
+        myInvoker = invoker;
         myVars = new VariableContainer();
         myFactory = new CommandFactory(invoker, myVars);
         myResources = new ResourceHandler(lang);
@@ -34,7 +36,7 @@ public class Parser implements Observer, Parse {
     @Override
     public void update(Observable o, Object arg){
         if(arg instanceof PentaConsumer){
-            ((PentaConsumer) arg).accept(this, myExecutor,  myVars, myResources);
+            ((PentaConsumer) arg).accept(this, myExecutor,  myVars, myResources, myInvoker);
         }
         else{
             myExecutor.setReplacementValue((String) arg);
