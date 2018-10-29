@@ -40,10 +40,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
     }
 
     private String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("\\s*\\[\\s*", "");
-        newS = newS.replaceAll("\\s*\\]\\s*", "");
-        return newS;
+        return s.substring(1, s.length() - 1);
     }
 
     private String[] breakLoopCommands(String s) {
