@@ -4,6 +4,7 @@ import internal.TurtleView;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -60,6 +61,8 @@ public class GraphicsWindow extends Pane implements Observer {
             addTurtle(id);
         }
         TurtleView turtle = myTurtles.get(id);
+        turtle.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream(gui.GUI.TURTLE_IMAGES
+                + GUI.POSSIBLE_SHAPE_NAMES[(int) (state.get("shapeIndex")/1)] + "Turtle.png")));
         turtle.setActiveStatus(state.get("active") == 1);
         setTurtlePosition(turtle, x, y);
         turtle.setRotate(state.get("Heading"));

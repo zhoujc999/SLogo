@@ -118,6 +118,14 @@ public interface ModelTurtle {
     double clearScreen();
 
     /**
+     * sets the index at which
+     *
+     * @param index the index at which the desired shape can be found in the list of possible shapes
+     * @return the given index
+     */
+    int setShapeIndex(int index);
+
+    /**
      * "activates" the ModelTurtle by setting a flag
      */
     void activate();
@@ -150,6 +158,14 @@ public interface ModelTurtle {
      * @return 1 if turtle is showing, 0 if it is hiding
      */
     int getShowing();
+
+    /**
+     * return the index at which the turtle's shape can be found in the list of possible shapes.
+     * This list is a constant in the GUI.
+     *
+     * @return the index at which the turtle's shape can be found in the list of possible shapes
+     */
+    int getShapeIndex();
 
     /**
      * For Invoker to check whether to execute command
