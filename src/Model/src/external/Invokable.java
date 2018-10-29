@@ -1,4 +1,7 @@
 package external;
+
+import java.util.List;
+
 /**
  * An interface used for classes that encapsulate the execution of commands.
  */
@@ -12,5 +15,8 @@ public interface Invokable {
      */
     public void acceptCommand(SLogoExecutable cmd);
 
+    public void activateTurtles(List<String> ids);
+
+    public int getNumTurtles();
 
 }
