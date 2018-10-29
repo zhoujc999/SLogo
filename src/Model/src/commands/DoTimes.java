@@ -1,10 +1,8 @@
 package commands;
 
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,7 +19,7 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
 
     //private
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
 
 
@@ -43,8 +41,8 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replace("\\s*\\[\\s*", "");
-        newS = newS.replace("\\s*\\]\\s*", "");
+        newS = s.replaceAll("\\s*\\[\\s*", "");
+        newS = newS.replaceAll("\\s*\\]\\s*", "");
         return newS;
     }
 
@@ -52,16 +50,16 @@ public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, 
         return s.split("\\s");
     }
 
-    private void loopFunction(Parse p) {
-        p.setReplacementValue(ZERO);
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+        t.setReplacementValue(ZERO);
         for (int i = START; i <= stop; i += INCREMENT) {
-            p.addVariable(variable, Integer.toString(i));
+            v.addVariable(variable, Integer.toString(i));
             p.parseCommand(commands);
         }
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

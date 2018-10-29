@@ -1,0 +1,31 @@
+package gui;
+
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+
+public class VariableList extends DefinitionList {
+    /**
+     * The DefinitionList displays all of the variables defined by the user. The user can then use
+     * one of these variables or commands by typing it into the CommandWindow.
+     *
+     * @author Tahj Starr
+     */
+
+    private static final String LOAD_SIGNAL = "mv";
+
+    protected VariableList(Font font, CommandWindow cw, double columnWidth) {
+        super(font, cw, columnWidth);
+    }
+
+    @Override
+    public void save(String name, String value) {
+        HBox entry = createEntry(name, value);
+        entry.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> load(name));
+        getItems().add(entry);
+    }
+
+    public void load(String name) {
+        getCommandWindow().setInput(LOAD_SIGNAL + " " + name + " ");
+    }
+}

@@ -1,9 +1,7 @@
 package commands;
 
-import external.ModelTurtle;
-import external.Parse;
-import external.SLogoAbstractExecutable;
-import external.SLogoConsumerReturnable;
+import external.*;
+import parsing.QuaConsumer;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -16,7 +14,7 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
     private int stop;
     private String commands;
 
-    private Consumer<Parse> c;
+    private QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> c;
 
     public Repeat(List params) {
         super(params);
@@ -38,22 +36,22 @@ public class Repeat extends BinaryOperator implements SLogoAbstractExecutable, S
 
     private String stripBrackets(String s) {
         String newS;
-        newS = s.replace("\\s*\\[\\s*", "");
-        newS = newS.replace("\\s*\\]\\s*", "");
+        newS = s.replaceAll("\\s*\\[\\s*", "");
+        newS = newS.replaceAll("\\s*\\]\\s*", "");
         return newS;
     }
 
 
-    private void loopFunction(Parse p) {
-        p.setReplacementValue(ZERO);
+    private void loopFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci) {
+        t.setReplacementValue(ZERO);
         for (int i = START; i < stop; i += INCREMENT) {
-            p.addVariable(VARIABLE, Integer.toString(i));
+            v.addVariable(VARIABLE, Integer.toString(i));
             p.parseCommand(commands);
         }
     }
 
     @Override
-    public Consumer<Parse> returnValue() {
+    public QuaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface> returnValue() {
         return c;
     }
 

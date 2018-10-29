@@ -1,5 +1,7 @@
 package external;
 
+import commands.CommandTextWrapper;
+
 public interface VariableManipulator {
 
     /**
@@ -14,4 +16,11 @@ public interface VariableManipulator {
      * @param var Name of the variable to be removed
      */
     public void removeVariable(String var);
+
+    /**
+     * Adds a command to the user defined commands
+     * @param name The name of the command
+     * @param command The value of the command
+     */
+    public void addCommand(String name, CommandTextWrapper command);
 }

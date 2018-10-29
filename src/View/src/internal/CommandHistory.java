@@ -2,7 +2,6 @@ package internal;
 
 import gui.CommandWindow;
 import gui.GUIList;
-import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
@@ -29,14 +28,14 @@ public class CommandHistory extends ListView implements GUIList {
         var text = new Text(name);
         text.setFont(myFont);
 
-        text.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> myCommandWindow.setInput(load(name)));
+        text.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> load(name));
 
         getItems().add(text);
     }
 
     @Override
-    public String load(String name) {
-        return name;
+    public void load(String name) {
+        myCommandWindow.setInput(name);
     }
 
 }

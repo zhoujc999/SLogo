@@ -171,4 +171,6 @@ public interface ModelTurtle {
      * @return the number of turtles that have been created
      */
     int getNumTurtles();
+
+    StdModelBackground getBackground();
 }

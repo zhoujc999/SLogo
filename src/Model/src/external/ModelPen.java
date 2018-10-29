@@ -1,7 +1,6 @@
 package external;
 
 import java.util.Map;
-import java.util.function.Consumer;
 
 /**
  * Instances of classes implementing this interface are abstract representations of a pen
