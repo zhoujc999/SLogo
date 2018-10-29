@@ -1,4 +1,4 @@
-package gui;
+package internal;
 
 public interface GUIList {
 

@@ -2,10 +2,14 @@ package gui;
 
 import internal.ButtonPanel;
 import internal.CommandHistory;
+import internal.CommandList;
+import internal.VariableList;
 import javafx.geometry.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.util.Map;
 import java.util.List;
@@ -41,8 +45,13 @@ public class GUI extends SplitPane {
             "Spanish"
     );
     private String myLanguage;
+
+    private final Map<String, Consumer<String>> myConsumers;
+    private final Map<String, Supplier> mySuppliers;
     private final Consumer<String> myParsingFunc;
     private final Consumer<String> myModelLangFunc;
+    private final Supplier<Iterable<Map.Entry<String, String>>> myVarSavingFunc;
+    private final Supplier<Iterable<Map.Entry<String, String>>> myComSavingFunc;
 
     private ResourceBundle myResources;
     private static final Font CODE_FONT = new Font("Courier New", 10);
@@ -50,17 +59,19 @@ public class GUI extends SplitPane {
     private CommandWindow myCommandWindow;
     private GraphicsWindow myGraphicsWindow;
     private TabPane myProjectWindow;
-    private final ButtonPanel buttonPanel;
+    private VariableList  myVariables;
+    private CommandList myCommands;
     private CommandHistory myCommandHistory;
 
     public GUI(String language, Map<String, Consumer<String>> stringConsumerMap, Map<String, Supplier> supplierMap) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES + language);
         myLanguage = language;
+        myConsumers = stringConsumerMap;
+        mySuppliers = supplierMap;
         myParsingFunc = stringConsumerMap.get("parsingFunc");
         myModelLangFunc = stringConsumerMap.get("modelLangFunc");
-        Map<String, Consumer<String>> stringConsumerMapForBundle = Map.of("parsingFunc",myParsingFunc,
-                "setLangFunc", this::setLanguage);
-        buttonPanel = new ButtonPanel(language, myResources, stringConsumerMapForBundle, supplierMap);
+        myVarSavingFunc = supplierMap.get("variableSupplier");
+        myComSavingFunc = supplierMap.get("commandSupplier");
 
         initializeComponents(language);
         initializeLayout();
@@ -70,12 +81,10 @@ public class GUI extends SplitPane {
         myCommandWindow = new CommandWindow(CODE_FONT, myResources.getString("PromptText"));
         myCommandWindow.setPrefWidth(COMMAND_WINDOW_SIZE.getWidth());
         myGraphicsWindow = new GraphicsWindow(new CornerRadii(0), new Insets(0));
-        var variables = new VariableList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
-        variables.save("length", "5");
-        var commands = new CommandList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
-        commands.save("length", "5");
+        myVariables = new VariableList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
+        myCommands = new CommandList(CODE_FONT, myCommandWindow, DEFINITION_LIST_COLUMN_WIDTH);
         myCommandHistory = new CommandHistory(CODE_FONT, myCommandWindow);
-        myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"), variables), new Tab(myResources.getString("CommandTab"), commands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
+        myProjectWindow = new TabPane(new Tab(myResources.getString("VariableTab"),  myVariables), new Tab(myResources.getString("CommandTab"), myCommands), new Tab(myResources.getString("HistoryTab"), myCommandHistory));
         myProjectWindow.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
@@ -85,6 +94,10 @@ public class GUI extends SplitPane {
         commandControl.setAlignment(Pos.CENTER);
         var commandPanel = new HBox(commandControl, myCommandWindow);
         commandPanel.setSpacing(SPACING);
+        Map<String, Consumer<String>> stringConsumerMapForBundle = Map.of("parsingFunc",myParsingFunc,
+                "setLangFunc", this::setLanguage);
+        var buttonPanel = new ButtonPanel(myLanguage, myResources, myGraphicsWindow, stringConsumerMapForBundle, mySuppliers);
+        buttonPanel.add(newWorkspaceButton(), 0, buttonPanel.getRowCount(), buttonPanel.getColumnCount(), 1);
         var sidePanel = new VBox(buttonPanel, myProjectWindow);
         var mainPanel = new SplitPane(myGraphicsWindow, commandPanel);
 
@@ -105,8 +118,21 @@ public class GUI extends SplitPane {
 //        } catch (Exception e) {
 //            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
 //        }
+        Iterable<Map.Entry <String, String>> varsIterable = myVarSavingFunc.get();
+        myVariables.getItems().clear();
+        for (Map.Entry<String, String> variable: varsIterable) {
+            myVariables.save(variable.getKey(), variable.getValue());
+        }
+
+        Iterable<Map.Entry <String, String>> comsIterable = myComSavingFunc.get();
+        myCommands.getItems().clear();
+        for (Map.Entry<String, String> command: comsIterable) {
+            myCommands.save(command.getKey(), command.getValue());
+        }
+
         String input = myCommandWindow.getInput();
         myCommandHistory.save(input, "");
+
         myParsingFunc.accept(input);
     }
 
@@ -125,6 +151,18 @@ public class GUI extends SplitPane {
         button.setLayoutY(CLEAR_BUTTON_LOCATION.getY());
         button.setPrefSize(CLEAR_BUTTON_SIZE.getWidth(), CLEAR_BUTTON_SIZE.getHeight());
         button.setOnAction(e -> myCommandWindow.clear());
+        return button;
+    }
+
+    private Button newWorkspaceButton() {
+        var button = new Button(myResources.getString("WorkspaceButton"));
+        button.setOnAction(e -> {
+            var stage = new Stage();
+            var gui = new GUI(myLanguage, myConsumers, mySuppliers);
+            var scene = new Scene(gui, getWidth(), getHeight());
+            stage.setScene(scene);
+            stage.show();
+        });
         return button;
     }
 

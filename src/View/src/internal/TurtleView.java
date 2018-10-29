@@ -1,4 +1,4 @@
-package gui;
+package internal;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +20,7 @@ public class TurtleView extends ImageView {
     private boolean isActive;
     private Color myPenColor;
 
-    protected TurtleView(String url, double x, double y, int id) {
+    public TurtleView(String url, double x, double y, int id) {
         super(url);
         mySize = ACTIVE_SIZE;
         setFitWidth(mySize);
@@ -42,14 +42,7 @@ public class TurtleView extends ImageView {
         }
     }
 
-    protected TurtleView(String url) {
-        super(url);
-        setFitWidth(mySize);
-        setFitHeight(mySize);
-        myPenColor = Color.BLACK;
-    }
-
-    protected void setActiveStatus(boolean status) {
+    public void setActiveStatus(boolean status) {
         isActive = status;
     }
 
@@ -80,7 +73,7 @@ public class TurtleView extends ImageView {
         return getLayoutY() + mySize /2;
     }
 
-    protected void setPosition(double x, double y) {
+    public void setPosition(double x, double y) {
         relocate(x - mySize /2, y - mySize /2);
     }
 
@@ -88,7 +81,7 @@ public class TurtleView extends ImageView {
         return myPenColor;
     }
 
-    protected void setPenColor(Color color) {
+    public void setPenColor(Color color) {
         myPenColor = color;
     }
 
