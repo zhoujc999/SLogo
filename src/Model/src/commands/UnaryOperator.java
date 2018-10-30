@@ -25,9 +25,9 @@ public abstract class UnaryOperator {
 
     protected String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
-        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
-        return newS;
+        newS = s.replaceAll("^[^\\[]*", "");
+        newS = newS.replaceAll("[^\\]]*$", "");
+        return newS.substring(1, newS.length() - 1);
     }
 
     public abstract void execute(ModelTurtle turtle);
