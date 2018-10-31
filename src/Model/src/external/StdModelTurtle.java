@@ -197,6 +197,9 @@ public class StdModelTurtle extends Observable implements ModelTurtle {
         double xDiff = myXPos - x;
         double yDiff = myYPos - y;
         double newHeading = Math.toDegrees(Math.atan(xDiff/yDiff)) + NINETY_DEGREES;
+        if (x==0 && y==0) {
+            newHeading = myHeading;
+        }
         double headingDiff = newHeading - myHeading;
         myHeading = newHeading;
         notifyOfState(dataMap);
