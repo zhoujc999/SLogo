@@ -22,13 +22,13 @@ public class GUI extends SplitPane {
      * @author Tahj Starr
      */
 
-    private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(520, 60);
+    private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(450, 60);
     private static final Point2D RUN_BUTTON_LOCATION = new Point2D(10, 530);
     private static final Dimension2D RUN_BUTTON_SIZE = new Dimension2D(50, 25);
     private static final Point2D CLEAR_BUTTON_LOCATION = new Point2D(10, 565);
     private static final Dimension2D CLEAR_BUTTON_SIZE = new Dimension2D(50, 25);
     public static final Point2D BUTTON_PANEL_LOCATION = new Point2D(600, 50);
-    public static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(190, 200);
+    public static final Dimension2D BUTTON_PANEL_SIZE = new Dimension2D(250, 200);
 
     private static final double HORIZONTAL_DIVIDER_POSITION = 0.9;
     private static final double VERTICAL_DIVIDER_POSITION = 0.75;

@@ -1,5 +1,6 @@
 package internal;
 
+import gui.GUI;
 import gui.GraphicsWindow;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -31,12 +32,12 @@ public class ButtonPanel extends GridPane {
         myParsingFunc = stringConsumerMap.get("parsingFunc");
         mySetLangFunc = stringConsumerMap.get("setLangFunc");
         myCommandReference = new CommandReference(myLanguage);
-        this.setLayoutX(gui.GUI.BUTTON_PANEL_LOCATION.getX());
-        this.setLayoutY(gui.GUI.BUTTON_PANEL_LOCATION.getY());
-        this.setPrefSize(gui.GUI.BUTTON_PANEL_SIZE.getWidth(), gui.GUI.BUTTON_PANEL_SIZE.getHeight());
-        this.setHgap(gui.GUI.SPACING);
-        this.setVgap(gui.GUI.SPACING);
-        this.setPadding(new Insets(gui.GUI.SPACING));
+        this.setLayoutX(GUI.BUTTON_PANEL_LOCATION.getX());
+        this.setLayoutY(GUI.BUTTON_PANEL_LOCATION.getY());
+        this.setMinSize(GUI.BUTTON_PANEL_SIZE.getWidth(), GUI.BUTTON_PANEL_SIZE.getHeight());
+        this.setHgap(GUI.SPACING);
+        this.setVgap(GUI.SPACING);
+        this.setPadding(new Insets(GUI.SPACING));
         this.addColumn(0,
                 new Text(myResources.getString("BackgroundPicker")),
                 new Text(myResources.getString("TurtlePicker")),
