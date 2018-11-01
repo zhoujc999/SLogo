@@ -3,12 +3,10 @@ package commands;
 import external.*;
 import parsing.PentaConsumer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BinaryOperator {
     private final static int NUMPARAMS = 2;
-    protected List<String> paramStringList;
     protected String param1;
     protected String param2;
 
@@ -17,26 +15,25 @@ public abstract class BinaryOperator {
 
     public BinaryOperator(List params) {
         checkNumParams(params);
-
-        paramStringList = new ArrayList<>();
-        for (int i = 0; i < params.size(); i++) {
-            try {
-                String param = (String) params.get(i);
-                paramStringList.add(param);
-            } catch (ClassCastException | NullPointerException | NumberFormatException e) {
-                throw new IllegalArgumentException(String.format("%s %d Argument to String Error", this.getClass().getSimpleName(), i + 1));
-            }
+        try {
+            param1 = (String) params.get(0);
         }
-
-        param1 = paramStringList.get(0);
-        param2 = paramStringList.get(1);
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s 1st Argument to String Error", this.getClass().getSimpleName()));
+        }
+        try {
+            param2 = (String) params.get(1);
+        }
+        catch (ClassCastException | NullPointerException | NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("%s 2nd Argument to String Error", this.getClass().getSimpleName()));
+        }
     }
 
     protected String stripBrackets(String s) {
         String newS;
-        newS = s.replaceAll("^[^\\[]*", "");
-        newS = newS.replaceAll("[^\\]]*$", "");
-        return newS.substring(1, newS.length() - 1);
+        newS = s.replaceAll("^[^a-zA-Z0-9_]*", "");
+        newS = newS.replaceAll("[^a-zA-Z0-9_]*$", "");
+        return newS;
     }
 
     public abstract void execute(ModelTurtle turtle);

@@ -30,7 +30,7 @@ public class CommandTextWrapper {
     }
 
     public int getNumVariables() {
-        return variables.size();
+        return  variables.size();
     }
 
 

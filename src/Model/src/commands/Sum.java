@@ -15,11 +15,7 @@ public class Sum extends BinaryDoubleOperator implements SLogoMathExecutable, SL
 
     @Override
     public void execute(ModelTurtle turtle) {
-        Double result = this.paramDoubleList.get(0);
-        for (int i = 1; i < paramDoubleList.size(); i++) {
-            result += this.paramDoubleList.get(i);
-        }
-        String resultString = Double.toString(result);
-        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(resultString);
+        Double result = this.param1 + this.param2;
+        this.c = (p, t, v, pci, inv) -> t.setReplacementValue(Double.toString(result));
     }
 }
