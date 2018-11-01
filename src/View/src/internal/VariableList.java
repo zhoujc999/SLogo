@@ -7,10 +7,11 @@ import javafx.scene.text.Font;
 
 public class VariableList extends DefinitionList {
     /**
-     * The DefinitionList displays all of the variables defined by the user. The user can then use
-     * one of these variables or commands by typing it into the CommandWindow.
+     * The VariableList displays all of the variables defined by the user. The user can then use
+     * one of these variables by typing it into the CommandWindow.
      *
      * @author Tahj Starr
+     * @see DefinitionList
      */
 
     private static final String LOAD_SIGNAL = "mv";
