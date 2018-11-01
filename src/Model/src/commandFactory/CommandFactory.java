@@ -26,10 +26,10 @@ public class CommandFactory implements CommandFactoryInterface {
 
 
     final public void createCommand(String cmd, List params) {
-        System.out.println("cmd");
-        System.out.println(cmd);
-        System.out.println("param list");
-        System.out.println(params);
+//        System.out.println("cmd");
+//        System.out.println(cmd);
+//        System.out.println("param list");
+//        System.out.println(params);
 
         SLogoExecutable command = null;
         CommandTextWrapper commandTextWrapper = variableAccessor.getCommand(cmd);

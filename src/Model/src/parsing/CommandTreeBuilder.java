@@ -119,7 +119,7 @@ public class CommandTreeBuilder implements TreeBuilder {
 
     private Pair<List<String>, ListNode> accumulateGroup(ListNode commandNode){
         ArrayList<String> ret = new ArrayList<>();
-        while(myContainer.getType(commandNode.getData()).equals(GROUP_END_KEY)){
+        while(!myContainer.getType(commandNode.getData()).equals(GROUP_END_KEY)){
             ret.add(commandNode.getData());
             commandNode = commandNode.getChild();
         }
