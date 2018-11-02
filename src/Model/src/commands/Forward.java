@@ -6,6 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 
 public class Forward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 

@@ -5,6 +5,9 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class For extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static int NUMLOOPITEMS = 4;
     private final static String ZERO = "0";

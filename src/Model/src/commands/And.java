@@ -5,6 +5,10 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
+
 public class And extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     private final static String ZERO = "0";
     private final static String ONE = "1";

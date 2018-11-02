@@ -1,10 +1,12 @@
 package commands;
-
-
 import external.*;
 import parsing.PentaConsumer;
 
 import java.util.List;
+
+/**
+ * @author Jason Zhou
+ */
 
 public class Turtles extends Operator implements SLogoMultiExecutable, SLogoReturnable {
 

@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Sine extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Sine(List params) {
