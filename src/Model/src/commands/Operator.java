@@ -5,6 +5,10 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * This abstract class is the superclass of Commands that takes in no parameters.
+ * @author Jason Zhou
+ */
 public abstract class Operator {
 
     private final static int NUMPARAMS = 0;
@@ -13,13 +17,6 @@ public abstract class Operator {
 
     public Operator(List params) {
         checkNumParams(params);
-    }
-
-    protected String stripBrackets(String s) {
-        String newS;
-        newS = s.replaceAll("^[^\\[]*", "");
-        newS = newS.replaceAll("[^\\]]*$", "");
-        return newS.substring(1, newS.length() - 1);
     }
 
     public abstract void execute(ModelTurtle turtle);

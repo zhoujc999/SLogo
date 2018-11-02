@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Tell extends UnaryOperator implements SLogoMultiExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 

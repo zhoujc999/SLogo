@@ -6,6 +6,9 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class DoTimes extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static int NUMLOOPITEMS = 2;
     private final static String ZERO = "0";

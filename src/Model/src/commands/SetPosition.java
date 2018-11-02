@@ -5,6 +5,9 @@ import external.SLogoTurtleExecutable;
 import external.ModelTurtle;
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class SetPosition extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetPosition(List params) {

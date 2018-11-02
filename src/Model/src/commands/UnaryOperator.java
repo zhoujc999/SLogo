@@ -5,6 +5,11 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * This abstract class is the superclass of Commands that takes in a parameter.
+ * Upon instantiation, the parameter are converted to strings, and the command object throws an exception if it fails.
+ * @author Jason Zhou
+ */
 public abstract class UnaryOperator {
 
     private final static int NUMPARAMS = 1;

@@ -5,6 +5,9 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 
 public class Backward extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 

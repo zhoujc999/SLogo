@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class GreaterThan extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     private final static String ZERO = "0";
     private final static String ONE = "1";

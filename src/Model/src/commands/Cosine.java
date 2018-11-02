@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Cosine extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public Cosine(List params) {
         super(params);

@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class CommandTextWrapper {
 
     private String commandName;

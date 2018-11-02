@@ -5,6 +5,9 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class MakeVariable extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
 
     public MakeVariable(List params) {
