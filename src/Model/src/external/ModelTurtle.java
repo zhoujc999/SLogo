@@ -17,7 +17,7 @@ public interface ModelTurtle {
      * Return a unique integer ID for this ModelTurtle. This method will be used in the event that multiple ModelTurtle
      * instances are created.
      *
-     * @return the ID of this external.ModelTurtle
+     * @return the ID of this ModelTurtle
      */
     int getID();
 
