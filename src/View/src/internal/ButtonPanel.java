@@ -18,6 +18,13 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ButtonPanel extends GridPane {
+    /**
+     * ButtonPanel contains a group of controls for users to interface with the GUI.
+     *
+     * @author jgp17
+     * @author Tahj Starr
+     */
+
     String myLanguage;
     ResourceBundle myResources;
     GraphicsWindow myGraphicsWindow;
