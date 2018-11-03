@@ -6,7 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-
+/**
+ * @author Jason Zhou
+ */
 public class ClearScreen extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public ClearScreen(List params) {

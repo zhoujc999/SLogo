@@ -5,6 +5,9 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class If extends BinaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 

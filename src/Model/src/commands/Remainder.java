@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Remainder extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Remainder(List params) {

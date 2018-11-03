@@ -12,6 +12,7 @@ public abstract class DefinitionList extends ListView implements GUIList {
      * one of these variables or commands by typing it into the CommandWindow.
      *
      * @author Tahj Starr
+     * @see GUIList
      */
 
     private Font myFont;

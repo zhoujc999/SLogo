@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Random extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Random(List params) {

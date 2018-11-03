@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class NaturalLog extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public NaturalLog(List params) {
         super(params);

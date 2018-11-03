@@ -5,7 +5,9 @@ import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
-
+/**
+ * @author Jason Zhou
+ */
 // equivalent to command "showing?"
 public class IsShowing extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 

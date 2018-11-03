@@ -13,9 +13,8 @@ import java.util.ResourceBundle;
 
 public class CommandReference extends Stage {
     /**
-     * CommandReference provides users with a list of all the commands initially recognized by the SLogo program. It is
-     * displayed due to the click of a button and can be hidden again with another click of the button. It would need
-     * access to the languages resources.
+     * CommandReference provides users with a list of all the commands initially recognized by the SLogo program.
+     * It is displayed in a stage of its own. It would need access to the languages resources.
      *
      * @author Tahj Starr
      */

@@ -7,6 +7,9 @@ import java.util.regex.MatchResult;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class MakeUserInstruction extends TernaryOperator implements SLogoAbstractExecutable, SLogoReturnable {
     private final static String ZERO = "0";
     private final static String ONE = "1";

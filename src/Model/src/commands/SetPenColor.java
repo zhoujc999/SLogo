@@ -6,6 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author jgp17
+ */
 public class SetPenColor extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetPenColor(List params) {

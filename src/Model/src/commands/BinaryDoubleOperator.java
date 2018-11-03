@@ -5,6 +5,11 @@ import external.ModelTurtle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This abstract class is the superclass of Commands that takes in 2 parameters which are doubles.
+ * Upon instantiation, the parameters are converted to doubles, and the command object throws an exception if it fails.
+ * @author Jason Zhou
+ */
 public abstract class BinaryDoubleOperator extends BinaryOperator {
 
     protected List<Double> paramDoubleList;

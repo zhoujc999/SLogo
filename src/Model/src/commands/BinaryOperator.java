@@ -6,6 +6,11 @@ import parsing.PentaConsumer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This abstract class is the superclass of Commands that takes in 2 parameters.
+ * Upon instantiation, the parameters are converted to strings, and the command object throws an exception if it fails.
+ * @author Jason Zhou
+ */
 public abstract class BinaryOperator {
     private final static int NUMPARAMS = 2;
     protected List<String> paramStringList;

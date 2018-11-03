@@ -6,6 +6,10 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
+
 public class Left extends UnaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public Left(List params) {

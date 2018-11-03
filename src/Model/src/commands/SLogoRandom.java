@@ -1,8 +1,9 @@
 package commands;
-
-
 import java.util.Random;
 
+/**
+ * @author Jason Zhou
+ */
 public class SLogoRandom {
 
     private static SLogoRandom r;
@@ -14,12 +15,9 @@ public class SLogoRandom {
     }
 
     public static SLogoRandom getInstance() {
-        if (r == null)
-        {
-            synchronized(SLogoRandom.class)
-            {
-                if (r == null)
-                {
+        if (r == null) {
+            synchronized(SLogoRandom.class) {
+                if (r == null) {
                     r = new SLogoRandom();
                 }
             }

@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Tangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public Tangent(List params) {
         super(params);
