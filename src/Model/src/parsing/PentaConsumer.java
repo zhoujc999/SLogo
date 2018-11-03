@@ -15,7 +15,7 @@ public interface PentaConsumer<T, U, V, S, W> {
      * @param t Parser p
      * @param u TreeExecutor t
      * @param v VariableManipulator
-     * @param s ParameterChangeInterface pc
+     * @param s ParameterChangeInterface pci
      * @param w Invokable inv
      */
     public void accept(T t, U u, V v, S s, W w);
