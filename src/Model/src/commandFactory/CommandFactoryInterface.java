@@ -2,7 +2,6 @@ package commandFactory;
 
 import java.util.List;
 
-
 /**
  * CommandFactoryInterface is the abstraction of the CommandFactory class.
  * It only has a single method - createCommand, which is called by the Parser.
@@ -15,14 +14,11 @@ import java.util.List;
  * @author Jason Zhou
  */
 
-
 public interface CommandFactoryInterface {
-
     /**
      * Takes a command string And creates a SLogoExecutable object
      * @param cmd A string that stands for the command
      * @param params A list of parameters for the command in Strings
      */
     public void createCommand(String cmd, List params);
-
 }
