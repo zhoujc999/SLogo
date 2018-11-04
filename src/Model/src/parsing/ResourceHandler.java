@@ -80,6 +80,7 @@ public class ResourceHandler implements ResourceContainer, LanguageInterface, Pa
 
     @Override
     public void addCommandParameter(String command, String num) {
+        System.out.println(num);
         paramMap.put(command, num);
     }
 
