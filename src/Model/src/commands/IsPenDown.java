@@ -1,12 +1,14 @@
 package commands;
 
-
 import external.ModelTurtle;
 import external.SLogoReturnable;
 import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 // equivalent to command "pendown?"
 public class IsPenDown extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 

@@ -10,6 +10,16 @@ import java.util.List;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * The CommandFactory class uses Java Reflection to instantiate Command objects with Strings.
+ * These Command Objects interact with the Model Turtle, Invoker and  parts of the Parser depending on the specific command.
+ * When passed the String of a command, the CommandFactory would look for a User-defined command through the variableAccessor interface.
+ * If the command exists, it instantiates a GenericCommand object and passes the object to the Invoker.
+ * Else, the CommandFactory tries to instantiate the corresponding Command object.
+ * If Java Reflection throws an exception, CommandFactory throws a RuntimeException.
+ * @author Jason Zhou
+ */
+
 public class CommandFactory implements CommandFactoryInterface {
 
     private Invokable invoker;
@@ -44,30 +54,15 @@ public class CommandFactory implements CommandFactoryInterface {
                 commandClass = Class.forName(commandName);
             }
             catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                throw new RuntimeException("Command Instantiation Exception");
             }
-
             Constructor<?> constructor = commandClass.getConstructors()[0];
-
             try {
                 command = (SLogoExecutable) constructor.newInstance(params);
             }
 
-            catch (InstantiationException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (InvocationTargetException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw new RuntimeException("Command Instantiation Exception");
             }
         }
 

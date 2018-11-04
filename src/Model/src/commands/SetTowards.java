@@ -6,6 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class SetTowards extends BinaryDoubleOperator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public SetTowards(List params) {

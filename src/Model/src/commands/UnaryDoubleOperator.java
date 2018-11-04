@@ -4,6 +4,12 @@ import external.ModelTurtle;
 
 import java.util.List;
 
+/**
+ * This abstract class is the superclass of Commands that takes in a parameter which is a double.
+ * Upon instantiation, the parameter are converted to a double, and the command object throws an exception if it fails.
+ * @author Jason Zhou
+ */
+
 public abstract class UnaryDoubleOperator extends UnaryOperator {
 
     protected double param1;

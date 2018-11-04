@@ -7,10 +7,11 @@ import javafx.scene.text.Font;
 
 public class CommandList extends DefinitionList {
     /**
-     * The DefinitionList displays all of the variables defined by the user. The user can then use
-     * one of these variables or commands by typing it into the CommandWindow.
+     * The CommandList displays all of the commands defined by the user. The user can then use
+     * one of these commands by typing it into the CommandWindow.
      *
      * @author Tahj Starr
+     * @see DefinitionList
      */
 
     public CommandList(Font font, CommandWindow cw, double columnWidth) {

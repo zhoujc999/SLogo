@@ -6,7 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
-
+/**
+ * @author Jason Zhou
+ */
 public class Home extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
 

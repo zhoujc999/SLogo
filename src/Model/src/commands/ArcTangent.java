@@ -5,6 +5,10 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
+
 public class ArcTangent extends UnaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
     public ArcTangent(List params) {
         super(params);

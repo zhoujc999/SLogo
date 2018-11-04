@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
+
 public class Ask extends BinaryOperator implements SLogoMultiExecutable, SLogoReturnable {
     private final static String ZERO = "0";
 

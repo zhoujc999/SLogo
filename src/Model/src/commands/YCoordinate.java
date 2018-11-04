@@ -6,6 +6,9 @@ import external.SLogoTurtleExecutable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class YCoordinate extends Operator implements SLogoTurtleExecutable, SLogoReturnable {
 
     public YCoordinate(List params) {

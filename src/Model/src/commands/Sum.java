@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Sum extends BinaryDoubleOperator implements SLogoMathExecutable, SLogoReturnable {
 
     public Sum(List params) {

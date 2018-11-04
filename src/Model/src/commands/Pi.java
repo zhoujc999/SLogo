@@ -6,6 +6,9 @@ import external.SLogoReturnable;
 
 import java.util.List;
 
+/**
+ * @author Jason Zhou
+ */
 public class Pi extends Operator implements SLogoMathExecutable, SLogoReturnable {
 
     public Pi(List params) {

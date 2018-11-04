@@ -5,6 +5,12 @@ import parsing.PentaConsumer;
 
 import java.util.List;
 
+/**
+ * /**
+ *  This abstract class is the superclass of Commands that takes in 3 parameters.
+ *  Upon instantiation, the parameters are converted to strings, and the command object throws an exception if it fails.
+ *  @author Jason Zhou
+ */
 public abstract class TernaryOperator {
 
     protected PentaConsumer<Parse, TreeExecutor, VariableManipulator, ParameterChangeInterface, Invokable> c;
