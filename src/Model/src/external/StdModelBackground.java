@@ -6,7 +6,7 @@ public class StdModelBackground extends StdColorObject{
 
     public StdModelBackground() {
         super();
-        setColor(7);
+        setColor(3);
     }
 
     public HashMap<String, Double> getState() {
