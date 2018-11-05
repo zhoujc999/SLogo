@@ -1,15 +1,16 @@
 package parsing;
 
 /**
- * This functional interface enables the Command objects to call methods that exist in different parts of the model without having a reference to them.
- * @param <T> Parse p
- * @param <U> TreeExecutor t
- * @param <V> VariableManipulator v
- * @param <S> ParameterChangeInterface pci
- * @param <W> Invokable inv
+ * 
+ * @param <T>
+ * @param <U>
+ * @param <V>
+ * @param <S>
+ * @param <W>
  */
 @FunctionalInterface
 public interface PentaConsumer<T, U, V, S, W> {
+<<<<<<< HEAD
     /**
      * This method accepts the corresponding objects. It executes a block of code that is created when you call execute in the Command Objects
      * @param t Parser p
@@ -18,5 +19,7 @@ public interface PentaConsumer<T, U, V, S, W> {
      * @param s ParameterChangeInterface pci
      * @param w Invokable inv
      */
+=======
+>>>>>>> parent of 3d09264... added docs
     public void accept(T t, U u, V v, S s, W w);
 }
