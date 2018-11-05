@@ -54,9 +54,11 @@ public class CommandFactory implements CommandFactoryInterface {
                 commandClass = Class.forName(commandName);
             }
             catch (ClassNotFoundException e) {
-                throw new RuntimeException("Command Instantiation Exception");
+                e.printStackTrace();
             }
+
             Constructor<?> constructor = commandClass.getConstructors()[0];
+
             try {
                 command = (SLogoExecutable) constructor.newInstance(params);
             }

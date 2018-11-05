@@ -32,8 +32,8 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
 
     /**
      * https://stackoverflow.com/questions/6020384/create-array-of-regex-matches
-     * @param s string to be processed into an array of variables
-     * @return  Array of strings.
+     * @param s
+     * @return
      */
     private String[] breakVariables(String s) {
         String[] matches = Pattern.compile("(:)\\w+").matcher(s).results().map(MatchResult::group).toArray(String[]::new);
@@ -46,14 +46,6 @@ public class MakeUserInstruction extends TernaryOperator implements SLogoAbstrac
     }
 
 
-    /**
-     *
-     * @param p
-     * @param t
-     * @param v
-     * @param pci
-     * @param inv
-     */
     private void makeCommandFunction(Parse p, TreeExecutor t, VariableManipulator v, ParameterChangeInterface pci, Invokable inv) {
         t.setReplacementValue(ZERO);
         commandContent = new CommandTextWrapper(commandName, variableList, commandText);

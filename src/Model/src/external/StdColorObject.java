@@ -2,7 +2,7 @@ package external;
 
 import java.util.Map;
 
-public class StdColorObject implements ColorObject {
+public class StdColorObject implements ColorObject{
 
     public static final String COLOR_INDEX_KEY = "ColorIndex";
     public static final String COLOR_R_KEY = "ColorRVal";
