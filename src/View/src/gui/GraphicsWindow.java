@@ -16,13 +16,15 @@ import javafx.scene.shape.StrokeLineCap;
 import java.util.*;
 
 /**
- * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
- *
  * @author Tahj Starr
  * @author jgp17
  */
 
 public class GraphicsWindow extends Pane implements Observer {
+    /**
+     * GraphicsWindow contains the turtle. The turtles may in a list if multiple turtles want to be added.
+     */
+
 
     private static final Dimension2D SIZE = new Dimension2D(580, 540);
     public static final String DEFAULT_FILENAME = "/gui/TurtleImages/GreenTurtle.png";
@@ -46,9 +48,6 @@ public class GraphicsWindow extends Pane implements Observer {
         addTurtle(1);
     }
 
-    /**
-     * Updates visual appearance of the GraphicsWindow.
-     */
     @Override
     public void update(Observable o, Object arg) {
         var state = (Map<String, Double>) arg;

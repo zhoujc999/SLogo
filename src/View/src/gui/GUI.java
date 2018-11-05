@@ -17,10 +17,9 @@ import java.util.function.Supplier;
 public class GUI extends SplitPane {
     /**
      * The GUI contains and defines the position of all the classes in the View. The language of its text is able to be
-     * chosen and changed. Its three main components include a ProjectWindow, a CommandWindow, and a GraphicsWindow.
+     * chosen and changed.
      *
      * @author Tahj Starr
-     * @author jgp17
      */
 
     private static final Dimension2D COMMAND_WINDOW_SIZE = new Dimension2D(450, 60);

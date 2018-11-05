@@ -40,9 +40,6 @@ public class TurtleView extends ImageView {
         }
     }
 
-    /**
-     * Sets turtle's active status to the given boolean.
-     */
     public void setActiveStatus(boolean status) {
         isActive = status;
     }
@@ -74,9 +71,6 @@ public class TurtleView extends ImageView {
         return getLayoutY() + mySize /2;
     }
 
-    /**
-     * Sets center of the TurtleView to given x and y coordinates.
-     */
     public void setPosition(double x, double y) {
         relocate(x - mySize /2, y - mySize /2);
     }
